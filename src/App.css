@@ -23,10 +23,10 @@ body {
 
 .header     { background-color: #ffffff; }
 .dashboard   { background-color: #ffffff; }
-.bottombar   {  background-color: #0c033e;}
+.bottombar   {  background-color: #313042;}
 
 .sidebar   {
-   background-color: #0c033e; 
+   background-color: #313042; 
    width: 250px;
    height: 100vh;
    position: absolute;
@@ -34,7 +34,9 @@ body {
    transition: all 0.5s ease;
   }
 
-  
+.login-sidebar{
+  width: 100vw;
+}
 
 .main-layout {
   display: grid;
@@ -49,15 +51,13 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-  .sidebar   {
-    background-color: #0c033e; 
-    width: 250px;
-    height: 100vh;
-    position: absolute;
+  .sidebar   { 
     margin-left: -250px;
-    z-index: 1;
-  
    }
+   .login-sidebar{
+    width: 100vw;
+    margin-left: 0px;    
+  }
    .main-layout {
     display: grid;
     height: calc(100vh - 82px);
