@@ -16,23 +16,68 @@ body {
   text-align: center;
 }
 
-.header     { background-color: #ffffff; }
-.sidebar   { background-color: #0c033e; }
-.dashboard   { background-color: #ffffff; }
-
-.app-layout {
-  display: grid;
-  height: 100vh;
-  grid-template-columns: 250px 1fr;
-  grid-template-rows: auto 1fr;
-
-  grid-template-areas: "sidebar header"
-                       "sidebar dashboard"                      
+.app-layout{
+  position: relative;
+  display: inline;  
 }
 
-@media screen and (max-width: 1024px) {
-  .app-layout {
-                          
+.header     { background-color: #ffffff; }
+.dashboard   { background-color: #ffffff; }
+.bottombar   {  background-color: #0c033e;}
+
+.sidebar   {
+   background-color: #0c033e; 
+   width: 250px;
+   height: 100vh;
+   position: absolute;
+   z-index: 1;
+   transition: all 0.5s ease;
+  }
+
+  
+
+.main-layout {
+  display: grid;
+  height: 100vh;
+  width:calc(100% - 250px);
+  margin-left:250px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "header"
+                       "dashboard" ;
+  transition: all 0.5s ease;                     
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar   {
+    background-color: #0c033e; 
+    width: 250px;
+    height: 100vh;
+    position: absolute;
+    margin-left: -250px;
+    z-index: 1;
+  
+   }
+   .main-layout {
+    display: grid;
+    height: calc(100vh - 82px);
+    width:calc(100% - 0px);
+    margin-left:0px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  
+    grid-template-areas: "header"
+                         "dashboard"                                  
+  }
+  .dashboard {
+    grid-area: dashboard;
+    padding: 0 1em;  
+    overflow-y: scroll;
+  }
+  .bottombar {
+    display: block !important;
+    position: absolute; 
+    width: 100vw;
   }
 }
 
@@ -46,8 +91,13 @@ body {
   border-bottom: 1px solid #f2f2f2;
 }
 
+.bottombar {
+  grid-area: bottombar;
+  color: #fff;
+  display: none;  
+}
+
 .dashboard {
   grid-area: dashboard;
-  padding: 0 1em;
-  overflow-y: scroll;
+  padding: 0 1em;  
 }
