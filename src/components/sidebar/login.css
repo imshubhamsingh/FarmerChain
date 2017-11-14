@@ -36,13 +36,13 @@ form {
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 425px) {
     .form {
         width: 82vw;       
     }
     .form-panel {
-        padding: 60px calc(5% + 60px) 60px 60px;
-        box-sizing: border-box;
+        padding: 59px calc(-11% + 60px) 58px 23px !important;
+      
     }
     
   }
