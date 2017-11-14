@@ -8,6 +8,7 @@ body {
   margin: 0;
   font-family: Arial;
   background-color: #f2f2f2;
+  position: relative;
 }
 
 .box {
@@ -17,8 +18,7 @@ body {
 }
 
 .app-layout{
-  position: relative;
-  display: inline;  
+  position: relative; 
 }
 
 .header     { background-color: #ffffff; }
@@ -32,10 +32,11 @@ body {
    position: absolute;
    z-index: 1;
    transition: all 0.5s ease;
-  }
+}
 
 .login-sidebar{
-  width: 100vw;
+  width: 100%;
+  background-size: cover;
 }
 
 .main-layout {
@@ -55,8 +56,7 @@ body {
     margin-left: -250px;
    }
    .login-sidebar{
-    width: 100vw;
-    margin-left: 0px;    
+     margin-left: 0px;    
   }
    .main-layout {
     display: grid;

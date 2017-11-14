@@ -7,15 +7,18 @@ import './App.css';
 
 
 class ClientApp extends Component{
+   
     render(){
         return(
             <div className="app-layout">
                  <Sidebar/>  
-                 <div className='main-layout'>            
-                    <Header/>
-                    <Dashboard/>                        
-                 </div> 
-                 <Bottombar/>    
+                 <div>
+                    <div className='main-layout'>            
+                        <Header/>
+                        <Dashboard/>                        
+                    </div> 
+                    <Bottombar/>  
+                 </div>                   
             </div>                                
         )
     }

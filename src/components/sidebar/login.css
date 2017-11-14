@@ -15,8 +15,7 @@ form {
 }
 
 .remove-form{
-    animation: login-now .3s reverse forwards;
-    animation-direction:
+    animation: login-now .3s reverse forwards; 
 }
 
 @keyframes login-now {
@@ -42,6 +41,17 @@ form {
     }
     .form-panel {
         padding: 59px calc(-11% + 60px) 58px 23px !important;
+      
+    }
+    
+  }
+
+  @media screen and (max-width: 638px) {
+    .form {
+        width: 82vw;       
+    }
+    .form-panel {
+        padding: 59px calc(-8% + 60px) 58px 23px !important;
       
     }
     
