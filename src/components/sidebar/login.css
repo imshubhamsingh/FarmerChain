@@ -14,6 +14,28 @@ form {
     overflow: hidden;
 }
 
+.remove-form{
+    animation: login-now .3s reverse forwards;
+    animation-direction:
+}
+
+@keyframes login-now {
+    0% {
+        opacity: 0;
+        transform: translateY(-400px);
+    }
+
+    50% {
+        transform: translateY(40px);
+    }
+ 
+    100% {
+        opacity: 1;
+        transform : translateY(0);
+    }
+}
+
+
 @media screen and (max-width: 768px) {
     .form {
         width: 82vw;       
