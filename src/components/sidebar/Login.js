@@ -5,7 +5,8 @@ class Login extends Component{
     state = {
         username: '',
         password: '',
-        login: false
+        login: false,
+        signUp: false
     }
     login = (event) => {
         event.preventDefault();
@@ -13,6 +14,17 @@ class Login extends Component{
         this.setState({login:true})
         setTimeout(this.props.onLogin,1000);
     };
+    openSignUp = ()=>{
+        if(this.state.signUp === false){
+            this.setState({signUp: true})
+        }
+    }
+
+    closeSignUp = ()=>{
+        if(this.state.signUp === true){
+            this.setState({signUp: false})
+        }
+    }
     handleChange = (event) => {
         if(event.target.name ==='password'){
             this.setState({password: event.target.value});
@@ -49,7 +61,37 @@ class Login extends Component{
                             </div>
                         </form>
                     </div>
-                </div>          
+                </div> 
+                <div className={"form-panel two "+(this.state.signUp?"show":'')} onClick={this.openSignUp}>
+                    <div className="form-toggle" onClick={this.closeSignUp}></div>
+                    <div className="form-header">
+                        <h1>Register Account</h1>
+                    </div>
+                    <div className="form-content">
+                        <form onSubmit={this.login}>
+                            <div className="form-group">
+                                <label htmlFor="username">Username</label>
+                                <input type="text" id="username" name="username" required="required" value={this.state.username} onChange={this.handleChange}/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="password">Password</label>
+                                <input type="password" id="password" name="password" required="required" value={this.state.password} onChange={this.handleChange}/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="confirmPassword">Confirm Password</label>
+                                <input type="password" id="password" name="confirmPassword" required="required" value={this.state.password} onChange={this.handleChange}/>
+                            </div>       
+                           <div className="form-group">
+                                <label htmlFor="username">Email</label>
+                                <input type="text" id="username" name="username" required="required" value={this.state.username} onChange={this.handleChange}/>
+                            </div>
+                            <div className="form-group">
+                                <button type="submit">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div> 
+                         
             </div>            
         )
     }

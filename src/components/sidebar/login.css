@@ -12,6 +12,7 @@ form {
     box-sizing: border-box;
     margin: 100px auto 10px;
     overflow: hidden;
+    border-radius: 6px 0 0 6px;
 }
 
 .remove-form{
@@ -40,8 +41,16 @@ form {
         width: 82vw;       
     }
     .form-panel {
-        padding: 59px calc(-11% + 60px) 58px 23px !important;
+        padding: 59px calc(-11% + 60px) 73px 23px !important;
       
+    }
+    .form-panel.two {
+        padding: 59px calc(-6% + 102px) calc(-8% + 60px) 39px !important;
+        left: 86% !important;
+        top: -69px !important;      
+    }
+    .form-panel.two:hover {
+        left: 81% !important;         
     }
     
   }
@@ -51,7 +60,13 @@ form {
         width: 82vw;       
     }
     .form-panel {
-        padding: 59px calc(-8% + 60px) 58px 23px !important;
+        padding: 59px calc(-8% + 93px) 73px 23px !important;
+      
+    }
+    .form-panel.two {
+        padding: 59px calc(-6% + 102px) calc(-8% + 60px) 39px !important;
+        left: 90% !important;
+        top: -47px !important;
       
     }
     
@@ -59,7 +74,7 @@ form {
 
 .form-header h1 {
     padding: 4px 0;
-    color: #4285F4;
+    color: #3a385a;;
     font-size: 24px;
     font-weight: 700;
     text-transform: uppercase;
@@ -67,7 +82,7 @@ form {
 }
 
 .form-panel {
-    padding: 60px calc(5% + 60px) 60px 60px;
+    padding: 60px calc(5% + 60px) 73px 60px;
     box-sizing: border-box;
 }
 
@@ -116,7 +131,7 @@ form {
 
 .form-group button {
     outline: none;
-    background: #4285F4;
+    background: #3a385a;;
     width: 100%;
     border: 0;
     border-radius: 4px;
@@ -129,3 +144,84 @@ form {
     text-transform: uppercase;
     cursor: pointer;
 }
+
+.form-panel.two {
+    z-index: 5;
+    position: absolute;
+    top: -52px;
+    left: 90%;
+    background: #3a385a;
+    width: 111%;
+    min-height: 100%;
+    padding: 60px calc(10% + 60px) 60px 60px;
+    transition: 0.3s ease;
+    cursor: pointer;
+    transform: scale(0.9);
+}
+
+.form-panel.two:hover {  
+    left: 88% !important;   
+}
+
+
+.form-panel.two.show{
+    left:0% !important;
+    outline:0 !important; 
+       
+}
+
+.two .form-header h1 {
+    position: relative;
+    z-index: 40;
+    color: #FFFFFF;
+    font-size: 1.3rem;
+}
+
+.two .form-group label {
+    color: #FFFFFF;
+}
+
+.form-group input {  
+    color: rgba(255, 255, 255, .8);
+   
+}
+
+.two .form-group button {
+    background: #FFFFFF;
+    color: #3a385a;
+    margin-top: 10px;
+}
+
+.form-toggle{
+        /* z-index: 10; */
+        position: absolute;
+        right: 10%;
+        background: #FFFFFF;
+        width: 18px;
+        height: 18px;
+        border-radius: 100%;   
+        cursor: pointer;    
+}
+.form-toggle::before{
+    content: '';
+    width: 14px;
+    height: 2px;
+    position: absolute;
+    background:#3a385a;
+    transform: translate(-50%, -50%) rotate(45deg);
+    top: 9px;
+}
+
+.form-toggle::after{
+    content: '';
+    width: 14px;
+    height: 2px;
+    position: absolute;
+    background:#3a385a;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    top: 9px;
+}
+
+
+
+
