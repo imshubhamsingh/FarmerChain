@@ -51,7 +51,7 @@ body {
   width:calc(100% - 250px);
   margin-left:250px;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-areas: "header"
                        "dashboard" ;
   transition: all 0.5s ease;                     
@@ -70,7 +70,7 @@ body {
     width:calc(100% - 0px);
     margin-left:0px;
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr;
   
     grid-template-areas: "header"
                          "dashboard"                                  
@@ -106,4 +106,5 @@ body {
 .dashboard {
   grid-area: dashboard;
   padding: 0 1em;  
+  overflow-y: scroll;
 }
