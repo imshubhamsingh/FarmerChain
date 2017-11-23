@@ -7,13 +7,15 @@ class Dashboard extends Component{
             <div className='dashboard box'>
                 <ul className="card-list">
                     <li className="card-list-item">
-                        <div className="card"></div>
+                        <div className="card">
+                            <div>Pool Farming</div>
+                        </div>
                     </li>   
                     <li className="card-list-item">
-                        <div className="card"></div>
+                        <div className="card">Cart Farm</div>
                     </li>  
                     <li className="card-list-item">
-                        <div className="card"></div>
+                        <div className="card">Farmers' Bank</div>
                     </li>                                
                 </ul>                
             </div>                              

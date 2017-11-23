@@ -27,8 +27,8 @@ body {
   position: relative; 
 }
 
-.header     { background-color: #ffffff; }
-.dashboard   { background-color: #ffffff; }
+.header     { background-color: #f5f9fc; }
+.dashboard   { background-color: #f5f9fc; }
 .bottombar   {  background-color: #313042;}
 
 .sidebar   {
@@ -78,7 +78,7 @@ body {
   .dashboard {
     grid-area: dashboard;
     padding: 0 1em;  
-    overflow-y: scroll;
+    overflow-x: scroll;
   }
   .bottombar {
     display: block !important;
@@ -106,5 +106,5 @@ body {
 .dashboard {
   grid-area: dashboard;
   padding: 0 1em;  
-  overflow-y: scroll;
+  overflow-x: scroll;
 }

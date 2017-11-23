@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Login from './Login'
-
+import Main from './Main'
 
 class Sidebar extends Component{
     state = {
@@ -10,7 +10,7 @@ class Sidebar extends Component{
         this.setState({login:true})
     }
     render(){
-        const current = !this.state.login? <Login onLogin={this.dashboard}/>: '' 
+        const current = !this.state.login? <Login onLogin={this.dashboard}/>: <Main/>
         return(
             <div className={'sidebar box ' + (!this.state.login? 'login-sidebar': '' )}>
                 {current}             

@@ -1,0 +1,47 @@
+.wrapper {
+    padding: 100px;
+}
+
+.image--cover {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: -67px;
+    object-fit: cover;
+    object-position: center right;
+    border: 2px #fff solid;
+}
+h3{
+    margin-top: -10px;
+}
+
+h6{
+    margin-top: -12px;
+}
+.menu{
+
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li.menu-list{
+    padding-right: 25px;
+    font-size: 20px;
+}
+
+.menu-list-item{
+    text-align: right;
+}
+
+.menu-list-item h6{
+    margin-top: 10px;
+    color: #7a78a2 !important;
+}
+
+.menu-list-item h1{
+    margin-top: -30px;
+}
