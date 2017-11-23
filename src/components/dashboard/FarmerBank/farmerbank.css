@@ -253,3 +253,7 @@ label{
         display: block;
     }
 }
+
+.tabs_item.farmerBank-request{
+    padding: 30px;
+}

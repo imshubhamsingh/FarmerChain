@@ -39,7 +39,7 @@ class PoolFarm extends Component{
 
                     <div className="tab_content">
 
-                        <div className="tabs_item">
+                        <div className="tabs_item pool-request">
                             <form action="">
                                 <div>
                                     <label htmlFor="pool">Pool Description</label>

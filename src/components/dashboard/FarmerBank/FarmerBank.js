@@ -40,7 +40,7 @@ class FarmerBank extends Component{
 
                     <div className="tab_content">
 
-                        <div className="tabs_item">
+                        <div className="tabs_item farmerBank-request">
                             <form action="">
                                 <div>
                                     <label htmlFor="pool">Loan Description</label>

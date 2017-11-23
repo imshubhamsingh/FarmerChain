@@ -40,7 +40,7 @@ class CartFarm extends Component{
 
                     <div className="tab_content">
 
-                        <div className="tabs_item">
+                        <div className="tabs_item product-request">
                             <form action="">
                                 <div>
                                     <label htmlFor="pool">Product Name</label>

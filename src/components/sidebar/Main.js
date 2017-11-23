@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import  gravatar from 'gravatar'
 import './main.css'
 
 class Main extends Component{
@@ -6,11 +7,11 @@ class Main extends Component{
         return(
             <div>
                 <div className="wrapper">
-                    <img src="https://i.kinja-img.com/gawker-media/image/upload/gd8ljenaeahpn0wslmlz.jpg" className="image--cover" />
+                    <img src={gravatar.url('imshubhamsingh97@gmail.com',{s:'200'})} className="image--cover" />
                 </div>
                 <h3>Shubham Singh</h3>
                 <h6>0x43254543mn45kj435h43jh445</h6>
-                
+
                 <div className="menu">
                     <ul>
                         <li className="menu-list">
