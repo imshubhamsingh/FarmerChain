@@ -4,7 +4,7 @@
     margin-bottom: 20px;
     position: relative;
     overflow: hidden;
-    width: 70%;
+    width: 99%;
     margin: 0 auto;
     font-family: 'Roboto', sans-serif;
     line-height: 1.5;
@@ -40,7 +40,6 @@
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
-    border-bottom: 2px solid blue;
 }
 
 .tabs_item {
@@ -174,6 +173,11 @@ label{
     text-indent: 0px;
 }
 
+.tabs_item{
+    height: 450px;
+    overflow-y: hidden;
+}
+
 .tabs_item .info{
     display: inline;
     position: relative;
@@ -206,11 +210,35 @@ label{
 }
 
 .tabs_item .details{
-   text-align: left;
+    text-align: left;
 }
 
 .pool-list ul>li{
     padding: 10px;
     background-color: #f3f3f3;
     margin: 20px;
+}
+.yet-to-buy{
+    background-color: red !important;
+}
+.bought{
+    background-color: green !important;
+}
+
+.product-list{
+    display: flex;
+}
+
+.product-list .products-list{
+    width: 100%;
+}
+
+.products-list ul{
+    width: 100%;
+    overflow-y: scroll;
+    height: 324px;
+}
+
+.products-list h2{
+    text-align: center;
 }

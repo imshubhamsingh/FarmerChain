@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom'
 import './services.css';
 
 class Services extends Component{
     render(){
         return(
                 <ul className="card-list">
-                    <li className="card-list-item">
+                    <Link to="/poolFarm" style={{ textDecoration: 'none' }} className="card-list-item">
                         <div className="card">
                             <div>Pool Farming</div>
                         </div>
-                    </li>
-                    <li className="card-list-item">
+                    </Link>
+                    <Link to="/cartFarm" style={{ textDecoration: 'none' }} className="card-list-item">
                         <div className="card">Cart Farm</div>
-                    </li>
-                    <li className="card-list-item">
+                    </Link>
+                    <Link to="/farmerBank" style={{ textDecoration: 'none' }} className="card-list-item">
                         <div className="card">Farmers' Bank</div>
-                    </li>
+                    </Link>
                 </ul>
         )
     }

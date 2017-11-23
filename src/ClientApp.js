@@ -11,7 +11,7 @@ class ClientApp extends Component{
     render(){
         return(
             <div className="app-layout">
-                 <Sidebar/>
+                    <Sidebar/>
                  <div>
                     <div className='main-layout'>            
                         <Header/>

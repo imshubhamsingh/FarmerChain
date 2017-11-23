@@ -2,6 +2,7 @@
 
 
 .card-list{
+    text-decoration: none;
     display: flex;
     padding: 10px 0 0 0;
     flex-flow: nowrap;
@@ -18,6 +19,7 @@
 }
 
 .card-list .card-list-item .card {
+    text-decoration: none !important;
   transition: all 0.5s ease;
   width: 100%;
   height: 400px;
@@ -45,8 +47,10 @@
   }
 
 @media screen and (min-width: 1024px) {
+
     .card-list{
         display: flex;
+        padding: 71px 0 0 0 !important;
     }
     .card-list .card-list-item .card{
         width: 95%;
