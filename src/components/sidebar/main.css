@@ -30,11 +30,12 @@ ul{
 
 li.menu-list{
     padding-right: 25px;
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .menu-list-item{
     text-align: right;
+
 }
 
 .menu-list-item h6{
@@ -43,5 +44,5 @@ li.menu-list{
 }
 
 .menu-list-item h1{
-    margin-top: -30px;
+    margin-top: -28px;
 }

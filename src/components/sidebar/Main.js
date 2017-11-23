@@ -26,7 +26,18 @@ class Main extends Component{
                         <li className="menu-list">
                             <div className="menu-list-item">
                                 <h6>
-                                    Order Products
+                                    Pool Accepted
+                                </h6>
+                                <h1>
+                                   4
+                                </h1>
+                            </div>
+                        </li>
+
+                        <li className="menu-list">
+                            <div className="menu-list-item">
+                                <h6>
+                                    Ordered Products
                                 </h6>
                                 <h1>
                                     2
