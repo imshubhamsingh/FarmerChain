@@ -95,6 +95,7 @@ body {
   grid-area: header;
   color: #333;
   border-bottom: 1px solid #f2f2f2;
+    position: relative;
 }
 
 .bottombar {

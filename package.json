@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "gravatar": "^1.6.0",
+    "history": "^4.7.2",
     "jquery": "^3.2.1",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
