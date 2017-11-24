@@ -10,14 +10,19 @@
     object-fit: cover;
     object-position: center right;
     border: 2px #fff solid;
+    opacity: 0;
 }
-h3{
+
+#name{
+    opacity: 0;
     margin-top: -10px;
 }
 
-h6{
+#accountNo{
+    opacity: 0;
     margin-top: -12px;
 }
+
 .menu{
 
 }
@@ -31,6 +36,7 @@ ul{
 li.menu-list{
     padding-right: 25px;
     font-size: 16px;
+    opacity: 0;
 }
 
 .menu-list-item{

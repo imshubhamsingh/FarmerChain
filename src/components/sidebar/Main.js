@@ -11,13 +11,13 @@ class Main extends Component{
         $(document).ready(function() {
 
             (function ($) {
-                let img = $('.wrapper'),
+                let img = $('.wrapper').children(),
                     name = $('#name'),
                     accountNo = $('#accountNo'),
                     details = $('.menu ul>li');
-                let serviceList = [...img,...name,...accountNo,...details];
+                let serviceList = [...name,...accountNo,...details];
                 console.log(serviceList);
-                let t1Loader = new TimelineLite();
+                let t1Loader = new TimelineLite({delay:0.5});
 
                 t1Loader.staggerFromTo(
                     serviceList,
@@ -26,6 +26,7 @@ class Main extends Component{
                     { y: 0, autoAlpha:1, ease: Elastic.SlowMo},
                     0.5
                 )
+                    .fromTo(img, 0.5, {y:50, autoAlpha:0},{ y: 0, autoAlpha:1, ease: Elastic.SlowMo}, "-=3.25")
             })(jQuery);
 
         });
