@@ -51,9 +51,9 @@ class Login extends Component{
                                 <input type="password" id="password" name="password" required="required" value={this.state.password} onChange={this.handleChange}/>
                             </div>
                             <div className="form-group">
-                                <label className="form-remember">
-                                    <input type="checkbox"/>Remember Me
-                                </label>
+                                {/*<label className="form-remember">*/}
+                                    {/*<input type="checkbox"/>Remember Me*/}
+                                {/*</label>*/}
                                 {/* <a className="form-recovery" href="">Forgot Password?</a> */}
                             </div>
                             <div className="form-group">

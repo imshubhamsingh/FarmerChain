@@ -62,7 +62,7 @@ form {
     .form-panel.two {
         padding: 59px calc(-6% + 102px) calc(-8% + 60px) 39px !important;
         left: 90% !important;
-        top: -47px !important;
+        top: -27px !important;
       
     }
     
@@ -131,6 +131,7 @@ form {
     width: 100%;
     border: 0;
     border-radius: 4px;
+    margin-top: 43px;
     padding: 12px 20px;
     color: #FFFFFF;
     font-family: inherit;
