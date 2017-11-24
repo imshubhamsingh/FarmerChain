@@ -101,7 +101,8 @@ body {
 .bottombar {
   grid-area: bottombar;
   color: #fff;
-  display: none;  
+  display: none;
+    padding: 0;
 }
 
 .dashboard {

@@ -4,7 +4,7 @@ import Main from './Main'
 
 class Sidebar extends Component{
     state = {
-        login: true
+        login: false
     }
     dashboard =  () =>{
         this.setState({login:true})
