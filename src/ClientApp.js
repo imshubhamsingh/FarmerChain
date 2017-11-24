@@ -7,17 +7,36 @@ import './App.css';
 
 
 class ClientApp extends Component{
+    state = {
+        login: false
+    }
+
+    loginRequest =  () =>{
+        this.setState({login:true})
+    }
+
+    showDashBoard = () => {
+        if(this.state.login) return (
+            <div className='main-layout'>
+                <Header/>
+                <Dashboard/>
+            </div>
+        )
+    }
+
+    showBottomBar = () => {
+        if(this.state.login) return (
+            <Bottombar/>
+        )
+    }
    
     render(){
         return(
             <div className="app-layout">
-                    <Sidebar/>
+                    <Sidebar loginRequest={this.loginRequest} login={this.state.login}/>
                  <div>
-                    <div className='main-layout'>            
-                        <Header/>
-                        <Dashboard/>                        
-                    </div> 
-                    <Bottombar/>  
+                     {this.showDashBoard()}
+                     {this.showBottomBar()}
                  </div>                   
             </div>                                
         )
