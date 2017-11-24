@@ -6,18 +6,19 @@ import CartFarm from "./Cart Farm/CartFarm";
 import FarmerBank from "./FarmerBank/FarmerBank";
 import { Route, Switch} from 'react-router-dom';
 
+import PageShell from './PageShell/PageShell'
 
 class Dashboard extends Component{
     render(){
         return(
             <div className="dashboard">
-                <Switch>
-                    <Route path="/" exact component={Services}/>
-                    <Route path="/poolfarm" component={PoolFarm}/>
-                    <Route path="/cartFarm" component={CartFarm}/>
-                    <Route path="/farmerBank" component={FarmerBank}/>
-                    <Route/>
-                </Switch>
+                     <Switch>
+                        <Route path="/" exact component={PageShell(Services)} />
+                        <Route path="/poolfarm" component={PageShell(PoolFarm)} />
+                        <Route path="/cartfarm" component={PageShell(CartFarm)} />
+                        <Route path="/farmerBank" component={PageShell(FarmerBank)} />
+                        <Route/>
+                     </Switch>
             </div>
 
         )

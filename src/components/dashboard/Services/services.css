@@ -9,6 +9,7 @@
 }
 
 .card-list .card-list-item{
+    opacity: 0;
     transition: all 0.5s ease-in-out;
     width: 350px;
     margin-top: 0;

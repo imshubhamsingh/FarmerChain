@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "animated": "^0.2.1",
     "font-awesome": "^4.7.0",
     "gravatar": "^1.6.0",
+    "gsap": "^1.20.3",
     "history": "^4.7.2",
     "jquery": "^3.2.1",
     "react": "^16.1.0",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.1.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "react-transition-group": "^2.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
