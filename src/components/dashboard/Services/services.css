@@ -3,7 +3,7 @@
 
 .card-list{
     display: flex;
-    padding: 10px 0 0 0;
+    padding: 80px 0 0 0;
     flex-flow: nowrap;
     justify-content: space-around;
 }
@@ -34,11 +34,14 @@
 @media screen and (max-width: 425px) {
     .card-list{
         flex-flow: row wrap;
+        padding: 10px 0 0 0;
     }
 }
 @media screen and (max-width: 768px) {
     .card-list{
         display: block;
+        padding: 10px 0 0 0;
+
     }
     .card-list .card-list-item{
         width: 100%;
