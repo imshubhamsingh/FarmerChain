@@ -1,16 +1,43 @@
 import React, { Component } from 'react'
 import  gravatar from 'gravatar'
+import {TimelineLite, Elastic} from "gsap";
 import './main.css'
 
+import $ from 'jquery';
+const jQuery = $;
+
 class Main extends Component{
+    componentDidMount(){
+        $(document).ready(function() {
+
+            (function ($) {
+                let img = $('.wrapper'),
+                    name = $('#name'),
+                    accountNo = $('#accountNo'),
+                    details = $('.menu ul>li');
+                let serviceList = [...img,...name,...accountNo,...details];
+                console.log(serviceList);
+                let t1Loader = new TimelineLite();
+
+                t1Loader.staggerFromTo(
+                    serviceList,
+                    1,
+                    { y: +20, autoAlpha:0},
+                    { y: 0, autoAlpha:1, ease: Elastic.SlowMo},
+                    0.5
+                )
+            })(jQuery);
+
+        });
+    }
     render(){
         return(
-            <div>
+            <div className="sidebar-main">
                 <div className="wrapper">
                     <img src={gravatar.url('imshubhamsingh97@gmail.com',{s:'200'})} className="image--cover" />
                 </div>
-                <h3>Shubham Singh</h3>
-                <h6>0x43254543mn45kj435h43jh445</h6>
+                <h3 id="name">Shubham Singh</h3>
+                <h6 id="accountNo">0x43254543mn45kj435h43jh445</h6>
 
                 <div className="menu">
                     <ul>

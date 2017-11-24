@@ -1,24 +1,31 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import './services.css';
-import {TimelineLite} from "gsap";
+import {TimelineLite, Elastic} from "gsap";
 import $ from 'jquery';
 const jQuery = $;
 
-
 class Services extends Component{
     componentDidMount(){
-        let serviceList = $('ul.card-list').children();
-        let t1Loader = new TimelineLite();
+        $(document).ready(function() {
 
-        t1Loader.staggerFromTo(
-            serviceList,
-            0.05,
-            { y: +20, autoAlpha:0},
-            { y: 0, autoAlpha:1},
-            0.33
-        )
+            (function ($) {
+                let serviceList = $('ul.card-list').children();
+                console.log(serviceList);
+                let t1Loader = new TimelineLite();
+
+                t1Loader.staggerFromTo(
+                    serviceList,
+                    1,
+                    { y: +20, autoAlpha:0},
+                    { y: 0, autoAlpha:1, ease:Elastic.easeIn},
+                    0.5
+                )
+            })(jQuery);
+
+        });
     }
+
     render(){
         return(
                 <ul className="card-list">
