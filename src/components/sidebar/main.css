@@ -52,3 +52,23 @@ li.menu-list{
 .menu-list-item h1{
     margin-top: -28px;
 }
+
+.logOut{
+    border: none;
+    background-color: #21212d;
+    color: wheat;
+    border-radius: 21px;
+    padding: 5px;
+    width: 100%;
+    transition: all 0.2s ease-in;
+    outline: none;
+}
+
+.logOut:hover{
+    background-color: #fff;
+    color: black;
+}
+
+.logOut:active{
+    transform: translateY(2px);
+}

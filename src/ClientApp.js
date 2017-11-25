@@ -6,6 +6,10 @@ import Bottombar from './components/bottombar/Bottombar'
 import './App.css';
 
 
+import { firebaseApp } from './firebase/firebase'
+
+
+
 class ClientApp extends Component{
     state = {
         login: false
@@ -28,6 +32,18 @@ class ClientApp extends Component{
         if(this.state.login) return (
             <Bottombar/>
         )
+    }
+
+    componentWillMount(){
+        firebaseApp.auth().onAuthStateChanged(user=>{
+            if(user){
+                console.log('user has signed in or up', user)
+                this.setState({login:true});
+            }else{
+                console.log('user has signed out or still needs to sign in.')
+                this.setState({login:false});
+            }
+        });
     }
    
     render(){

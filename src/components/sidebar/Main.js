@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import  gravatar from 'gravatar'
 import {TimelineLite, Elastic} from "gsap";
+import { firebaseApp } from '../../firebase/firebase'
+
 import './main.css'
 
 import $ from 'jquery';
@@ -29,6 +31,13 @@ class Main extends Component{
                     .fromTo(img, 0.5, {y:50, autoAlpha:0},{ y: 0, autoAlpha:1, ease: Elastic.SlowMo}, "-=3.25")
             })(jQuery);
 
+        });
+    }
+    logout = ()=>{
+        firebaseApp.auth().signOut().then(function() {
+            // Sign-out successful.
+        }, function(error) {
+            // An error happened.
         });
     }
     render(){
@@ -96,6 +105,9 @@ class Main extends Component{
                         </li>
                     </ul>                    
                 </div>
+                <button className="logOut" onClick={this.logout}>
+                    Log Out
+                </button>
 
             </div>
         )

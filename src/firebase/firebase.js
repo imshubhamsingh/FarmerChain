@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import * as firebase from 'firebase'
 
 const config = {
     apiKey: "AIzaSyCNlEBXTBdIG5N31D2bl5FlFSzjT1DiBio",
@@ -8,6 +8,6 @@ const config = {
     storageBucket: "digitalocean-1a580.appspot.com",
     messagingSenderId: "104470064238"
 };
-firebase.initializeApp(config);
 
-export default firebase;
+export const firebaseApp = firebase.initializeApp(config);
+
