@@ -5,6 +5,8 @@ contract Bank{
     address owner;
     uint256 previousBalance;
 
+    event addedFunds(address whoAdded, uint256 howMuch);
+
     function Bank() {
         owner = msg.sender;
         members[owner] = member(true, true, 100, 0, 0);
@@ -19,10 +21,25 @@ contract Bank{
         uint256 amountAddedToThePool;
     }
 
+    struct mod{
+        string name;
+        bool status;
+    }
+
     mapping(address => member) members;
+    mapping(address => mod) mods;
+    mapping(address => uint256) loanGranted;
 
     modifier onlyowner(){
         if(msg.sender == owner){
+            _;
+        }else{
+            throw;
+        }
+    }
+
+    modifier onlymods(){
+        if(mods[msg.sender].status == true){
             _;
         }else{
             throw;
@@ -35,6 +52,10 @@ contract Bank{
         }else{
             throw;
         }
+    }
+
+    function addMods(address _modAddress, string _modName) onlyowner{
+        mods[_modAddress] = mod(_modName, true);
     }
 
     function addMembers(address _memberaddress, uint _maxAmount) onlyowner{
@@ -56,6 +77,17 @@ contract Bank{
         }
         addedFunds(msg.sender, changeInBalance);
         previousBalance = this.balance;
+    }
+
+    function requestLoan(uint256 loanAmount) onlymember constant returns(bool status){
+        if(members[msg.sender].isPermitted && loanAmount <= 2*members[msg.sender].amountAddedToThePool && loanAmount <= this.balance/2){
+            members[msg.sender].isPermitted == false;
+            members[msg.sender].loanGranted = loanAmount;
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     function getBalance() constant returns(uint256){
