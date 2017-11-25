@@ -6,55 +6,51 @@ import Bottombar from './components/bottombar/Bottombar'
 import './App.css';
 
 
-import { firebaseApp } from './firebase/firebase'
+import {LoginCheckModule, auth} from "./firebase/firebase";
 
 
 
 class ClientApp extends Component{
     state = {
-        login: false
+        user: null
     }
-
-    loginRequest =  () =>{
-        this.setState({login:true})
-    }
-
-    showDashBoard = () => {
-        if(this.state.login) return (
-            <div className='main-layout'>
-                <Header/>
-                <Dashboard/>
-            </div>
-        )
-    }
-
-    showBottomBar = () => {
-        if(this.state.login) return (
-            <Bottombar/>
-        )
-    }
-
     componentWillMount(){
-        firebaseApp.auth().onAuthStateChanged(user=>{
-            if(user){
-                console.log('user has signed in or up', user)
-                this.setState({login:true});
-            }else{
-                console.log('user has signed out or still needs to sign in.')
-                this.setState({login:false});
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({ user });
             }
         });
     }
-   
+
+    login = ()=> {
+        auth.signInWithPopup(provider)
+            .then((result) => {
+                const user = result.user;
+                this.setState({
+                    user
+                });
+            });
+    }
+
+    logout = ()=>{
+        auth.signOut()
+            .then(() => {
+                this.setState({
+                    user: null
+                });
+            });
+    }
+
     render(){
         return(
-            <div className="app-layout">
-                    <Sidebar loginRequest={this.loginRequest} login={this.state.login}/>
-                 <div>
-                     {this.showDashBoard()}
-                     {this.showBottomBar()}
-                 </div>                   
-            </div>                                
+            < div className="app-layout">
+                    <Sidebar user={this.state.user}/>
+                    {this.state.user?<div className='main-layout'>
+                        <Header/>
+                        <Dashboard/>
+                    </div>:''}
+                     {this.state.user?<Bottombar/>:''}
+            </div>
         )
     }
 }

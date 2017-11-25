@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './bottombar.css'
 
-
 class Bottombar extends Component{
     render(){
         return(

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './login.css'
-import { firebaseApp } from '../../firebase/firebase'
+import {firebaseApp, LoginCheckModule} from '../../firebase/firebase'
 
 class Login extends Component{
     state = {
@@ -82,7 +82,18 @@ class Login extends Component{
         }
     }
 
+    checkLogin = ()=>{
+        return LoginCheckModule(user=>{
+            if(user){
+                return true;
+            }else{
+                return false;
+            }
+        })
+    }
+
     render(){
+        console.log('In login')
         return(
             <div className={"form "+(this.state.login?"remove-form":'') + (this.state.error?"error":'')}>
                 <div className="form-panel one">

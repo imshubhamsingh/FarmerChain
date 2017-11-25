@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import  gravatar from 'gravatar'
 import {TimelineLite, Elastic} from "gsap";
-import { firebaseApp } from '../../firebase/firebase'
+import { auth } from '../../firebase/firebase'
 
 import './main.css'
 
@@ -34,7 +34,7 @@ class Main extends Component{
         });
     }
     logout = ()=>{
-        firebaseApp.auth().signOut().then(function() {
+        auth.signOut().then(function() {
             // Sign-out successful.
         }, function(error) {
             // An error happened.

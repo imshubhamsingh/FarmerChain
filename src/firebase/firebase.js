@@ -11,3 +11,6 @@ const config = {
 
 export const firebaseApp = firebase.initializeApp(config);
 
+export const LoginCheckModule = (fn)=> firebaseApp.auth().onAuthStateChanged(user=> fn(user))
+
+export const auth = firebase.auth();
