@@ -9,6 +9,7 @@ contract Bank{
 
     function Bank() {
         owner = msg.sender;
+        mods[owner] = mod("FarmerBank", true);
         members[owner] = member(true, true, 100, 0, 0);
         previousBalance = this.balance;
     }
