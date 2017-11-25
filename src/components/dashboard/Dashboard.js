@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './dashboard.css';
 import Services from "./Services/services";
 import PoolFarm from "./PoolFarming/PoolFarm";
-import CartFarm from "./Cart Farm/CartFarm";
+import CartFarm from "./CartFarm/CartFarm";
 import FarmerBank from "./FarmerBank/FarmerBank";
 import { Route, Switch} from 'react-router-dom';
 

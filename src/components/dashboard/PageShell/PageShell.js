@@ -7,9 +7,9 @@ const PageShell = Service => {
         <div>
             <ReactCSSTransitionGroup
                 transitionAppear={true}
-                transitionAppearTimeout={600}
-                transitionEnterTimeout={600}
-                transitionLeaveTimeout={200}
+                transitionAppearTimeout={500}
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={500}
                 transitionName="SlideIn"
             >
                 <Service {...props} />

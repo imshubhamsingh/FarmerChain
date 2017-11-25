@@ -16,7 +16,10 @@
 .products-list ul{
     width: 100%;
     overflow-y: scroll;
-    height: 324px;
+    padding: 0 10px;
+    background: white;
+    margin-top: -27px;
+    height: 370px;
 }
 
 .products-list h2{

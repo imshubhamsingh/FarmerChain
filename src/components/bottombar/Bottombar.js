@@ -7,9 +7,9 @@ class Bottombar extends Component{
         return(
             <div className='bottombar box'>
                 <div>
-                    <ul className="bottombar-menu">
-                        <li className="menu-list">
-                            <div className="menu-list-item">
+                    <ul id="bottombar-menu">
+                        <li className="bottom-menu-list">
+                            <div className="bottom-menu-list-item">
                                 <h6>
                                     Current Balance
                                 </h6>
@@ -18,8 +18,8 @@ class Bottombar extends Component{
                                 </h1>
                             </div>
                         </li>
-                        <li className="menu-list">
-                            <div className="menu-list-item">
+                        <li className="bottom-menu-list">
+                            <div className="bottom-menu-list-item">
                                 <h6>
                                     Pool Accepted
                                 </h6>
@@ -29,8 +29,8 @@ class Bottombar extends Component{
                             </div>
                         </li>
 
-                        <li className="menu-list">
-                            <div className="menu-list-item">
+                        <li className="bottom-menu-list">
+                            <div className="bottom-menu-list-item">
                                 <h6>
                                     Ordered Products
                                 </h6>
@@ -40,8 +40,8 @@ class Bottombar extends Component{
                             </div>
                         </li>
 
-                        <li className="menu-list">
-                            <div className="menu-list-item">
+                        <li className="bottom-menu-list">
+                            <div className="bottom-menu-list-item">
                                 <h6>
                                     Transaction Received
                                 </h6>
@@ -50,8 +50,8 @@ class Bottombar extends Component{
                                 </h1>
                             </div>
                         </li>
-                        <li className="menu-list">
-                            <div className="menu-list-item">
+                        <li className="bottom-menu-list">
+                            <div className="bottom-menu-list-item">
                                 <h6>
                                     Transaction Done
                                 </h6>
