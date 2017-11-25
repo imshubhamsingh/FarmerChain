@@ -52,6 +52,7 @@ contract Bank{
             members[msg.sender].amountAddedToThePool -= members[msg.sender].loanGranted;
             members[msg.sender].loanGranted = 0;
             members[msg.sender].isPermitted = true;
+            //transfer function
         }
         addedFunds(msg.sender, changeInBalance);
         previousBalance = this.balance;
