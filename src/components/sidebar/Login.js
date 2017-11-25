@@ -16,7 +16,8 @@ class Login extends Component{
         },
         errorLogin: {
             message: ''
-        }
+        },
+        error: false
     }
     login = (event) => {
         event.preventDefault();
@@ -31,7 +32,10 @@ class Login extends Component{
             .catch((error)=>{
             this.setState({login:false})
                 console.log('error',error)
-                this.setState({errorLogin:error})
+                this.setState({errorLogin:error, error:true})
+                setTimeout(()=>{
+                    this.setState({error: false})
+                }, 2000)
         });
     };
     openSignUp = ()=>{
@@ -52,14 +56,22 @@ class Login extends Component{
                 })
                 .catch(error=>{
                     console.log('error',error)
-                    this.setState({errorSignUp:error})
+                    this.setState({errorSignUp:error,error:true})
+                    setTimeout(()=>{
+                        this.setState({error: false})
+                    }, 2000)
+
                 })
         }else{
             this.setState({
                 errorSignUp: {
                     message: 'Password do not match'
-                }
+                },
+                error:true
             })
+            setTimeout(()=>{
+                this.setState({error: false})
+            }, 2000)
         }
 
 
@@ -72,7 +84,7 @@ class Login extends Component{
 
     render(){
         return(
-            <div className={"form "+(this.state.login?"remove-form":'')}>
+            <div className={"form "+(this.state.login?"remove-form":'') + (this.state.error?"error":'')}>
                 <div className="form-panel one">
                     <div className="form-header">
                         <h1>Account Login</h1>
