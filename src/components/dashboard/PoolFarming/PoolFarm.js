@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {setPoolRequest} from '../../../Actions/PoolFarmAction'
+import {connect} from 'react-redux'
 import './poolfarm.css';
 import $ from 'jquery';
 const jQuery = $;
@@ -26,6 +28,14 @@ class PoolFarm extends Component{
 
         });
     }
+    state = {
+        description:'',
+        poolType:'Hand'
+    }
+    handleSubmit = (event) =>{
+        event.preventDefault();
+        this.props.setPoolRequest({...this.state});
+    }
     render(){
         return(
             <div>
@@ -40,17 +50,17 @@ class PoolFarm extends Component{
                     <div className="tab_content">
 
                         <div className="tabs_item pool-request">
-                            <form action="">
+                            <form onSubmit={this.handleSubmit} action="">
                                 <div>
                                     <label htmlFor="pool">Pool Description</label>
-                                    <input type="text" id="pool"/>
+                                    <input type="text" id="pool" onChange={event=> this.setState({description:event.target.value})}/>
                                 </div>
                                 <div>
                                     <label htmlFor="type">Pool Type</label>
-                                    <select id="type">
-                                        <option value="volvo">Hand</option>
-                                        <option value="saab">Machine</option>
-                                        <option value="mercedes">Storage</option>
+                                    <select id="type" value={this.state.poolType} onChange={event=> this.setState({poolType:event.target.value})}>
+                                        <option value="hand">Hand</option>
+                                        <option value="machine">Machine</option>
+                                        <option value="storage">Storage</option>
                                     </select>
                                 </div>
                                 <button className="btn btn-effect" type="submit">Submit Request</button>
@@ -156,4 +166,4 @@ class PoolFarm extends Component{
     }
 }
 
-export default PoolFarm
+export default connect(null,{setPoolRequest})(PoolFarm)

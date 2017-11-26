@@ -9,6 +9,7 @@ class Login extends Component{
         email: '',
         password: '',
         signUpEmail: '',
+        signUpDisplayName:'',
         signUpPassword:'',
         confirmPassword: '',
         login: false,
@@ -34,7 +35,6 @@ class Login extends Component{
         this.setState({login:true})
         this.props.login(email, password)
             .then(()=>{
-
                 setTimeout(this.props.onLogin,1000);
             })
             .catch((error)=>{
@@ -53,18 +53,18 @@ class Login extends Component{
     }
     signUp = (event)=>{
         event.preventDefault();
-        console.log(this.state)
-
         if(this.state.confirmPassword === this.state.signUpPassword){
-            const {signUpEmail, signUpPassword} = this.state
-            createAccount(signUpEmail,signUpPassword)
-                .then(()=>{
-                    this.setState({login:true})
+            const {signUpEmail, signUpPassword,signUpDisplayName } = this.state
+            this.setState({login:true})
+            this.props.createAccount(signUpEmail,signUpPassword)
+                .then((user)=>{
+                    user.updateProfile({'displayName': signUpDisplayName});
                     setTimeout(this.props.onLogin,1000);
                 })
                 .catch(error=>{
+                    this.setState({login:false})
                     console.error('error',error)
-                    this.setState({errorSignUp:error,error:true})
+                    this.setState({errorSignUp:error, error:true})
                     setTimeout(()=>{
                         this.setState({error: false})
                     }, 2000)
@@ -127,6 +127,10 @@ class Login extends Component{
                 </div>
                 <div className="form-content">
                     <form onSubmit={this.signUp}>
+                        <div className="form-group">
+                            <label htmlFor="userSignUpDisplayName">Username</label>
+                            <input type="text" id="userSignUpDisplayName" name="username" required="required" value={this.state.signUpDisplayName} onChange={event=>this.setState({signUpDisplayName: event.target.value})}/>
+                        </div>
                         <div className="form-group">
                             <label htmlFor="userSignUpEmail">Email</label>
                             <input type="email" id="userSignUpEmail" name="username" required="required" value={this.state.signUpEmail} onChange={event=>this.setState({signUpEmail: event.target.value})}/>

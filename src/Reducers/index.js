@@ -1,4 +1,5 @@
 import UserReducer from './UserReducer';
+import PoolFarmReducer from './PoolFarmReducer'
 
 import { persistCombineReducers } from 'redux-persist'
 import storage from 'redux-persist/es/storage' // dfault: localStorage if web, AsyncStorage if react-native
@@ -9,7 +10,8 @@ const config = {
 }
 
 export const reducer = persistCombineReducers(config, {
-    user: UserReducer
+    user: UserReducer,
+    pool: PoolFarmReducer
 })
 
 
