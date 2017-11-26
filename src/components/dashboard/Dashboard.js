@@ -4,7 +4,10 @@ import Services from "./Services/services";
 import PoolFarm from "./PoolFarming/PoolFarm";
 import CartFarm from "./CartFarm/CartFarm";
 import FarmerBank from "./FarmerBank/FarmerBank";
-import { Route, Switch} from 'react-router-dom';
+import { Route,Switch, withRouter} from 'react-router-dom';
+import {connect} from 'react-redux'
+
+
 
 import PageShell from './PageShell/PageShell'
 
@@ -12,6 +15,7 @@ class Dashboard extends Component{
     render(){
         return(
             <div className="dashboard">
+
                      <Switch>
                         <Route path="/" exact component={PageShell(Services)} />
                         <Route path="/poolfarm" component={PageShell(PoolFarm)} />
@@ -25,4 +29,4 @@ class Dashboard extends Component{
     }
 }
 
-export default Dashboard
+export default withRouter(connect()(Dashboard))

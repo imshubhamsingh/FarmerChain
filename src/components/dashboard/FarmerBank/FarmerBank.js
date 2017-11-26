@@ -33,9 +33,9 @@ class FarmerBank extends Component{
                 <div className="tab">
 
                     <ul className="tabs">
-                        <li><a href="#">Request a Loan</a></li>
-                        <li><a href="#">Add Funds</a></li>
-                        <li><a href="#">Transaction History</a></li>
+                        <li><a>Request a Loan</a></li>
+                        <li><a>Add Funds</a></li>
+                        <li><a>Transaction History</a></li>
                     </ul>
 
                     <div className="tab_content">

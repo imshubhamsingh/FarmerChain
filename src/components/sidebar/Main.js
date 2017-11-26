@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import  gravatar from 'gravatar'
 import {TimelineLite, Elastic} from "gsap";
-import { firebaseApp } from '../../firebase/firebase'
+import { connect } from 'react-redux';
+import {logout} from "../../Actions/UserActions";
+import { withRouter } from 'react-router-dom'
 
 import './main.css'
 
@@ -18,7 +20,6 @@ class Main extends Component{
                     accountNo = $('#accountNo'),
                     details = $('.menu ul>li');
                 let serviceList = [...name,...accountNo,...details];
-                console.log(serviceList);
                 let t1Loader = new TimelineLite({delay:0.5});
 
                 t1Loader.staggerFromTo(
@@ -33,18 +34,12 @@ class Main extends Component{
 
         });
     }
-    logout = ()=>{
-        firebaseApp.auth().signOut().then(function() {
-            // Sign-out successful.
-        }, function(error) {
-            // An error happened.
-        });
-    }
+
     render(){
         return(
             <div className="sidebar-main">
                 <div className="wrapper">
-                    <img src={gravatar.url('imshubhamsingh97@gmail.com',{s:'200'})} className="image--cover" />
+                    <img alt="userPic"src={gravatar.url('imshubhamsingh97@gmail.com',{s:'200'})} className="image--cover" />
                 </div>
                 <h3 id="name">Shubham Singh</h3>
                 <h6 id="accountNo">0x43254543mn45kj435h43jh445</h6>
@@ -105,7 +100,7 @@ class Main extends Component{
                         </li>
                     </ul>                    
                 </div>
-                <button className="logOut" onClick={this.logout}>
+                <button className="logOut" onClick={this.props.logout}>
                     Log Out
                 </button>
 
@@ -114,4 +109,4 @@ class Main extends Component{
     }
 }
 
-export default Main
+export default withRouter(connect(null,{logout})(Main))

@@ -32,10 +32,10 @@ class CartFarm extends Component{
                 <div className="tab">
 
                     <ul className="tabs">
-                        <li><a href="#">Place Order</a></li>
-                        <li><a href="#">Added Items</a></li>
-                        <li><a href="#">Track Items</a></li>
-                        <li><a href="#">Pay for Items</a></li>
+                        <li><a>Place Order</a></li>
+                        <li><a>Added Items</a></li>
+                        <li><a>Track Items</a></li>
+                        <li><a>Pay for Items</a></li>
                     </ul>
 
                     <div className="tab_content">
@@ -159,7 +159,9 @@ class CartFarm extends Component{
                         </div>
 
                         <div className="tabs_item pool-list">
-                            <iframe style={
+                            <iframe
+                                title="currentlocation"
+                                style={
                                 {
                                     width:'100%',
                                     height:'100%',
