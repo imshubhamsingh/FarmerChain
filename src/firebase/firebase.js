@@ -15,6 +15,5 @@ export const LoginCheckModule = (fn)=> firebaseApp.auth().onAuthStateChanged(use
 
 export const auth = firebaseApp.auth();
 
-
 export const database = firebaseApp.database();
 

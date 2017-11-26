@@ -11,7 +11,7 @@ const config = {
 
 export const reducer = persistCombineReducers(config, {
     user: UserReducer,
-    pool: PoolFarmReducer
+    pools: PoolFarmReducer
 })
 
 

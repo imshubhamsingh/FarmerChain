@@ -1,4 +1,4 @@
-import { ADD_POOL_REQUEST, SET_POOL_REQUEST, REMOVE_POOL_REQUEST, EDIT_POOL_REQUEST } from '../Actions/PoolFarmAction';
+import { ADD_POOL_REQUEST, GET_POOL_REQUEST, REMOVE_POOL_REQUEST, EDIT_POOL_REQUEST } from '../Actions/PoolFarmAction';
 
 
 const pool = [];
@@ -21,9 +21,9 @@ export default function (state = pool, action) {
                     };
                 } else {
                     return pool;
-                };
+                }
             });
-        case 'SET_POOL_REQUEST':
+        case 'GET_POOL_REQUEST':
             return action.pool;
         default:
             return state;

@@ -1,14 +1,13 @@
 import { database } from '../firebase/firebase'
 import {auth} from "../firebase/firebase";
 
-export const SET_POOL_REQUEST = 'set_pool_request';
+export const GET_POOL_REQUEST = 'set_pool_request';
 export const ADD_POOL_REQUEST = "add_pool_request";
 export const REMOVE_POOL_REQUEST ="remove_pool_request";
 export const EDIT_POOL_REQUEST = "edit_pool_request";
 
 
 export function setPoolRequest(pool={}) {
-    console.log("called SetPoolRequest")
     return dispatch => {
         var user = auth.currentUser;
         pool = {
@@ -24,8 +23,8 @@ export function setPoolRequest(pool={}) {
                     userId: user.uid,
                     ...pool
                 }
-
             })
         })
     }
 }
+

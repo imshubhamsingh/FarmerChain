@@ -114,48 +114,21 @@ class PoolFarm extends Component{
 
                         <div className="tabs_item pool-list">
                             <ul>
-                                <li>
+                                {this.props.pools.map((pool)=> <li key={pool.id}>
                                     <div className="info">
-                                        <div className="name">Rohan
+                                        <div className="name">{pool.username}
                                             <div className="type">
-                                                Hand
+                                                {pool.poolType}
                                             </div>
                                         </div>
-
                                     </div>
                                     <div className="details">
-                                        Wheat crop production in ganaur harayana
+                                        {pool.description}
                                     </div>
                                     <button className="btn-pool btn-effect" type="submit">Accept Pool</button>
                                 </li>
-                                <li>
-                                    <div className="info">
-                                        <div className="name">Rohan
-                                            <div className="type">
-                                                Storage
-                                            </div>
-                                        </div>
+                                )}
 
-                                    </div>
-                                    <div className="details">
-                                        Wheat crop production in ganaur harayana
-                                    </div>
-                                    <button className="btn-pool btn-effect" type="submit">Accept Pool</button>
-                                </li>
-                                <li>
-                                    <div className="info">
-                                        <div className="name">Rohan
-                                            <div className="type">
-                                                Machine
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div className="details">
-                                        Wheat crop production in ganaur harayana
-                                    </div>
-                                    <button className="btn-pool btn-effect" type="submit">Accept Pool</button>
-                                </li>
                             </ul>
                         </div>
 
@@ -166,4 +139,8 @@ class PoolFarm extends Component{
     }
 }
 
-export default connect(null,{setPoolRequest})(PoolFarm)
+function mapStateToProps(state) {
+    return { pools: state.pools };
+}
+
+export default connect(mapStateToProps,{setPoolRequest})(PoolFarm)
