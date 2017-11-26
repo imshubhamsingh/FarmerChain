@@ -5,54 +5,33 @@ import Header from './components/header/Header'
 import Bottombar from './components/bottombar/Bottombar'
 import './App.css';
 
-
-import {LoginCheckModule, auth} from "./firebase/firebase";
+import {connect} from 'react-redux'
+import { getUser } from './Actions/UserActions';
 
 
 
 class ClientApp extends Component{
-    state = {
-        user: null
-    }
     componentWillMount(){
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                this.setState({ user });
-            }
-        });
+        this.props.getUser()
     }
 
-    login = ()=> {
-        auth.signInWithPopup(provider)
-            .then((result) => {
-                const user = result.user;
-                this.setState({
-                    user
-                });
-            });
-    }
-
-    logout = ()=>{
-        auth.signOut()
-            .then(() => {
-                this.setState({
-                    user: null
-                });
-            });
-    }
 
     render(){
+        console.log(this.props)
         return(
             < div className="app-layout">
-                    <Sidebar user={this.state.user}/>
-                    {this.state.user?<div className='main-layout'>
+                    <Sidebar/>
+                    {!this.props.user.loading?<div className='main-layout'>
                         <Header/>
                         <Dashboard/>
                     </div>:''}
-                     {this.state.user?<Bottombar/>:''}
+                     {!this.props.user.loading?<Bottombar/>:''}
             </div>
         )
     }
 }
 
-export default ClientApp
+function mapStateToProps(state) {
+    return { user: state.user };
+}
+export default connect(mapStateToProps,{getUser})(ClientApp)

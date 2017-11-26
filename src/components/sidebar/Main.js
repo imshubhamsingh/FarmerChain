@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import  gravatar from 'gravatar'
 import {TimelineLite, Elastic} from "gsap";
-import { auth } from '../../firebase/firebase'
+import { connect } from 'react-redux';
+import {logout} from "../../Actions/UserActions";
 
 import './main.css'
 
@@ -18,7 +19,6 @@ class Main extends Component{
                     accountNo = $('#accountNo'),
                     details = $('.menu ul>li');
                 let serviceList = [...name,...accountNo,...details];
-                console.log(serviceList);
                 let t1Loader = new TimelineLite({delay:0.5});
 
                 t1Loader.staggerFromTo(
@@ -33,13 +33,7 @@ class Main extends Component{
 
         });
     }
-    logout = ()=>{
-        auth.signOut().then(function() {
-            // Sign-out successful.
-        }, function(error) {
-            // An error happened.
-        });
-    }
+
     render(){
         return(
             <div className="sidebar-main">
@@ -105,7 +99,7 @@ class Main extends Component{
                         </li>
                     </ul>                    
                 </div>
-                <button className="logOut" onClick={this.logout}>
+                <button className="logOut" onClick={this.props.logout}>
                     Log Out
                 </button>
 
@@ -114,4 +108,4 @@ class Main extends Component{
     }
 }
 
-export default Main
+export default connect(null,{logout})(Main)

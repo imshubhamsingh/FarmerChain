@@ -1,4 +1,4 @@
-form {
+form{
     display: block;
 }
 
@@ -13,10 +13,15 @@ form {
     margin: 100px auto 10px;
     overflow: hidden;
     border-radius: 6px 0 0 6px;
+    display: none;
 }
 
 .remove-form{
-    animation: login-now .3s reverse forwards; 
+    animation: login-now .3s reverse forwards;
+}
+
+.enter-form{
+    animation: login-now .3s linear forwards;
 }
 
 @keyframes login-now {

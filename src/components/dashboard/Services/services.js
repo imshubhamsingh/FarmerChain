@@ -11,7 +11,6 @@ class Services extends Component{
 
             (function ($) {
                 let serviceList = $('ul.card-list').children();
-                console.log(serviceList);
                 let t1Loader = new TimelineLite();
 
                 t1Loader.staggerFromTo(
