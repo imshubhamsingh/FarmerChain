@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {setPoolRequest} from '../../../Actions/PoolFarmAction'
+import {setPoolRequest, getPoolList, getUpdatePoolList} from '../../../Actions/PoolFarmAction'
 import {connect} from 'react-redux'
 import './poolfarm.css';
 import $ from 'jquery';
@@ -7,6 +7,8 @@ const jQuery = $;
 
 class PoolFarm extends Component{
     componentDidMount(){
+        this.props.getPoolList();
+        this.props.getUpdatePoolList();
         $(document).ready(function() {
 
             (function ($) {
@@ -140,7 +142,8 @@ class PoolFarm extends Component{
 }
 
 function mapStateToProps(state) {
+    console.log(state.pools)
     return { pools: state.pools };
 }
 
-export default connect(mapStateToProps,{setPoolRequest})(PoolFarm)
+export default connect(mapStateToProps,{setPoolRequest, getPoolList, getUpdatePoolList})(PoolFarm)
