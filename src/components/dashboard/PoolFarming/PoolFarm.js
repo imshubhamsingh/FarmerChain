@@ -32,9 +32,9 @@ class PoolFarm extends Component{
                 <div className="tab">
 
                     <ul className="tabs">
-                        <li><a href="#">Pool Request</a></li>
-                        <li><a href="#">Accepted Pools</a></li>
-                        <li><a href="#">Pooling Offers</a></li>
+                        <li><a>Pool Request</a></li>
+                        <li><a>Accepted Pools</a></li>
+                        <li><a>Pooling Offers</a></li>
                     </ul>
 
                     <div className="tab_content">

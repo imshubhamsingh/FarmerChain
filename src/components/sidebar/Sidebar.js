@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Login from './Login'
 import Main from './Main'
 import { connect } from 'react-redux'
-import {LoginCheckModule} from "../../firebase/firebase";
+import { withRouter } from 'react-router-dom'
 import { getUser } from '../../Actions/UserActions';
 
 class Sidebar extends Component{
@@ -10,16 +10,10 @@ class Sidebar extends Component{
         this.props.getUser()
     }
 
-    state = {
-        currentUser: this.props.user
-    }
-
     current = () => {
-        console.log(this.props.user.loading)
-        return this.props.user.loading?<Login currUser={this.state.currentUser.loading}/>:<Main/>
+        return this.props.user.loading?<Login/>:<Main/>
     }
     render(){
-        console.log(this.props.user.loading)
         return(
             <div className={'sidebar box ' + (this.props.user.loading?'login-sidebar':'')}>
                 {this.current()}
@@ -32,4 +26,4 @@ function mapStateToProps(state) {
     return { user: state.user };
 }
 
-export default connect(mapStateToProps,{getUser})(Sidebar)
+export default withRouter(connect(mapStateToProps,{getUser})(Sidebar))

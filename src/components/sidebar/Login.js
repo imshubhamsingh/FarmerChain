@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import './login.css'
-import {firebaseApp, LoginCheckModule} from '../../firebase/firebase'
-import { login, createAccount } from '../../Actions/UserActions';
+import { login, createAccount, getUser } from '../../Actions/UserActions';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom'
+
 class Login extends Component{
     state = {
         email: '',
@@ -21,6 +22,11 @@ class Login extends Component{
         error: false,
         showForm: this.props.user.loading
     }
+
+    componentWillMount(){
+        this.props.getUser()
+    }
+
     loginForm = (event) => {
         event.preventDefault();
         const {email, password} = this.state
@@ -33,7 +39,7 @@ class Login extends Component{
             })
             .catch((error)=>{
             this.setState({login:false})
-                console.log('error',error)
+                console.error('error',error)
                 this.setState({errorLogin:error, error:true})
                 setTimeout(()=>{
                     this.setState({error: false})
@@ -57,7 +63,7 @@ class Login extends Component{
                     setTimeout(this.props.onLogin,1000);
                 })
                 .catch(error=>{
-                    console.log('error',error)
+                    console.error('error',error)
                     this.setState({errorSignUp:error,error:true})
                     setTimeout(()=>{
                         this.setState({error: false})
@@ -85,7 +91,7 @@ class Login extends Component{
     }
 
     renderLogin =()=>{
-        return  <div className={"form "+(this.state.login?"remove-form":'') + (this.state.error?"error":'')} style={{display: this.state.showForm ? 'block' : 'none' }}
+        return  <div className={"form "+(this.state.login?"remove-form":'') + (this.state.error?"error":'')} style={{display: this.props.user.loading ? 'block' : 'none' }}
         >
             <div className="form-panel one">
                 <div className="form-header">
@@ -147,7 +153,6 @@ class Login extends Component{
 
 
     render(){
-        console.log('In login')
         if(this.props.user.loading) return this.renderLogin()
     }
 }
@@ -157,4 +162,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps,{login,createAccount})(Login)
+export default withRouter(connect(mapStateToProps,{login,createAccount,getUser})(Login))

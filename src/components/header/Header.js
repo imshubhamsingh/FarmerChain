@@ -5,8 +5,6 @@ import history from "../../history";
 
 class Header extends Component{
     showback = () => {
-        console.log(history.location);
-        // if(history.location.pathname !=='/')
         return <i onClick={history.goBack} className="fa fa-arrow-left" aria-hidden="true" style={{position: 'absolute',left:'37px',fontSize:'20px',color: '#313041'}}></i>
     }
 

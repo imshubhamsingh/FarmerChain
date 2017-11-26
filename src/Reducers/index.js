@@ -1,8 +1,15 @@
-import { combineReducers } from 'redux';
 import UserReducer from './UserReducer';
 
-const rootReducer = combineReducers({
-    user: UserReducer
-});
+import { persistCombineReducers } from 'redux-persist'
+import storage from 'redux-persist/es/storage' // dfault: localStorage if web, AsyncStorage if react-native
 
-export default rootReducer;
+const config = {
+    key: 'root',
+    storage,
+}
+
+export const reducer = persistCombineReducers(config, {
+    user: UserReducer
+})
+
+

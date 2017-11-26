@@ -3,6 +3,8 @@ import Sidebar from './components/sidebar/Sidebar'
 import Dashboard from './components/dashboard/Dashboard'
 import Header from './components/header/Header'
 import Bottombar from './components/bottombar/Bottombar'
+import { withRouter } from 'react-router-dom'
+
 import './App.css';
 
 import {connect} from 'react-redux'
@@ -17,7 +19,6 @@ class ClientApp extends Component{
 
 
     render(){
-        console.log(this.props)
         return(
             < div className="app-layout">
                     <Sidebar/>
@@ -34,4 +35,4 @@ class ClientApp extends Component{
 function mapStateToProps(state) {
     return { user: state.user };
 }
-export default connect(mapStateToProps,{getUser})(ClientApp)
+export default withRouter(connect(mapStateToProps,{getUser})(ClientApp))

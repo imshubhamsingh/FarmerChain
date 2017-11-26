@@ -6,11 +6,13 @@ export function getUser() {
     return dispatch => {
         return new Promise(function (resolve, reject) {
             auth.onAuthStateChanged(function (user) {
-                console.log(user)
                 if (user) {
                     dispatch({
                         type: GET_USER,
-                        payload: user
+                        payload: {
+                            loading: false,
+                            user
+                        }
                     });
                 } else {
                     dispatch({
@@ -26,7 +28,6 @@ export function getUser() {
 }
 
 export function login(email, password) {
-    console.log(email, password)
     return dispatch => auth.signInWithEmailAndPassword(email, password);
 }
 
