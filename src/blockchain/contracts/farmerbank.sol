@@ -31,28 +31,44 @@ contract Bank{
     mapping(address => mod) mods;
     mapping(address => uint256) loanGranted;
 
+    // modifier onlyowner(){
+    //     if(msg.sender == owner){
+    //         _;
+    //     }else{
+    //         revert();
+    //     }
+    // }
+
+    // modifier onlymods(){
+    //     if(mods[msg.sender].status == true){
+    //         _;
+    //     }else{
+    //         revert();
+    //     }
+    // }
+
+    // modifier onlymember(){
+    //     if(members[msg.sender].isMember == true){
+    //         _;
+    //     }else{
+    //         revert();
+    //     }
+    // }
+
     modifier onlyowner(){
-        if(msg.sender == owner){
-            _;
-        }else{
-            throw;
-        }
+        require(msg.sender == owner);
+
+        _;
     }
 
     modifier onlymods(){
-        if(mods[msg.sender].status == true){
+        require(mods[msg.sender].status == true);
             _;
-        }else{
-            throw;
-        }
     }
 
     modifier onlymember(){
-        if(members[msg.sender].isMember == true){
+        require(members[msg.sender].isMember == true);
             _;
-        }else{
-            throw;
-        }
     }
 
     function addMods(address _modAddress, string _modName) onlyowner{
@@ -74,7 +90,6 @@ contract Bank{
             members[msg.sender].amountAddedToThePool -= members[msg.sender].loanGranted;
             members[msg.sender].loanGranted = 0;
             members[msg.sender].isPermitted = true;
-            //transfer function
         }
         addedFunds(msg.sender, changeInBalance);
         previousBalance = this.balance;
@@ -84,6 +99,7 @@ contract Bank{
         if(members[msg.sender].isPermitted && loanAmount <= 2*members[msg.sender].amountAddedToThePool && loanAmount <= this.balance/2){
             members[msg.sender].isPermitted == false;
             members[msg.sender].loanGranted = loanAmount;
+            msg.sender.transfer(loanAmount);
             return true;
         }
         else{
@@ -93,5 +109,9 @@ contract Bank{
 
     function getBalance() constant returns(uint256){
         return this.balance;
+    }
+
+    function getAmoundAdded() constant returns(uint256){
+        return members[msg.sender].amountAddedToThePool;
     }
 }
