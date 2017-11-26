@@ -17,14 +17,7 @@ export function setPoolRequest(pool={}) {
             ...pool
         }
          database.ref('poolFarm').push(pool).then((ref)=>{
-            dispatch({
-                type: ADD_POOL_REQUEST,
-                pool:{
-                    id: ref.key,
-                    userId: user.uid,
-                    ...pool
-                }
-            })
+
         })
     }
 }
@@ -50,9 +43,14 @@ export function getPoolList() {
 export function getUpdatePoolList() {
     return dispatch => {
         database.ref(`poolFarm`).on('value',(snapshot)=>{
+            let updatedPool = Object.keys(snapshot.val()).map(key => {
+                let ar = snapshot.val()[key]
+                ar.id = key
+                return ar
+            })
             dispatch({
                 type: UPDATE_POOL,
-                pool: snapshot.val()
+                updatedPool
             })
         })
     }

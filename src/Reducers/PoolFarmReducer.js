@@ -27,9 +27,8 @@ export default function (state = pool, action) {
             return action.pool;
         case UPDATE_POOL:
             return [
-                ...state,
-                action.pool
-            ]
+                ...action.updatedPool
+                ]
         default:
             return state;
     }

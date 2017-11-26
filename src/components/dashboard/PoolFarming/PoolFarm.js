@@ -7,7 +7,6 @@ const jQuery = $;
 
 class PoolFarm extends Component{
     componentDidMount(){
-        this.props.getPoolList();
         this.props.getUpdatePoolList();
         $(document).ready(function() {
 
@@ -116,7 +115,7 @@ class PoolFarm extends Component{
 
                         <div className="tabs_item pool-list">
                             <ul>
-                                {this.props.pools.map((pool)=> <li key={pool.id}>
+                                {this.props.pool!==null?this.props.pools.map((pool)=> <li key={pool.id}>
                                     <div className="info">
                                         <div className="name">{pool.username}
                                             <div className="type">
@@ -129,7 +128,7 @@ class PoolFarm extends Component{
                                     </div>
                                     <button className="btn-pool btn-effect" type="submit">Accept Pool</button>
                                 </li>
-                                )}
+                                ):''}
 
                             </ul>
                         </div>
@@ -142,7 +141,6 @@ class PoolFarm extends Component{
 }
 
 function mapStateToProps(state) {
-    console.log(state.pools)
     return { pools: state.pools };
 }
 
