@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {setPoolRequest, getPoolList, getUpdatePoolList, deletePoolRequest} from '../../../Actions/PoolFarmAction'
+import {setPoolRequest, getUpdatePoolList, deletePoolRequest} from '../../../Actions/PoolFarmAction'
 import {connect} from 'react-redux'
 import './poolfarm.css';
 
@@ -178,8 +178,7 @@ function mapStateToProps(state) {
     return {
         pools: state.pools,
         user: state.user.user
-
     };
 }
 
-export default connect(mapStateToProps,{setPoolRequest, getPoolList, getUpdatePoolList, deletePoolRequest})(PoolFarm)
+export default connect(mapStateToProps,{setPoolRequest, getUpdatePoolList, deletePoolRequest})(PoolFarm)
