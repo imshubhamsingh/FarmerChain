@@ -51,7 +51,6 @@ class PoolFarm extends Component{
             this.setState({
                 buttonText: 'Request Accepted'
             })
-
             setTimeout(()=>{
                 this.setState({
                     description:'',
@@ -59,10 +58,7 @@ class PoolFarm extends Component{
                     buttonText: 'Submit Request'
                 })
             },2000)
-
-
         })
-
     }
     render(){
         return(

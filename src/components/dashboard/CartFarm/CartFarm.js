@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import {setProductRequest, getUpdateProductList, deleteProductRequest} from '../../../Actions/CartFarmAction'
+import {connect} from 'react-redux'
 import './cartfarm.css';
 import $ from 'jquery';
 const jQuery = $;
 
 class CartFarm extends Component{
     componentDidMount(){
+        this.props.getUpdateProductList();
         $(document).ready(function() {
 
             (function ($) {
@@ -26,6 +29,38 @@ class CartFarm extends Component{
 
         });
     }
+    state = {
+        productName:'',
+        quantity:'1',
+        buttonText: 'Order'
+    }
+    handleSubmit = (event) =>{
+        event.preventDefault();
+        this.setState({
+            buttonText: 'Processing Order'
+        })
+        this.props.setPoolRequest({
+            productName:this.state.productName,
+            quantity: this.state.quantity,
+            createdAt: Date.now()
+        }).then(()=>{
+            this.setState({
+                buttonText: 'Order in Queue'
+            })
+
+            setTimeout(()=>{
+                this.setState({
+                    productName:'',
+                    quantity:'1',
+                    buttonText: 'Order'
+                })
+            },2000)
+
+
+        })
+
+    }
+
     render(){
         return(
             <div>
@@ -180,4 +215,11 @@ class CartFarm extends Component{
     }
 }
 
-export default CartFarm
+function mapStateToProps(state) {
+    return {
+        products: state.products,
+        user: state.user.user
+    };
+}
+
+export default connect(mapStateToProps,{setProductRequest, getUpdateProductList, deleteProductRequest})(CartFarm)
