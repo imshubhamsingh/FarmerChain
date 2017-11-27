@@ -10,18 +10,21 @@ class BuyingList extends Component {
         this.props.rejectProductRequest(this.props.product.id,this.props.userProductKey)
     }
     buy = () =>{
-        this.props.boughtProduct(this.props.product.id, this.props.userProductKey ,extractUserDetails(this.props.user))
+        if(!this.props.alreadyBought){
+            this.props.boughtProduct(this.props.product.id, this.props.userProductKey ,extractUserDetails(this.props.user))
+        }
     }
 
     checkifBuy = () =>{
         for (const userId in this.props.product.boughtBy) {
-            if ((this.props.product.boughtBy[userId].uid === this.props.user.uid) && (this.props.product.boughtBy[userId].bought=== true)) {
+            if ((this.props.product.boughtBy[userId].uid === this.props.user.uid) && (this.props.product.boughtBy[userId].bought === true)) {
                 return true
             }
         }
         return false
     }
     render(){
+        console.log(this.props)
         return(
             <li>
                 <div className="info">
@@ -33,7 +36,9 @@ class BuyingList extends Component {
                 </div>
                 <div className="buying-list">
                     <button className="btn-pool btn-effect remove-from-list btn-1" onClick={()=>this.deleteAcceptedReq()} >Remove</button>
-                    <button className="btn-pool btn-effect btn-2" onClick={()=>this.buy()} style={{backgroundColor: this.checkifBuy()?'green':''}} disabled={this.checkifBuy()}>{this.checkifBuy()?'Bought':'Buy'}</button>
+                    <button className="btn-pool btn-effect btn-2" onClick={()=>this.buy()} style={{backgroundColor: this.checkifBuy()?'green':''}} disabled={this.checkifBuy()}>
+                        {this.checkifBuy()?'Bought':!this.props.alreadyBought?'Buy':`Bought By ${this.props.alreadyBought}`}
+                    </button>
                 </div>
 
             </li>

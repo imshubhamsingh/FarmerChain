@@ -149,6 +149,7 @@ class CartFarm extends Component{
                                         {this.props.products!==null?this.props.products.map((product)=> {
                                             let flag = false;
                                             let userProductKey="";
+                                            let alreadBought = null
                                             for (const userId in product.boughtBy) {
                                                 if (product.boughtBy[userId].uid === this.props.user.uid) {
                                                     flag = true
@@ -156,8 +157,16 @@ class CartFarm extends Component{
                                                     break
                                                 }
                                             }
+
+                                            for (const userId in product.boughtBy) {
+                                                if (product.boughtBy[userId].bought === true && product.boughtBy[userId].uid !== this.props.user.uid) {
+                                                    alreadBought = product.boughtBy[userId].displayName
+                                                    break
+                                                }
+                                            }
+
                                             return (flag)?<BuyingList product={product} user={this.props.user}
-                                                                              key={product.id} userProductKey={userProductKey}/>:''
+                                                                              key={product.id} userProductKey={userProductKey} alreadyBought={alreadBought}/>:''
                                         }):''}
                                     </ul>
                                 </div>
