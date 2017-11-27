@@ -114,9 +114,6 @@ class CartFarm extends Component{
                                             return <li key={product.id}>
                                                 <div className="info">
                                                     <div className="name">{`${product.productName} (${product.quantity}kg)`}
-                                                        <div className="product-user">
-                                                            {`Added by ${product.username}`}
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <button className="btn-pool btn-effect" onClick={()=> this.props.deleteProductRequest(product)} style={{backgroundColor:this.checkifBuyProduct(product).result?'green':'red'}} disabled={this.checkifBuyProduct(product).result}>{this.checkifBuyProduct(product).result?`Bought by ${this.checkifBuyProduct(product).details.displayName}`:'Cancel Order'}</button>
