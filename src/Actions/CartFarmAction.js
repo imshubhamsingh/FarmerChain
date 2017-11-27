@@ -1,36 +1,35 @@
 import { database } from '../firebase/firebase'
 import {auth} from "../firebase/firebase";
 
-export const SET_POOL_REQUEST = 'set_pool_request';
-export const UPDATE_POOL = "update_pool";
+export const UPDATE_PRODUCT_LIST = "update_product_list";
 
 
-export function setPoolRequest(pool={}) {
+export function setProductRequest(product={}) {
     return dispatch => {
         var user = auth.currentUser;
-        pool = {
+        product = {
             userId: user.uid,
             username: user.displayName,
-            acceptedBy: [],
-            ...pool
+            boughtBy: [],
+            ...product
         }
-        return database.ref('poolFarm').push(pool)
+        return database.ref('cartFarm').push(product)
     }
 }
 
 
-export function getUpdatePoolList() {
+export function getUpdateProductList() {
     return dispatch => {
-        database.ref(`poolFarm`).on('value',(snapshot)=>{
+        database.ref(`cartFarm`).on('value',(snapshot)=>{
             if(snapshot.val()!==null){
-                let updatedPool = Object.keys(snapshot.val()).map(key => {
+                let updatedProduct = Object.keys(snapshot.val()).map(key => {
                     let ar = snapshot.val()[key]
                     ar.id = key
                     return ar
                 })
                 dispatch({
-                    type: UPDATE_POOL,
-                    updatedPool
+                    type: UPDATE_PRODUCT_LIST,
+                    updatedProduct
                 })
             }
 
@@ -38,20 +37,31 @@ export function getUpdatePoolList() {
     }
 }
 
-export function deletePoolRequest(pool={}) {
+export function deleteProductRequest(product={}) {
     return dispatch => {
-        database.ref(`poolFarm/${pool.id}`).remove()
+        database.ref(`cardFarm/${product.id}`).remove()
     }
 }
 
-export function acceptPoolRequest(poolId, userUid) {
+export function acceptProductRequest(productId, userUid) {
     return dispatch => {
-        database.ref(`poolFarm/${poolId}/acceptedBy`).push(userUid)
+        database.ref(`poolFarm/${productId}/boughtBy`).push({
+            userUid,
+            bought:false
+        })
     }
 }
 
-export function rejectPoolRequest(poolId, userkey) {
+export function rejectProductRequest(productId, userkey) {
     return dispatch => {
-        database.ref(`poolFarm/${poolId}/acceptedBy/${userkey}`).remove()
+        database.ref(`poolFarm/${productId}/acceptedBy/${userkey}`).remove()
+    }
+}
+
+export function boughtProduct(productId, userkey) {
+    return dispatch => {
+        database.ref(`poolFarm/${productId}/boughtBy/${userkey}`).update({
+            bought:true
+        })
     }
 }
