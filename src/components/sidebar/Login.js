@@ -71,7 +71,6 @@ class Login extends Component{
                             poolAccepted: []
                         }
                     }
-                    console.log(userDetails);
                     database.ref(`users/${userDetails.uid}`).set(userDetails)
                     setTimeout(this.props.onLogin,1000);
                 })

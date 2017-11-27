@@ -66,7 +66,6 @@ class CartFarm extends Component{
     checkifBuyProduct = (product) =>{
         for (const userId in product.boughtBy) {
             if (product.boughtBy[userId].bought=== true && product.boughtBy[userId] !== undefined){
-                console.log(product.boughtBy[userId])
                 return {
                     details:product.boughtBy[userId],
                     result:true

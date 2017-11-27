@@ -22,7 +22,6 @@ class BuyingList extends Component {
         return false
     }
     render(){
-        console.log("product",this.props.product)
         return(
             <li>
                 <div className="info">

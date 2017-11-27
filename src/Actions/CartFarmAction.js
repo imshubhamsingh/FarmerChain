@@ -39,13 +39,11 @@ export function getUpdateProductList() {
 
 export function deleteProductRequest(product={}) {
     return dispatch => {
-        console.log(product)
         database.ref(`cartFarm/${product.id}`).remove()
     }
 }
 
 export function acceptProductRequest(productId, user) {
-    console.log(user)
     return dispatch => {
         database.ref(`cartFarm/${productId}/boughtBy`).push({
             bought:false,
