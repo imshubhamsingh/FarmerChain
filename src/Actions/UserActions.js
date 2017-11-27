@@ -1,4 +1,5 @@
-import { auth } from '../firebase/firebase';
+import { auth } from "../firebase/firebase";
+
 export const GET_USER = 'get_user';
 
 export function getUser() {
@@ -29,6 +30,7 @@ export function getUser() {
 
 export function login(email, password) {
     return dispatch => auth.signInWithEmailAndPassword(email, password);
+
 }
 
 export function logout() {
@@ -36,5 +38,5 @@ export function logout() {
 }
 
 export function createAccount(email, password) {
-    return dispatch => auth.createUserWithEmailAndPassword(email, password);
+    return dispatch => auth.createUserWithEmailAndPassword(email, password)
 }

@@ -1,3 +1,9 @@
 .tabs_item.pool-request{
     padding: 30px;
 }
+
+.user-pool-list li{
+    padding: 11px;
+    margin: 10px 0px;
+    background: #f4f3f3;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './login.css'
+import {auth, database} from '../../firebase/firebase'
 import { login, createAccount, getUser } from '../../Actions/UserActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
@@ -59,6 +60,18 @@ class Login extends Component{
             this.props.createAccount(signUpEmail,signUpPassword)
                 .then((user)=>{
                     user.updateProfile({'displayName': signUpDisplayName});
+                    var newUser = auth.currentUser;
+                    var userDetails = {}
+                    if (user != null) {
+                        userDetails = {
+                            name: signUpDisplayName,
+                            email: newUser.email,
+                            uid: newUser.uid,
+                            poolAccepted: []
+                        }
+                    }
+                    console.log(userDetails);
+                    database.ref(`users/${userDetails.uid}`).set(userDetails)
                     setTimeout(this.props.onLogin,1000);
                 })
                 .catch(error=>{

@@ -39,10 +39,10 @@ class Main extends Component{
         return(
             <div className="sidebar-main">
                 <div className="wrapper">
-                    <img alt="userPic"src={gravatar.url('imshubhamsingh97@gmail.com',{s:'200'})} className="image--cover" />
+                    <img alt="userPic"src={gravatar.url(this.props.user.email,{s:'200'})} className="image--cover" />
                 </div>
-                <h3 id="name">Shubham Singh</h3>
-                <h6 id="accountNo">0x43254543mn45kj435h43jh445</h6>
+                <h3 id="name">{this.props.user.displayName}</h3>
+                <h6 id="accountNo">{`0x${this.props.user.uid}`}</h6>
 
                 <div className="menu">
                     <ul>
@@ -109,4 +109,12 @@ class Main extends Component{
     }
 }
 
-export default withRouter(connect(null,{logout})(Main))
+function mapStateToProps(state) {
+    return {
+        user: state.user.user
+
+    };
+}
+
+
+export default withRouter(connect(mapStateToProps,{logout})(Main))

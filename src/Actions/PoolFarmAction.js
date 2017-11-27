@@ -14,11 +14,10 @@ export function setPoolRequest(pool={}) {
         pool = {
             userId: user.uid,
             username: user.displayName,
+            acceptedBy:[],
             ...pool
         }
-         database.ref('poolFarm').push(pool).then((ref)=>{
-
-        })
+         return database.ref('poolFarm').push(pool)
     }
 }
 
@@ -43,15 +42,31 @@ export function getPoolList() {
 export function getUpdatePoolList() {
     return dispatch => {
         database.ref(`poolFarm`).on('value',(snapshot)=>{
-            let updatedPool = Object.keys(snapshot.val()).map(key => {
-                let ar = snapshot.val()[key]
-                ar.id = key
-                return ar
-            })
-            dispatch({
-                type: UPDATE_POOL,
-                updatedPool
-            })
+            if(snapshot.val()!==null){
+                let updatedPool = Object.keys(snapshot.val()).map(key => {
+                    let ar = snapshot.val()[key]
+                    ar.id = key
+                    return ar
+                })
+                dispatch({
+                    type: UPDATE_POOL,
+                    updatedPool
+                })
+            }
+
         })
+    }
+}
+
+export function deletePoolRequest(pool={}) {
+    return dispatch => {
+        database.ref(`poolFarm/${pool.id}`).remove()
+    }
+}
+
+export function acceptPoolRequest(poolId, userUid) {
+    var user = auth.currentUser;
+    return dispatch => {
+        database.ref(`poolFarm/${poolId}/acceptedBy`).push(userUid)
     }
 }
