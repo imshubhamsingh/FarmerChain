@@ -6,6 +6,7 @@ import './poolfarm.css';
 
 import $ from 'jquery';
 import PoolOffers from "./PoolOffers";
+import AcceptedPool from "./AcceptedPool";
 const jQuery = $;
 
 class PoolFarm extends Component{
@@ -124,57 +125,39 @@ class PoolFarm extends Component{
 
                         <div className="tabs_item pool-list">
                             <ul>
-                                <li>
-                                    <div className="info">
-                                        <div className="name">Rohan
-                                            <div className="type">
-                                                Hand
-                                            </div>
-                                        </div>
+                                {this.props.pool!==null?this.props.pools.map((pool)=> {
+                                    let flags = false;
+                                    let userKey = "";
+                                    if (pool.userId !== this.props.user.uid) {
+                                        for (const userId in pool.acceptedBy) {
+                                            if (pool.acceptedBy[userId] === this.props.user.uid) {
+                                                flags = true
+                                                userKey = userId
+                                                break
+                                            }
+                                        }
+                                        return (!flags)?'':<AcceptedPool pool={pool} user={this.props.user} userkey={userKey} key={pool.id}/>
+                                    }
+                                    return '';
 
-                                    </div>
-                                    <div className="details">
-                                        Wheat crop production in ganaur harayana
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="info">
-                                        <div className="name">Rohan
-                                            <div className="type">
-                                                Storage
-                                            </div>
-                                        </div>
 
-                                    </div>
-                                    <div className="details">
-                                        Wheat crop production in ganaur harayana
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="info">
-                                        <div className="name">Rohan
-                                            <div className="type">
-                                                Machine
-                                            </div>
-                                        </div>
+                                }):''}
 
-                                    </div>
-                                    <div className="details">
-                                        Wheat crop production in ganaur harayana
-                                    </div>
-                                </li>
                             </ul>
                         </div>
 
                         <div className="tabs_item pool-list">
                             <ul>
                                 {this.props.pool!==null?this.props.pools.map((pool)=> {
-                                    if(pool.userId !== this.props.user.uid){
-                                        console.log(typeof (pool.acceptedBy))
-                                        if(pool.acceptedBy.indexOf(this.props.user.uid) <=-1){
-                                            return <PoolOffers pool={pool} user={this.props.user} />
+                                    let flags = false;
+                                    if (pool.userId !== this.props.user.uid) {
+                                        for (const userId in pool.acceptedBy) {
+                                            if (pool.acceptedBy[userId] === this.props.user.uid) {
+                                                flags = true
+                                                break
+                                            }
                                         }
-
+                                        return (flags)?'':<PoolOffers pool={pool} user={this.props.user} key={pool.id}/>
                                     }
                                     return '';
 

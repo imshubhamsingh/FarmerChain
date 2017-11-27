@@ -41,7 +41,7 @@ class Main extends Component{
                 <div className="wrapper">
                     <img alt="userPic"src={gravatar.url(this.props.user.email,{s:'200'})} className="image--cover" />
                 </div>
-                <h3 id="name">{this.props.user.displayName}</h3>
+                <h3 id="name">{this.props.displayName || this.props.user.displayName}</h3>
                 <h6 id="accountNo">{`0x${this.props.user.uid}`}</h6>
 
                 <div className="menu">

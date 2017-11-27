@@ -70,3 +70,10 @@ export function acceptPoolRequest(poolId, userUid) {
         database.ref(`poolFarm/${poolId}/acceptedBy`).push(userUid)
     }
 }
+
+export function rejectPoolRequest(poolId, userkey) {
+    var user = auth.currentUser;
+    return dispatch => {
+        database.ref(`poolFarm/${poolId}/acceptedBy/${userkey}`).remove()
+    }
+}

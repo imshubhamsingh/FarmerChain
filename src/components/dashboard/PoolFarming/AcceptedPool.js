@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
-import {acceptPoolRequest} from '../../../Actions/PoolFarmAction'
+import {rejectPoolRequest} from '../../../Actions/PoolFarmAction'
 
 
-class PoolOffers extends Component {
-    acceptReq = () => {
-        this.props.acceptPoolRequest(this.props.pool.id,this.props.user.uid)
+class AcceptedPool extends Component {
+    deleteAcceptedReq = () => {
+        this.props.rejectPoolRequest(this.props.pool.id,this.props.userkey)
 
     }
     render(){
@@ -21,7 +21,7 @@ class PoolOffers extends Component {
                 <div className="details">
                     {this.props.pool.description}
                 </div>
-                <button className="btn-pool btn-effect" type="submit" onClick={()=>this.acceptReq()}>Accept Pool</button>
+                <button className="btn-pool btn-effect" type="submit" style={{backgroundColor:'red'}} onClick={()=>this.deleteAcceptedReq()}>Reject Pool</button>
             </li>
         )
     }
@@ -29,4 +29,4 @@ class PoolOffers extends Component {
 }
 
 
-export default connect(null,{acceptPoolRequest})(PoolOffers)
+export default connect(null,{rejectPoolRequest})(AcceptedPool)

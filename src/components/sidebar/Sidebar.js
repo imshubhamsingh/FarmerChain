@@ -9,9 +9,17 @@ class Sidebar extends Component{
     componentWillMount(){
         this.props.getUser()
     }
+    state = {
+        displayName:''
+    }
+     setDisplayName = (displayName)=>{
+        this.setState({
+            displayName: displayName
+        })
+     }
 
     current = () => {
-        return this.props.user.loading?<Login/>:<Main/>
+        return this.props.user.loading?<Login setDisplayName={this.setDisplayName}/>:<Main displayName={this.state.displayName}/>
     }
     render(){
         return(

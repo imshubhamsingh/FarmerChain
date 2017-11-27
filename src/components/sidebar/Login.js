@@ -57,6 +57,7 @@ class Login extends Component{
         if(this.state.confirmPassword === this.state.signUpPassword){
             const {signUpEmail, signUpPassword,signUpDisplayName } = this.state
             this.setState({login:true})
+            this.props.setDisplayName(signUpDisplayName);
             this.props.createAccount(signUpEmail,signUpPassword)
                 .then((user)=>{
                     user.updateProfile({'displayName': signUpDisplayName});
