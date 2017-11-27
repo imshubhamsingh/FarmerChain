@@ -36,7 +36,7 @@ class BuyingList extends Component {
                 </div>
                 <div className="buying-list">
                     <button className="btn-pool btn-effect remove-from-list btn-1" onClick={()=>this.deleteAcceptedReq()} >Remove</button>
-                    <button className="btn-pool btn-effect btn-2" onClick={()=>this.buy()} style={{backgroundColor: this.checkifBuy()?'green':''}} disabled={this.checkifBuy()}>
+                    <button className="btn-pool btn-effect btn-2" onClick={()=>this.buy()} style={{backgroundColor: this.checkifBuy()?'green':''}} disabled={this.checkifBuy() || this.props.alreadyBought}>
                         {this.checkifBuy()?'Bought':!this.props.alreadyBought?'Buy':`Bought By ${this.props.alreadyBought}`}
                     </button>
                 </div>
