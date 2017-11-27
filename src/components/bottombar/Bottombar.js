@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import {withRouter} from 'react-router-dom'
+import { orderProducts, countAcceptedPool} from '../../helpers/userServiceDetails'
 import './bottombar.css'
 
 class Bottombar extends Component{
@@ -23,7 +26,7 @@ class Bottombar extends Component{
                                     Pool Accepted
                                 </h6>
                                 <h1>
-                                    4
+                                    {countAcceptedPool(this.props.pools, this.props.user)}
                                 </h1>
                             </div>
                         </li>
@@ -34,7 +37,7 @@ class Bottombar extends Component{
                                     Ordered Products
                                 </h6>
                                 <h1>
-                                    2
+                                    {orderProducts(this.props.products, this.props.user)}
                                 </h1>
                             </div>
                         </li>
@@ -66,4 +69,13 @@ class Bottombar extends Component{
     }
 }
 
-export default Bottombar
+function mapStateToProps(state) {
+    return {
+        user: state.user.user,
+        pools: state.pools,
+        products: state.products
+    };
+}
+
+
+export default withRouter(connect(mapStateToProps,null)(Bottombar))

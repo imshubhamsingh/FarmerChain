@@ -4,6 +4,7 @@ import {TimelineLite, Elastic} from "gsap";
 import { connect } from 'react-redux';
 import {logout} from "../../Actions/UserActions";
 import { withRouter } from 'react-router-dom'
+import {countAcceptedPool, orderProducts} from '../../helpers/userServiceDetails'
 
 import './main.css'
 
@@ -62,7 +63,7 @@ class Main extends Component{
                                     Pool Accepted
                                 </h6>
                                 <h1>
-                                   4
+                                    {countAcceptedPool(this.props.pools, this.props.user)}
                                 </h1>
                             </div>
                         </li>
@@ -73,7 +74,7 @@ class Main extends Component{
                                     Ordered Products
                                 </h6>
                                 <h1>
-                                    2
+                                    {orderProducts(this.props.products, this.props.user)}
                                 </h1>
                             </div>
                         </li>
@@ -111,8 +112,9 @@ class Main extends Component{
 
 function mapStateToProps(state) {
     return {
-        user: state.user.user
-
+        user: state.user.user,
+        pools: state.pools,
+        products: state.products
     };
 }
 
