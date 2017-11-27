@@ -1,0 +1,52 @@
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
+import { withRouter } from 'react-router-dom'
+import {rejectProductRequest, boughtProduct} from '../../../Actions/CartFarmAction'
+import { extractUserDetails} from './helper'
+
+
+class BuyingList extends Component {
+    deleteAcceptedReq = () => {
+        this.props.rejectProductRequest(this.props.product.id,this.props.userProductKey)
+    }
+    buy = () =>{
+        this.props.boughtProduct(this.props.product.id, this.props.userProductKey ,extractUserDetails(this.props.user))
+    }
+
+    checkifBuy = () =>{
+        for (const userId in this.props.product.boughtBy) {
+            if ((this.props.product.boughtBy[userId].uid === this.props.user.uid) && (this.props.product.boughtBy[userId].bought=== true)) {
+                return true
+            }
+        }
+        return false
+    }
+    render(){
+        console.log("product",this.props.product)
+        return(
+            <li>
+                <div className="info">
+                    <div className="name">{`${this.props.product.productName} (${this.props.product.quantity}kg)`}
+                        <div className="product-user">
+                            {`Added by ${this.props.user.displayName === this.props.product.username?'You': this.props.product.username}`}
+                        </div>
+                    </div>
+                </div>
+                <div className="buying-list">
+                    <button className="btn-pool btn-effect remove-from-list btn-1" onClick={()=>this.deleteAcceptedReq()} >Remove</button>
+                    <button className="btn-pool btn-effect btn-2" onClick={()=>this.buy()} style={{backgroundColor: this.checkifBuy()?'green':''}} disabled={this.checkifBuy()}>{this.checkifBuy()?'Bought':'Buy'}</button>
+                </div>
+
+            </li>
+        )
+    }
+
+}
+
+function mapStateToProps(state) {
+    return {
+        user: state.user.user
+    };
+}
+
+export default withRouter(connect(mapStateToProps,{rejectProductRequest, boughtProduct})(BuyingList))

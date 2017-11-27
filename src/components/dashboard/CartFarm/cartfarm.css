@@ -18,7 +18,7 @@
     overflow-y: scroll;
     padding: 0 10px;
     background: white;
-    margin-top: -27px;
+    margin-top: -25px;
     height: 370px;
 }
 
@@ -40,3 +40,47 @@
 .tabs_item.product-request{
     padding: 30px;
 }
+
+.product-user-list li{
+    padding: 11px;
+    margin: 10px 0px;
+    background: #f4f3f3;
+}
+
+.tabs_item .info .name .product-user {
+    color: #ffff;
+    background: #3268fb;
+    width: 156px;
+    height: 20px;
+    line-height: 2;
+    margin-top: 5px;
+    float: left;
+    border-radius: 2px;
+    text-align: center;
+    top: -24px;
+    right: 0;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.btn-pool.btn-effect:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.buying-list{
+    display: flex;
+}
+
+.buying-list button.btn-1{
+    margin: 0 2px 0 0;
+}
+
+.buying-list button.btn-2{
+    margin: 0 0 0 2px;
+}
+
+.buying-list button.remove-from-list {
+    background-color: red;
+}
+

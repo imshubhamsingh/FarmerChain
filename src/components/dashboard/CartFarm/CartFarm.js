@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import GlobalProductList from './GlobalProductList'
+import BuyingList from './BuyingList'
 import {setProductRequest, getUpdateProductList, deleteProductRequest} from '../../../Actions/CartFarmAction'
 import {connect} from 'react-redux'
 import './cartfarm.css';
@@ -39,7 +41,7 @@ class CartFarm extends Component{
         this.setState({
             buttonText: 'Processing Order'
         })
-        this.props.setPoolRequest({
+        this.props.setProductRequest({
             productName:this.state.productName,
             quantity: this.state.quantity,
             createdAt: Date.now()
@@ -61,6 +63,19 @@ class CartFarm extends Component{
 
     }
 
+    checkifBuyProduct = (product) =>{
+        for (const userId in product.boughtBy) {
+            if (product.boughtBy[userId].bought=== true && product.boughtBy[userId] !== undefined){
+                console.log(product.boughtBy[userId])
+                return {
+                    details:product.boughtBy[userId],
+                    result:true
+                }
+            }
+        }
+        return false
+    }
+
     render(){
         return(
             <div>
@@ -76,23 +91,42 @@ class CartFarm extends Component{
                     <div className="tab_content">
 
                         <div className="tabs_item product-request">
-                            <form action="">
+                            <form onSubmit={this.handleSubmit}>
                                 <div>
-                                    <label htmlFor="pool">Product Name</label>
-                                    <input type="text" id="pool"/>
+                                    <label htmlFor="product">Product Name</label>
+                                    <input type="text" id="product" value={this.state.productName} onChange={event=> this.setState({productName:event.target.value})}/>
                                 </div>
                                 <div>
                                     <label htmlFor="type">Quantity(kg)</label>
-                                    <select id="type">
-                                        <option value="volvo">1</option>
-                                        <option value="saab">2</option>
-                                        <option value="mercedes">3</option>
-                                        <option value="mercedes">4</option>
+                                    <select id="type" value={this.state.quantity} onChange={event=> this.setState({quantity:event.target.value})}>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
                                     </select>
                                 </div>
-                                <button className="btn btn-effect" type="submit">Order</button>
-
+                                <button className="btn btn-effect" type="submit">{this.state.buttonText}</button>
                             </form>
+                            <div className="product-user-list">
+                                <h3>Your Order List</h3>
+                                <ul>
+                                    {this.props.products!==null?this.props.products.map((product)=> {
+                                        if(product.userId === this.props.user.uid){
+                                            return <li key={product.id}>
+                                                <div className="info">
+                                                    <div className="name">{`${product.productName} (${product.quantity}kg)`}
+                                                        <div className="product-user">
+                                                            {`Added by ${product.username}`}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button className="btn-pool btn-effect" onClick={()=> this.props.deleteProductRequest(product)} style={{backgroundColor:this.checkifBuyProduct(product).result?'green':'red'}} disabled={this.checkifBuyProduct(product).result}>{this.checkifBuyProduct(product).result?`Bought by ${this.checkifBuyProduct(product).details.displayName}`:'Cancel Order'}</button>
+                                            </li>
+                                        }
+                                        return '';
+                                    }):''}
+                                </ul>
+                            </div>
                         </div>
 
                         <div className="tabs_item pool-list">
@@ -100,97 +134,38 @@ class CartFarm extends Component{
                                 <div className="products-list">
                                     <h2>Global Product List</h2>
                                     <ul>
-                                        <li>
-                                            <div className="info">
-                                                <div className="name">Manure (10kg)
-                                                    <div className="type">
-                                                        Added By Shubham
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button className="btn-pool btn-effect" type="submit">Volunteer to Buy</button>
-                                        </li>
-                                        <li>
-                                            <div className="info">
-                                                <div className="name">Manure (10kg)
-                                                    <div className="type">
-                                                        Added By Shubham
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button className="btn-pool btn-effect" type="submit">Volunteer to Buy</button>
-                                        </li>
-                                        <li>
-                                            <div className="info">
-                                                <div className="name">Manure (10kg)
-                                                    <div className="type">
-                                                        Added By Shubham
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button className="btn-pool btn-effect" type="submit">Volunteer to Buy</button>
-                                        </li>
-                                        <li>
-                                            <div className="info">
-                                                <div className="name">Manure (10kg)
-                                                    <div className="type">
-                                                        Added By Shubham
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button className="btn-pool btn-effect" type="submit">Volunteer to Buy</button>
-                                        </li>
-                                        <li>
-                                            <div className="info">
-                                                <div className="name">Manure (10kg)
-                                                    <div className="type">
-                                                        Added By Shubham
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button className="btn-pool btn-effect" type="submit">Volunteer to Buy</button>
-                                        </li>
+                                        {this.props.products!==null?this.props.products.map((product)=> {
+                                            let flag = false;
+                                            for (const userId in product.boughtBy) {
+                                                if (product.boughtBy[userId].uid === this.props.user.uid || product.boughtBy[userId].bought === true) {
+                                                    flag = true
+                                                    break
+                                                }
+                                            }
+                                            return (!flag)?<GlobalProductList product={product} user={this.props.user}
+                                                                                 key={product.id}/>:''
+                                        }):''}
                                     </ul>
                                 </div>
                                 <div className="products-list">
                                     <h2>Your buying List</h2>
                                     <ul>
-                                        <li>
-                                            <div className="info">
-                                                <div className="name">Manure (10kg)
-                                                    <div className="type">
-                                                        Added By Shubham
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button className="btn-pool btn-effect yet-to-buy" type="submit">Yet to Buy</button>
-                                        </li>
-                                        <li>
-                                            <div className="info">
-                                                <div className="name">Manure (10kg)
-                                                    <div className="type">
-                                                        Added By Shubham
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button className="btn-pool btn-effect yet-to-buy" type="submit">Yet to Buy</button>
-                                        </li>
-                                        <li>
-                                            <div className="info">
-                                                <div className="name">Manure (10kg)
-                                                    <div className="type">
-                                                        Added By Shubham
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <button className="btn-pool btn-effect bought" type="submit">Bought</button>
-                                        </li>
+                                        {this.props.products!==null?this.props.products.map((product)=> {
+                                            let flag = false;
+                                            let userProductKey="";
+                                            for (const userId in product.boughtBy) {
+                                                if (product.boughtBy[userId].uid === this.props.user.uid) {
+                                                    flag = true
+                                                    userProductKey = userId
+                                                    break
+                                                }
+                                            }
+                                            return (flag)?<BuyingList product={product} user={this.props.user}
+                                                                              key={product.id} userProductKey={userProductKey}/>:''
+                                        }):''}
                                     </ul>
                                 </div>
-
-
                             </div>
-
                         </div>
 
                         <div className="tabs_item pool-list">

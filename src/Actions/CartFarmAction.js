@@ -39,29 +39,32 @@ export function getUpdateProductList() {
 
 export function deleteProductRequest(product={}) {
     return dispatch => {
-        database.ref(`cardFarm/${product.id}`).remove()
+        console.log(product)
+        database.ref(`cartFarm/${product.id}`).remove()
     }
 }
 
-export function acceptProductRequest(productId, userUid) {
+export function acceptProductRequest(productId, user) {
+    console.log(user)
     return dispatch => {
-        database.ref(`poolFarm/${productId}/boughtBy`).push({
-            userUid,
-            bought:false
+        database.ref(`cartFarm/${productId}/boughtBy`).push({
+            bought:false,
+            ...user
         })
     }
 }
 
 export function rejectProductRequest(productId, userkey) {
     return dispatch => {
-        database.ref(`poolFarm/${productId}/acceptedBy/${userkey}`).remove()
+        database.ref(`cartFarm/${productId}/boughtBy/${userkey}`).remove()
     }
 }
 
-export function boughtProduct(productId, userkey) {
+export function boughtProduct(productId, userkey, user) {
     return dispatch => {
-        database.ref(`poolFarm/${productId}/boughtBy/${userkey}`).update({
-            bought:true
+        database.ref(`cartFarm/${productId}/boughtBy/${userkey}`).update({
+            bought:true,
+            ...user
         })
     }
 }
