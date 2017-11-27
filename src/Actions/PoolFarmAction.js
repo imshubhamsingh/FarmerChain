@@ -1,7 +1,6 @@
 import { database } from '../firebase/firebase'
 import {auth} from "../firebase/firebase";
 
-export const SET_POOL_REQUEST = 'set_pool_request';
 export const UPDATE_POOL = "update_pool";
 
 
