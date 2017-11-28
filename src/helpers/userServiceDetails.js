@@ -26,3 +26,28 @@ export const orderProducts = (products, user) => {
     }):''
     return orderProducts
 }
+
+
+export const transactionDone = (transactions, userID) => {
+    let transactionDone = 0;
+    if (transactions !== null || transactions !== undefined){
+        transactions.map((transaction)=> {
+                if (transaction.from.uid === userID) {
+                    transactionDone++;
+                }
+        })
+        return transactionDone
+    }else return ''
+}
+
+export const transactionReceived = (transactions, userID) => {
+    let transactionReceived = 0;
+    if (transactions !== null || transactions !== undefined){
+        transactions.map((transaction)=> {
+            if (transaction.to.uid === userID) {
+                transactionReceived++;
+            }
+        })
+        return transactionReceived
+    }else return ''
+}

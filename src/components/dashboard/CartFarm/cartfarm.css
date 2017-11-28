@@ -95,3 +95,13 @@
 
 }
 
+
+.pool-list ul>li.transaction-list {
+    padding: 10px;
+    background-color: #f3f3f3;
+    margin: 20px 0px;
+    text-align: left;
+    font-family: monospace !important;
+    font-weight: bold;
+    color: #2d2d2d;
+}

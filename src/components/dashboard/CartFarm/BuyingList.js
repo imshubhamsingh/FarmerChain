@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {rejectProductRequest, boughtProduct} from '../../../Actions/CartFarmAction'
 import { extractUserDetails} from './helper'
-import swal from 'sweetalert'
+import swal from 'sweetalert2'
 
 
 class BuyingList extends Component {
@@ -12,32 +12,47 @@ class BuyingList extends Component {
     }
     buy = () =>{
         if(!this.props.alreadyBought){
-            swal("Please Enter the price (₹):", {
-                content: "input",
-            })
-                .then((value) => {
+            swal({
+                title: 'Please Enter the price (₹)',
+                input: 'number',
+                showCancelButton: true,
+                confirmButtonText: 'Submit',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve()
+                        }, 2000)
+                    })
+                },
+                allowOutsideClick: false
+            }).then((result) => {
+                if (result.value) {
+                    let value = result.value;
                     if(value){
                         if(value!=="" || !isNaN(value)|| value !== null){
                             swal({
-                                icon: "success"
-                            });
+                                type: 'success',
+                            })
                             this.props.boughtProduct(this.props.product.id, this.props.userProductKey ,extractUserDetails(this.props.user), value)
                         }else{
-                            swal({
-                                title:"Something went wrong",
-                                icon: "error"
-                            });
+                            swal(
+                                'Oops...',
+                                'Something went wrong!',
+                                'error'
+                            )
                         }
 
-                    }else{
-                        swal({
-                            title:"Enter a value",
-                            icon: "error"
-                        });
                     }
 
-                })
-
+                }else {
+                    swal(
+                        'Oops...',
+                        'Something went wrong!',
+                        'error'
+                    )
+                }
+            })
         }
     }
 

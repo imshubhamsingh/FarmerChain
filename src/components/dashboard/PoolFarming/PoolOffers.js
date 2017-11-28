@@ -6,7 +6,6 @@ import {acceptPoolRequest} from '../../../Actions/PoolFarmAction'
 class PoolOffers extends Component {
     acceptReq = () => {
         const {uid, displayName, email} = this.props.user
-        console.log({uid, displayName, email})
         this.props.acceptPoolRequest(this.props.pool.id,{uid, displayName, email})
     }
     render(){

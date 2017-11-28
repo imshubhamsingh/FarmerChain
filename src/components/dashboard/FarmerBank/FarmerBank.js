@@ -101,9 +101,6 @@ class FarmerBank extends Component{
                                 </li>
                             </ul>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>

@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import GlobalProductList from './GlobalProductList'
 import BuyingList from './BuyingList'
+import AcceptProduct from './AcceptProduct'
+import PastOrders from './PastOrders'
 import {setProductRequest, getUpdateProductList, deleteProductRequest} from '../../../Actions/CartFarmAction'
 import {connect} from 'react-redux'
+import { transactionDetailsSorted } from  './helper'
 import './cartfarm.css';
 import $ from 'jquery';
 const jQuery = $;
@@ -62,6 +65,10 @@ class CartFarm extends Component{
 
     }
 
+    showPastOrders = () =>{
+        return (transactionDetailsSorted(this.props.transactions, this.props.user.uid))
+
+    }
     checkifBuyProduct = (product) =>{
         for (const userId in product.boughtBy) {
             if (product.boughtBy[userId].bought=== true && product.boughtBy[userId] !== undefined){
@@ -186,6 +193,29 @@ class CartFarm extends Component{
                             </iframe>
 
                         </div>
+                        <div className="tabs_item pool-list">
+                            <div className="product-list">
+                                <div className="products-list">
+                                    <h2>Accept your Product</h2>
+                                    <ul>
+                                        {this.props.products!==null?this.props.products.map((product)=> {
+                                            if(product.userId === this.props.user.uid && this.checkifBuyProduct(product).result){
+                                                return <AcceptProduct key={product.id} product={product} boughtbyDetails={this.checkifBuyProduct(product).details}/>
+                                            }
+                                            return '';
+                                        }):''}
+                                    </ul>
+                                </div>
+                                <div className="products-list">
+                                    <h2>Past Orders Transaction</h2>
+                                    <ul>
+                                        {this.showPastOrders().map(transaction => {
+                                            return <PastOrders transaction={transaction} key={transaction.id}/>
+                                        })}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -197,7 +227,8 @@ class CartFarm extends Component{
 function mapStateToProps(state) {
     return {
         products: state.products,
-        user: state.user.user
+        user: state.user.user,
+        transactions: state.transactions
     };
 }
 

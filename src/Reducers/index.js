@@ -1,6 +1,7 @@
 import UserReducer from './UserReducer';
 import PoolFarmReducer from './PoolFarmReducer'
 import CartFarmReducer from "./CartFarmReducer";
+import TransactionReducer from "./TransactionReducer";
 
 
 import { persistCombineReducers } from 'redux-persist'
@@ -14,7 +15,8 @@ const config = {
 export const reducer = persistCombineReducers(config, {
     user: UserReducer,
     pools: PoolFarmReducer,
-    products: CartFarmReducer
+    products: CartFarmReducer,
+    transactions: TransactionReducer
 })
 
 

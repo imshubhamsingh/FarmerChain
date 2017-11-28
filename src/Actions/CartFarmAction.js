@@ -67,3 +67,19 @@ export function boughtProduct(productId, userkey, user, price) {
         })
     }
 }
+
+export function payForProduct(product={}, user, buyer) {
+    return dispatch => {
+        database.ref(`transactions`).push({
+            info:{
+                ...product
+            },
+            type: "product",
+            time: Date.now(),
+            from: user,
+            to: buyer
+        })
+        database.ref(`cartFarm/${product.id}`).remove()
+    }
+
+}

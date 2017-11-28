@@ -4,7 +4,7 @@ import {TimelineLite, Elastic} from "gsap";
 import { connect } from 'react-redux';
 import {logout} from "../../Actions/UserActions";
 import { withRouter } from 'react-router-dom'
-import {countAcceptedPool, orderProducts} from '../../helpers/userServiceDetails'
+import {countAcceptedPool, orderProducts, transactionDone, transactionReceived} from '../../helpers/userServiceDetails'
 
 import './main.css'
 
@@ -85,7 +85,7 @@ class Main extends Component{
                                     Transaction Received
                                 </h6>
                                 <h1>
-                                    20
+                                    {transactionReceived(this.props.transactions,this.props.user.uid)}
                                 </h1>
                             </div>
                         </li>
@@ -95,7 +95,7 @@ class Main extends Component{
                                     Transaction Done
                                 </h6>
                                 <h1>
-                                    2
+                                    {transactionDone(this.props.transactions,this.props.user.uid)}
                                 </h1>
                             </div>
                         </li>
@@ -114,7 +114,8 @@ function mapStateToProps(state) {
     return {
         user: state.user.user,
         pools: state.pools,
-        products: state.products
+        products: state.products,
+        transactions: state.transactions
     };
 }
 
