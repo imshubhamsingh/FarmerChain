@@ -12,27 +12,37 @@ import { getUser } from './Actions/UserActions';
 import {getUpdateProductList} from './Actions/CartFarmAction'
 import {getUpdatePoolList} from './Actions/PoolFarmAction'
 
+import getWeb3 from './utils/getWeb3'
+
 
 
 
 class ClientApp extends Component{
+    state = {
+        web3: null
+    }
     componentWillMount(){
         this.props.getUser();
         this.props.getUpdateProductList();
         this.props.getUpdatePoolList();
-
+        getWeb3
+            .then(results => {
+                this.setState({ web3: results.web3 })
+            })
+            .catch(() => {
+                console.log('Error finding web3.')
+            })
     }
-
 
     render(){
         return(
             < div className="app-layout">
                     <Sidebar/>
-                    {!this.props.user.loading?<div className='main-layout'>
+                    {!this.props.user.loading?<div className='main-layout'  web3={this.state.web3}>
                         <Header/>
-                        <Dashboard/>
+                        <Dashboard  web3={this.state.web3}/>
                     </div>:''}
-                     {!this.props.user.loading?<Bottombar/>:''}
+                     {!this.props.user.loading?<Bottombar  web3={this.state.web3}/>:''}
             </div>
         )
     }
