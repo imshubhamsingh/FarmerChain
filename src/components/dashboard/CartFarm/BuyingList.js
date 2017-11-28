@@ -16,14 +16,22 @@ class BuyingList extends Component {
                 content: "input",
             })
                 .then((value) => {
-                    if(!isNaN(value)){
-                        swal({
-                            icon: "success"
-                        });
-                        this.props.boughtProduct(this.props.product.id, this.props.userProductKey ,extractUserDetails(this.props.user), value)
+                    if(value){
+                        if(value!=="" || !isNaN(value)|| value !== null){
+                            swal({
+                                icon: "success"
+                            });
+                            this.props.boughtProduct(this.props.product.id, this.props.userProductKey ,extractUserDetails(this.props.user), value)
+                        }else{
+                            swal({
+                                title:"Something went wrong",
+                                icon: "error"
+                            });
+                        }
+
                     }else{
                         swal({
-                            title:"Something went wrong",
+                            title:"Enter a value",
                             icon: "error"
                         });
                     }
@@ -42,7 +50,6 @@ class BuyingList extends Component {
         return false
     }
     render(){
-        console.log(this.props)
         return(
             <li>
                 <div className="info">
