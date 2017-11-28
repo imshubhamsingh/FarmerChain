@@ -58,19 +58,19 @@ class FarmerBank extends Component{
                         <div className="tabs_item pool-list">
                             <ul>
                                 <li>
-                                    <div className="info">
-                                        <div className="name">Rohan
-                                            <div className="type">
-                                                20 ETH
-                                            </div>
-                                        </div>
-
+                                    <div className="fund">
+                                        ₹3100
                                     </div>
-                                    <div className="details">
-                                        Wheat crop production in ganaur harayana
+                                    <div className="details" style={{textAlign:'center'}}>
+                                        General Public Funds
                                     </div>
                                     <button className="btn-pool btn-effect" type="submit">Add</button>
                                 </li>
+                            <div>
+                                <h2>
+                                    Requested Loan
+                                </h2>
+                            </div>
                                 <li>
                                     <div className="info">
                                         <div className="name">Rohan
@@ -83,7 +83,7 @@ class FarmerBank extends Component{
                                     <div className="details">
                                         Wheat crop production in ganaur harayana
                                     </div>
-                                    <button className="btn-pool btn-effect" type="submit">Add</button>
+                                    <button className="btn-pool btn-effect" type="submit">Grant</button>
                                 </li>
                                 <li>
                                     <div className="info">
@@ -97,7 +97,7 @@ class FarmerBank extends Component{
                                     <div className="details">
                                         Wheat crop production in ganaur harayana
                                     </div>
-                                    <button className="btn-pool btn-effect" type="submit">Add</button>
+                                    <button className="btn-pool btn-effect" type="submit">Grant</button>
                                 </li>
                             </ul>
                         </div>

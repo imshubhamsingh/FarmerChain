@@ -42,3 +42,12 @@
 .tabs_item.farmerBank-request{
     padding: 30px;
 }
+
+
+.tabs_item .fund {
+    display: inline;
+    position: relative;
+    width: 100%;
+    font-size: 80px;
+    font-weight: bold;
+}
