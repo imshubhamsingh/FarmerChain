@@ -15,6 +15,7 @@ body {
   font-family: Arial;
   background-color: #313042; 
   position: relative;
+    overflow-y: hidden;
 }
 
 .box {
@@ -70,20 +71,22 @@ body {
     width:calc(100% - 0px);
     margin-left:0px;
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr auto;
   
     grid-template-areas: "header"
-                         "dashboard"                                  
+                         "dashboard"
+                         "bottombar"
   }
   .dashboard {
     grid-area: dashboard;
     padding: 0 1em;  
-    overflow-x: scroll;
+    overflow-y: scroll;
   }
   .bottombar {
     display: block !important;
-    position: absolute; 
     width: 100vw;
+      margin-bottom: calc(100vh - 113vh);
+      padding: 6px;
   }
 }
 
@@ -99,10 +102,9 @@ body {
 }
 
 .bottombar {
-  grid-area: bottombar;
-  color: #fff;
-  display: none;
-    padding: 0;
+    grid-area: bottombar;
+    color: #fff;
+    display: none;
 }
 
 .dashboard {

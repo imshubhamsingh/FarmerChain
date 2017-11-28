@@ -10,14 +10,12 @@ class Header extends Component{
 
     render(){
         return(
-            <div>
                 <div className='header box'>
                     {this.showback()}
                     Dashboard
                     <i className="fa fa-cog" aria-hidden="true" style={{position: 'absolute',right:'77px',fontSize:'20px'}}></i>
                     <i className="fa fa-bell" aria-hidden="true" style={{position: 'absolute',right:'37px',fontSize:'20px'}}></i>
                 </div>
-            </div>                     
         )
     }
 }

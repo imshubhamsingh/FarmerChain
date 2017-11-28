@@ -41,8 +41,9 @@ class ClientApp extends Component{
                     {!this.props.user.loading?<div className='main-layout'  web3={this.state.web3}>
                         <Header/>
                         <Dashboard  web3={this.state.web3}/>
+                        {!this.props.user.loading?<Bottombar  web3={this.state.web3}/>:''}
                     </div>:''}
-                     {!this.props.user.loading?<Bottombar  web3={this.state.web3}/>:''}
+
             </div>
         )
     }

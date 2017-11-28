@@ -14,7 +14,7 @@ import PageShell from './PageShell/PageShell'
 class Dashboard extends Component{
     render(){
         return(
-            <div className="dashboard">
+            <div className="dashboard box">
 
                      <Switch>
                         <Route path="/" exact component={PageShell(Services)} />
