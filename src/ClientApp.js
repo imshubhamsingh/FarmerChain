@@ -9,12 +9,18 @@ import './App.css';
 
 import {connect} from 'react-redux'
 import { getUser } from './Actions/UserActions';
+import {getUpdateProductList} from './Actions/CartFarmAction'
+import {getUpdatePoolList} from './Actions/PoolFarmAction'
+
 
 
 
 class ClientApp extends Component{
     componentWillMount(){
-        this.props.getUser()
+        this.props.getUser();
+        this.props.getUpdateProductList();
+        this.props.getUpdatePoolList();
+
     }
 
 
@@ -35,4 +41,4 @@ class ClientApp extends Component{
 function mapStateToProps(state) {
     return { user: state.user };
 }
-export default withRouter(connect(mapStateToProps,{getUser})(ClientApp))
+export default withRouter(connect(mapStateToProps,{getUser, getUpdateProductList, getUpdatePoolList})(ClientApp))

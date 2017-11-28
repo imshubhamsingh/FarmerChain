@@ -9,7 +9,6 @@ const jQuery = $;
 
 class CartFarm extends Component{
     componentDidMount(){
-        this.props.getUpdateProductList();
         $(document).ready(function() {
 
             (function ($) {

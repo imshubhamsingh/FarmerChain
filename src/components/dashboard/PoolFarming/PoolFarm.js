@@ -11,7 +11,6 @@ const jQuery = $;
 
 class PoolFarm extends Component{
     componentDidMount(){
-        this.props.getUpdatePoolList();
         $(document).ready(function() {
 
             (function ($) {
