@@ -95,7 +95,7 @@ contract Bank{
         previousBalance = this.balance;
     }
 
-    function requestLoan(uint256 loanAmount) onlymember constant returns(bool status){
+    function requestLoan(uint256 loanAmount) onlymember returns(bool status){
         if(members[msg.sender].isPermitted && loanAmount <= 2*members[msg.sender].amountAddedToThePool && loanAmount <= this.balance/2){
             members[msg.sender].isPermitted == false;
             members[msg.sender].loanGranted = loanAmount;
