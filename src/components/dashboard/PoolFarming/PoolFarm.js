@@ -9,6 +9,7 @@ import PoolOffers from "./PoolOffers";
 import AcceptedPool from "./AcceptedPool";
 const jQuery = $;
 
+
 class PoolFarm extends Component{
     componentDidMount(){
         $(document).ready(function() {
@@ -59,6 +60,19 @@ class PoolFarm extends Component{
             },2000)
         })
     }
+
+    acceptedUserList = (pool)=>{
+        // const list = [];
+        // if(pool.acceptedBy !== null || pool.acceptedBy !== undefined){
+        //     for(const poolAcceptedId in pool.acceptedBy){
+        //         list.push(pool.acceptedBy[poolAcceptedId].displayName)
+        //     }
+        // }
+        // if(list.length >0) {
+        //     return list.join(" ,  ")
+        // }else return "None"
+        return
+    }
     render(){
         return(
             <div>
@@ -96,14 +110,27 @@ class PoolFarm extends Component{
                                         if(pool.userId === this.props.user.uid){
                                             return <li key={pool.id}>
                                                 <div className="info">
-                                                    <div className="name">{pool.username}
+                                                    <div className="name">{pool.description}
                                                         <div className="type">
                                                             {pool.poolType}
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="details">
-                                                    {pool.description}
+                                                    Accepted By:
+                                                    <div className="accepted-user-list">
+                                                        {
+                                                            Object.keys(pool.acceptedBy).map(user => {
+                                                                return <div className="user-info" key={user}>
+                                                                    <div className="name">
+                                                                        <div className="user-type">
+                                                                            {pool.acceptedBy[user].displayName}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            })
+                                                        }
+                                                    </div>
                                                 </div>
                                                 <button className="btn-pool btn-effect" onClick={deletePoolRequest(pool)} style={{backgroundColor:'red'}}>Delete Pool</button>
                                             </li>
@@ -125,7 +152,7 @@ class PoolFarm extends Component{
                                     let userKey = "";
                                     if (pool.userId !== this.props.user.uid) {
                                         for (const userId in pool.acceptedBy) {
-                                            if (pool.acceptedBy[userId] === this.props.user.uid) {
+                                            if (pool.acceptedBy[userId].uid === this.props.user.uid) {
                                                 flags = true
                                                 userKey = userId
                                                 break
@@ -147,7 +174,7 @@ class PoolFarm extends Component{
                                     let flags = false;
                                     if (pool.userId !== this.props.user.uid) {
                                         for (const userId in pool.acceptedBy) {
-                                            if (pool.acceptedBy[userId] === this.props.user.uid) {
+                                            if (pool.acceptedBy[userId].uid === this.props.user.uid) {
                                                 flags = true
                                                 break
                                             }

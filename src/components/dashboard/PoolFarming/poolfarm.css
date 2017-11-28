@@ -7,3 +7,27 @@
     margin: 10px 0px;
     background: #f4f3f3;
 }
+
+.user-type {
+    color: #ffff;
+    background: green;
+    width: 100px;
+    height: 20px;
+    line-height: 2;
+    margin: 3px 1px;
+    border-radius: 2px;
+    text-align: center;
+    top: -24px;
+    right: 0;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.tabs_item .user-info {
+    display: inline;
+    position: relative;
+}
+
+.accepted-user-list{
+    display: flex;
+}

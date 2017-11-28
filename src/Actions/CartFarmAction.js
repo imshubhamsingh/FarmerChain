@@ -58,10 +58,11 @@ export function rejectProductRequest(productId, userkey) {
     }
 }
 
-export function boughtProduct(productId, userkey, user) {
+export function boughtProduct(productId, userkey, user, price) {
     return dispatch => {
         database.ref(`cartFarm/${productId}/boughtBy/${userkey}`).update({
             bought:true,
+            price: price,
             ...user
         })
     }

@@ -43,9 +43,11 @@ export function deletePoolRequest(pool={}) {
     }
 }
 
-export function acceptPoolRequest(poolId, userUid) {
+export function acceptPoolRequest(poolId, user) {
     return dispatch => {
-        database.ref(`poolFarm/${poolId}/acceptedBy`).push(userUid)
+        database.ref(`poolFarm/${poolId}/acceptedBy`).push({
+            ...user
+        })
     }
 }
 

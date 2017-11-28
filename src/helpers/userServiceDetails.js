@@ -4,7 +4,7 @@ export const countAcceptedPool = (pools, user) =>{
         let flags = false;
         if (pool.userId !== user.uid) {
             for (const userId in pool.acceptedBy) {
-                if (pool.acceptedBy[userId] === user.uid) {
+                if (pool.acceptedBy[userId].uid === user.uid) {
                     flags = true
                     break
                 }

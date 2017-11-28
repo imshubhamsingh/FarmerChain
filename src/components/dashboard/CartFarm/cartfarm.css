@@ -84,3 +84,14 @@
     background-color: red;
 }
 
+@media screen and (max-width: 426px) {
+    .buying-list{
+        display: block !important;
+    }
+    .buying-list button.btn-1{
+        margin: 0 2px 4px 0;
+    }
+
+
+}
+

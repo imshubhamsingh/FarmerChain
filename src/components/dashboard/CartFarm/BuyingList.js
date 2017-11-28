@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {rejectProductRequest, boughtProduct} from '../../../Actions/CartFarmAction'
 import { extractUserDetails} from './helper'
+import swal from 'sweetalert'
 
 
 class BuyingList extends Component {
@@ -11,7 +12,24 @@ class BuyingList extends Component {
     }
     buy = () =>{
         if(!this.props.alreadyBought){
-            this.props.boughtProduct(this.props.product.id, this.props.userProductKey ,extractUserDetails(this.props.user))
+            swal("Please Enter the price (₹):", {
+                content: "input",
+            })
+                .then((value) => {
+                    if(!isNaN(value)){
+                        swal({
+                            icon: "success"
+                        });
+                        this.props.boughtProduct(this.props.product.id, this.props.userProductKey ,extractUserDetails(this.props.user), value)
+                    }else{
+                        swal({
+                            title:"Something went wrong",
+                            icon: "error"
+                        });
+                    }
+
+                })
+
         }
     }
 

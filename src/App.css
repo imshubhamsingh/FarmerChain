@@ -110,3 +110,7 @@ body {
   padding: 0 1em;  
   overflow-x: scroll;
 }
+
+.swal-overlay {
+    background-color: rgba(49, 48, 66, 0.45);
+}

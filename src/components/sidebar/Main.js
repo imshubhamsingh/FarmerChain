@@ -53,7 +53,7 @@ class Main extends Component{
                                     Current Balance
                                 </h6>
                                 <h1>
-                                    $25
+                                    ₹250
                                 </h1>
                             </div>
                         </li>
