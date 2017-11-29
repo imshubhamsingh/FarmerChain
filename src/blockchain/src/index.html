@@ -56,22 +56,24 @@
                     </div>
                     <br>
                     <div class="input-group">
-                            <label for="payLoans">Add Mods</label>
+                            <label for="payLoans">Add Funds or Pay Loans</label>
                             <input name="payLoans" id="payLoans" class="form-control" style="" type="text" placeholder="Enter amount in Wei"/>
                             <!-- <input type="text" class="form-control"> -->
                             <span class="input-group-btn">
                                  <button class="btn btn-primary" onclick="payLoan()" type="button" style="margin-bottom: -25px;">Pay</button>
                             </span>
                     </div>
+
+                    <button class="btn btn-primary" onclick="paynow()" type="button" style="margin-bottom: -25px;">Pay</button>
                 </div>
         </div>
 
         <script>
                 $(document).ready(function(){
-                    updateBalance();
                     document.getElementById("currentAccount").innerText = currentEtherbase;
                     // $(currentAccount).text = currentEtherbase;
                 });
+
         </script>
     </body>
 </html>
