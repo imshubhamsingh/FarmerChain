@@ -8,11 +8,11 @@ var contractAddress = '0x51fc52fd0b30fa0319d97893defe0201fed39c4c';
 //   web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
 // }
 
-  if (typeof web3 !== 'undefined') {
-    web3 = new Web3(web3.currentProvider);
-  } else {
-    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
-  }
+if (typeof web3 !== 'undefined') {
+  web3 = new Web3(web3.currentProvider);
+} else {
+  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"));
+}
 
 window.addEventListener('load', function() {
   if (typeof web3 !== 'undefined') {
@@ -38,6 +38,7 @@ function deployContract(){
   instance = contract.at(contractAddress);
 
   console.log(instance);
+  console.log(instance.address);
 
   // var con = web3.eth.contract([{"constant":true,"inputs":[],"name":"getBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_memberaddress","type":"address"}],"name":"removeMembers","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"addFundsorPayLoan","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"loanAmount","type":"uint256"}],"name":"requestLoan","outputs":[{"name":"status","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_memberaddress","type":"address"}],"name":"addMembers","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_modAddress","type":"address"},{"name":"_modName","type":"string"}],"name":"addMods","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getAmoundAdded","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"whoAdded","type":"address"},{"indexed":false,"name":"howMuch","type":"uint256"}],"name":"addedFunds","type":"event"}]);
     // var inst = con.new(
@@ -141,26 +142,26 @@ function addMembers(){
 
 
 function payLoan(){
-var address = $(payLoan).val();
-console.log(address);
-instance.addFundsorPayLoan.sendTransaction({from: currentEtherbase, value: address}, function(error, result){
-  if(error){
-    console.log("Error: ", error);
-  }else{
-    console.log(result);
-    // console.log(getReceipts(result));
-    getReceipts(result).then(function(receipt){
-      console.log(receipt);
-      document.getElementById("receipt").classList.remove("hidden");
-      document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
-      setTimeout(function(){
-        document.getElementById("receipt").classList.add("hidden");
-      }, 5000);
-    }).catch(function(error){
-      console.log(error);
-    });
-  }
-});
+  var address = $(payLoan).val();
+  console.log(address);
+  instance.addFundsorPayLoan.sendTransaction({from: currentEtherbase, value: address}, function(error, result){
+    if(error){
+      console.log("Error: ", error);
+    }else{
+      console.log(result);
+      // console.log(getReceipts(result));
+      getReceipts(result).then(function(receipt){
+        console.log(receipt);
+        document.getElementById("receipt").classList.remove("hidden");
+        document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
+        setTimeout(function(){
+          document.getElementById("receipt").classList.add("hidden");
+        }, 5000);
+      }).catch(function(error){
+        console.log(error);
+      });
+    }
+  });
 }
 
 
