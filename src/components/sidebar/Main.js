@@ -19,8 +19,9 @@ class Main extends Component{
                 let img = $('.wrapper').children(),
                     name = $('#name'),
                     accountNo = $('#accountNo'),
-                    details = $('.menu ul>li');
-                let serviceList = [...name,...accountNo,...details];
+                    details = $('.menu ul>li'),
+                    logout = $('.logOut');
+                let serviceList = [...name,...accountNo,...details,...logout];
                 let t1Loader = new TimelineLite({delay:0.5});
 
                 t1Loader.staggerFromTo(

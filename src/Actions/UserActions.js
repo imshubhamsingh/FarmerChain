@@ -45,7 +45,21 @@ export function logout() {
     return dispatch => auth.signOut();
 }
 
-export function createAccount(email, password) {
-    return dispatch => auth.createUserWithEmailAndPassword(email, password)
+export function createAccount(email, password, signUpDisplayName) {
+    return dispatch => auth.createUserWithEmailAndPassword(email, password).then(user =>{
+        user.updateProfile({'displayName': signUpDisplayName});
+        var newUser = auth.currentUser;
+        var userDetails = {}
+        if (user != null) {
+            userDetails = {
+                name: signUpDisplayName,
+                email: newUser.email,
+                uid: newUser.uid,
+                money: 1000,
+                poolAccepted: []
+            }
+        }
+        database.ref(`users/${userDetails.uid}`).set(userDetails)
+    })
 }
 

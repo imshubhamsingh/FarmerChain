@@ -58,21 +58,9 @@ class Login extends Component{
             const {signUpEmail, signUpPassword,signUpDisplayName } = this.state
             this.setState({login:true})
             this.props.setDisplayName(signUpDisplayName);
-            this.props.createAccount(signUpEmail,signUpPassword)
-                .then((user)=>{
-                    user.updateProfile({'displayName': signUpDisplayName});
-                    var newUser = auth.currentUser;
-                    var userDetails = {}
-                    if (user != null) {
-                        userDetails = {
-                            name: signUpDisplayName,
-                            email: newUser.email,
-                            uid: newUser.uid,
-                            poolAccepted: []
-                        }
-                    }
-                    database.ref(`users/${userDetails.uid}`).set(userDetails)
-                    setTimeout(this.props.onLogin,1000);
+            this.props.createAccount(signUpEmail,signUpPassword,  signUpDisplayName)
+                .then(()=>{
+                    setTimeout(this.props.onLogin,2000);
                 })
                 .catch(error=>{
                     this.setState({login:false})
