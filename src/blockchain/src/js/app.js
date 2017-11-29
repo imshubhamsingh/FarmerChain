@@ -148,27 +148,27 @@ function addMembers(){
   })
 }
 
-
-function payLoan(){
-  var address = $(payLoan).val();
-  console.log(address);
-  instance.addFundsorPayLoan.sendTransaction({from: currentEtherbase, value: address}, function(error, result){
-    if(error){
-      console.log("Error: ", error);
-    }else{
-      console.log(result);
-      // console.log(getReceipts(result));
-      getReceipts(result).then(function(receipt){
-        console.log(receipt);
-        document.getElementById("receipt").classList.remove("hidden");
-        document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
-      }).catch(function(error){
-        console.log(error);
-      });
-    }
-  });
-}
-
+//problematic function
+        function payLoan(){
+          var address = $(payLoan).val();
+          console.log(address);
+          instance.addFundsorPayLoan.sendTransaction({from: currentEtherbase, value: address}, function(error, result){
+            if(error){
+              console.log("Error: ", error);
+            }else{
+              console.log(result);
+              // console.log(getReceipts(result));
+              getReceipts(result).then(function(receipt){
+                console.log(receipt);
+                document.getElementById("receipt").classList.remove("hidden");
+                document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
+              }).catch(function(error){
+                console.log(error);
+              });
+            }
+          });
+        }
+/* somehow executing multiple times in a infinite loop */
 
 async function getReceipts(hash){
   var receipt = web3.eth.getTransactionReceipt(hash);
