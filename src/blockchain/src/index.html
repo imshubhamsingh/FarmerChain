@@ -14,39 +14,64 @@
         <div class="container">
             <h1 class="text-center">Farmer Bank</h1>
             <h6>Current Account: <span id="currentAccount"></span></h6>
-            <div class="col-sm-12 text-center" onload="updateBalance()">
-                    <h5 class="">Balance: <span id="contractBalance"> Ether</span></h2>
-                    <button class="btn btn-secondary" style="margin-bottom: 5px;" onclick="updateBalance()">Update Balance</button>
+            <div class="col-sm-12 text-center">
+                <div id="receipt" class="alert alert-success hidden">
+
+                </div>
             </div>
         </div>
 
-
-        <div class="clearfix"></div>
         <div class="container">
                 <div class="col-md-3 well">
-
+                        <h5 class="">Balance: <span id="contractBalance">0</span> Ether</h2>
+                        <button class="btn btn-sm" style="margin-bottom: 5px;" onclick="updateBalance()">Update Balance</button>
+                        <!-- <input class="form-control" type="text" name="switchAccount" id="switchAccount" /> -->
                 </div>
                 <div class="col-md-9 well">
-                    <!-- <div class="form-group">
-                            <label for="memAddress">Add Members</label>
-                            <input name="memAddress" id="memAddress" class="form-control" style="margin-bottom: 3px;" type="text" placeholder="Enter beneficiary address"/>
-                            <button class="btn btn-primary" onclick="addMembers()">Add Members</button>
-                            <button class="btn btn-primary" onclick="restofprogram()">Deploy!</button>
-                    </div> -->
                     <div class="input-group">
-                            <label for="memAddress"></label>
-                            <input name="memAddress" id="memAddress" class="form-control" style="margin-bottom: 3px;" type="text" placeholder="Enter beneficiary address"/>
+                            <label for="addMemberAddress">Add Members</label>
+                            <input name="addMemberAddress" id="addMemberAddress" class="form-control" style="" type="text" placeholder="Enter beneficiary address"/>
                             <!-- <input type="text" class="form-control"> -->
                             <span class="input-group-btn">
-                                 <button class="btn btn-primary" onclick="addMembers()" type="button" style="margin-top: -3px">Add Members</button>
+                                 <button class="btn btn-primary" onclick="addMembers()" type="button" style="margin-bottom: -25px;">Add Members</button>
+                            </span>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                            <label for="removeMemberAddress">Remove Members</label>
+                            <input name="removeMemberAddress" id="removeMemberAddress" class="form-control" style="" type="text" placeholder="Enter beneficiary address"/>
+                            <!-- <input type="text" class="form-control"> -->
+                            <span class="input-group-btn">
+                                 <button class="btn btn-primary" onclick="removeMembers()" type="button" style="margin-bottom: -25px;">Remove Members</button>
+                            </span>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                            <label for="addModAddress">Add Mods</label>
+                            <input name="addModAddress" id="addModAddress" class="form-control" style="" type="text" placeholder="Enter beneficiary address"/>
+                            <!-- <input type="text" class="form-control"> -->
+                            <span class="input-group-btn">
+                                 <button class="btn btn-primary" onclick="addMods()" type="button" style="margin-bottom: -25px;">Add Mods</button>
+                            </span>
+                    </div>
+
+                    <div class="input-group">
+                            <label for="payLoans">Add Mods</label>
+                            <input name="payLoans" id="payLoans" class="form-control" style="" type="text" placeholder="Enter amount in Wei"/>
+                            <!-- <input type="text" class="form-control"> -->
+                            <span class="input-group-btn">
+                                 <button class="btn btn-primary" onclick="payLoan()" type="button" style="margin-bottom: -25px;">Pay</button>
                             </span>
                     </div>
                 </div>
         </div>
 
         <script>
-                document.getElementById("currentAccount").innerText = web3.eth.coinbase;
-                updateBalance();
+                $(document).ready(function(){
+                    updateBalance();
+                    document.getElementById("currentAccount").innerText = currentEtherbase;
+                    // $(currentAccount).text = currentEtherbase;
+                });
         </script>
     </body>
 </html>

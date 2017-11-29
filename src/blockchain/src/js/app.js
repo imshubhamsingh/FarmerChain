@@ -1,5 +1,7 @@
 var abidef = '[{"constant":true,"inputs":[],"name":"getBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_memberaddress","type":"address"}],"name":"removeMembers","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"addFundsorPayLoan","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"loanAmount","type":"uint256"}],"name":"requestLoan","outputs":[{"name":"status","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_memberaddress","type":"address"}],"name":"addMembers","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_modAddress","type":"address"},{"name":"_modName","type":"string"}],"name":"addMods","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getAmoundAdded","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"whoAdded","type":"address"},{"indexed":false,"name":"howMuch","type":"uint256"}],"name":"addedFunds","type":"event"}]';
 var contractAddress = '0x51fc52fd0b30fa0319d97893defe0201fed39c4c';
+
+
 // if (typeof web3 !== 'undefined') {
 //   web3 = new Web3(web3.currentProvider);
 // } else {
@@ -25,11 +27,12 @@ window.addEventListener('load', function() {
 
 
 function printcoinbase(){
-  console.log("coinbase: ", web3.eth.coinbase);
-  alert("Coinbase: ", toString(web3.eth.coinbase));
+  console.log("coinbase: ", currentEtherbase);
+  $("#currentAccount").text = toString(currentEtherbase);
 }
 
 function deployContract(){
+  window.currentEtherbase = web3.eth.coinbase;
   var abidefinition = JSON.parse(abidef);
   contract = web3.eth.contract(abidefinition);
   instance = contract.at(contractAddress);
@@ -66,10 +69,10 @@ function restofprogram(){
   console.log("Balance", web3.fromWei(instance.getBalance(), "ether").toNumber());
 }
 
-function addMembers(){
-  var address = $(memAddress).val();
+function removeMembers(){
+  var address = $(removeMemberAddress).val();
   console.log(address);
-  instance.addMembers.sendTransaction(address, {from: web3.eth.coinbase}, function(error, result){
+  instance.removeMembers.sendTransaction(address, {from: currentEtherbase}, function(error, result){
     if(error){
       console.log("Error: ", error);
     }else{
@@ -77,12 +80,89 @@ function addMembers(){
       // console.log(getReceipts(result));
       getReceipts(result).then(function(receipt){
         console.log(receipt);
+        document.getElementById("receipt").classList.remove("hidden");
+        document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
+        setTimeout(function(){
+          document.getElementById("receipt").classList.add("hidden");
+        }, 5000);
       }).catch(function(error){
         console.log(error);
       });
     }
   })
 }
+
+function addMods(){
+  var address = $(addModAddress).val();
+  console.log(address);
+  instance.addMods.sendTransaction(address, "bob", {from: currentEtherbase}, function(error, result){
+    if(error){
+      console.log("Error: ", error);
+    }else{
+      console.log(result);
+      // console.log(getReceipts(result));
+      getReceipts(result).then(function(receipt){
+        console.log(receipt);
+        document.getElementById("receipt").classList.remove("hidden");
+        document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
+        setTimeout(function(){
+          document.getElementById("receipt").classList.add("hidden");
+        }, 5000);
+      }).catch(function(error){
+        console.log(error);
+      });
+    }
+  })
+}
+
+
+function addMembers(){
+  var address = $(addMemberAddress).val();
+  console.log(address);
+  instance.addMembers.sendTransaction(address, {from: currentEtherbase}, function(error, result){
+    if(error){
+      console.log("Error: ", error);
+    }else{
+      console.log(result);
+      // console.log(getReceipts(result));
+      getReceipts(result).then(function(receipt){
+        console.log(receipt);
+        document.getElementById("receipt").classList.remove("hidden");
+        document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
+        setTimeout(function(){
+          document.getElementById("receipt").classList.add("hidden");
+        }, 5000);
+      }).catch(function(error){
+        console.log(error);
+      });
+    }
+  })
+}
+
+
+function payLoan(){
+var address = $(payLoan).val();
+console.log(address);
+instance.addFundsorPayLoan.sendTransaction({from: currentEtherbase, value: address}, function(error, result){
+  if(error){
+    console.log("Error: ", error);
+  }else{
+    console.log(result);
+    // console.log(getReceipts(result));
+    getReceipts(result).then(function(receipt){
+      console.log(receipt);
+      document.getElementById("receipt").classList.remove("hidden");
+      document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
+      setTimeout(function(){
+        document.getElementById("receipt").classList.add("hidden");
+      }, 5000);
+    }).catch(function(error){
+      console.log(error);
+    });
+  }
+});
+}
+
 
 async function getReceipts(hash){
   var receipt = web3.eth.getTransactionReceipt(hash);
