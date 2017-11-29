@@ -19,7 +19,7 @@
     padding: 0 10px;
     background: white;
     margin-top: -25px;
-    height: 370px;
+    height: 64vh;
 }
 
 .products-list h2{
@@ -34,6 +34,9 @@
     .product-list {
         display: -ms-flexbox;
         display: block;
+    }
+    .products-list ul{
+        height: 320px !important;
     }
 }
 
