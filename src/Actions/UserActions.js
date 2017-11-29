@@ -12,12 +12,14 @@ export function getUser() {
                     database.ref(`users/${uid}`).on('value',(snapshot)=>{
                         if(snapshot.val()!==null){
                             let userBankMoney = snapshot.val()["money"]
+                            let type = snapshot.val()["type"]
                             dispatch({
                                 type: GET_USER,
                                 payload: {
                                     loading: false,
                                     user,
-                                    money:userBankMoney
+                                    money:userBankMoney,
+                                    type
                                 }
                             });
                         }

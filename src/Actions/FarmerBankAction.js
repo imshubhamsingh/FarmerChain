@@ -41,42 +41,51 @@ export function deleteLoanRequest(loan={}) {
     }
 }
 
-export function acceptLoanRequest(loan, admin, user) {
+export function acceptLoanRequest(loan, userId, adminId) {
     return dispatch => {
         database.ref(`farmerBank/${loan.id}`).update({
-            status: "granted",
-            ...loan
-        }).then(()=>{
-            transferMoney(loan, admin, user)
+            ...loan,
+            status: "granted"
         })
-    }
-}
-
-export function rejectLoanRequest(loan, user) {
-    return dispatch => {
-        database.ref(`farmerBank/${loan.id}`).update({
-            status: "rejected",
-            ...loan
+        console.log({
+            loan,
+            adminId,
+            userId
         })
-    }
-}
-
-export function transferMoney(loan={}, user, admin) {
-    return dispatch => {
         database.ref(`transactions`).push({
             info:{
                 ...loan
             },
             type: "loan",
             time: Date.now(),
-            from: user,
-            to: admin
+            from: userId,
+            to: adminId
         })
-        database.ref(`users/${user.uid}/money`).transaction(money =>{
+        database.ref(`users/${userId}/money`).transaction(money =>{
             return money - parseFloat(loan.amount)
         })
-        database.ref(`users/${admin.uid}/money`).transaction(money =>{
+        database.ref(`users/${adminId}/money`).transaction(money =>{
             return money + parseFloat(loan.amount)
         })
+    }
+}
+
+export function rejectLoanRequest(loan) {
+    return dispatch => {
+        database.ref(`farmerBank/${loan.id}`).update({
+            ...loan,
+            status:"rejected",
+        })
+    }
+}
+
+function transferMoney(loan={}, userId, adminId) {
+    console.log({
+        from: userId,
+        to: userId,
+        ...adminId
+    })
+    return dispatch => {
+
     }
 }

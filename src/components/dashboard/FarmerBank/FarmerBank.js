@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PastTransactions from './PastTransactions'
+import GlobalLoanList from './GlobalLoanList'
 import { transactionDetailsSorted } from '../../../helpers/userAndTransaction'
 import {deleteLoanRequest, setLoanRequest} from '../../../Actions/FarmerBankAction'
 import './farmerbank.css'
@@ -116,7 +117,7 @@ class FarmerBank extends Component{
                             <ul>
                                 <li>
                                     <div className="fund">
-                                        ₹3100
+                                        ₹{this.props.poolMoney}
                                     </div>
                                     <div className="details" style={{textAlign:'center'}}>
                                         General Public Funds
@@ -128,31 +129,9 @@ class FarmerBank extends Component{
                                     Requested Loan
                                 </h2>
                             </div>
-                                {/*{this.props.loans!==null?this.props.loans.map((loan)=> {*/}
-                                        {/*let flag = false;*/}
-                                        {/*for (const userId in product.boughtBy) {*/}
-                                            {/*if (loan.boughtBy[userId].uid === this.props.user.uid || product.boughtBy[userId].bought === true) {*/}
-                                                {/*flag = true*/}
-                                                {/*break*/}
-                                            {/*}*/}
-                                        {/*}*/}
-                                        {/*return (!flag)?<GlobalLoanList product={product} user={this.props.user}*/}
-                                                                          {/*key={product.id}/>:''*/}
-                                    {/*}):''}*/}
-                                <li>
-                                    <div className="info">
-                                        <div className="name">Rohan
-                                            <div className="type">
-                                                300 ETH
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div className="details">
-                                        Wheat crop production in ganaur harayana
-                                    </div>
-                                    <button className="btn-pool btn-effect" type="submit">Grant</button>
-                                </li>
+                                {
+                                    this.props.loans.map((loan)=> <GlobalLoanList loan={loan} user={this.props.user} key={loan.id} />)
+                                }
                             </ul>
                         </div>
                         <div className="tabs_item pool-list">
@@ -178,7 +157,8 @@ function mapStateToProps(state) {
         products: state.products,
         user: state.user.user,
         transactions: state.transactions,
-        loans: state.loans
+        loans: state.loans,
+        poolMoney: state.poolMoney
     };
 }
 
