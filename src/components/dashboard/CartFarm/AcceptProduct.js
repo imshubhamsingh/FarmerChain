@@ -54,7 +54,8 @@ class AcceptProduct extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.user.user
+        user: state.user.user,
+        money: state.user.money
     };
 }
 

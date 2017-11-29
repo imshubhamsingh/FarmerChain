@@ -79,6 +79,12 @@ export function payForProduct(product={}, user, buyer) {
             from: user,
             to: buyer
         })
+        database.ref(`users/${user.uid}/money`).transaction(money =>{
+            return money - parseFloat(product.price)
+        })
+        database.ref(`users/${buyer.uid}/money`).transaction(money =>{
+            return money + parseFloat(product.price)
+        })
         database.ref(`cartFarm/${product.id}`).remove()
     }
 

@@ -16,7 +16,7 @@ class Bottombar extends Component{
                                     Current Balance
                                 </h6>
                                 <h1>
-                                    ₹250
+                                    ₹{this.props.money}
                                 </h1>
                             </div>
                         </li>
@@ -72,6 +72,7 @@ class Bottombar extends Component{
 function mapStateToProps(state) {
     return {
         user: state.user.user,
+        money: state.user.money,
         pools: state.pools,
         products: state.products,
         transactions: state.transactions
