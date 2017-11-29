@@ -37,7 +37,6 @@ class Main extends Component{
     }
 
     render(){
-        console.log(this.props.money)
         return(
             <div className="sidebar-main">
                 <div className="wrapper">
