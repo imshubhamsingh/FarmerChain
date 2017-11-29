@@ -6,11 +6,11 @@ export function extractUserDetails(user) {
     }
 }
 
-export function transactionDetailsSorted(transactions, userID) {
+export function transactionDetailsSorted(transactions, userID, type) {
     let transactionList = [];
     if (transactions !== null || transactions !== undefined){
         for( const transactionID in transactions){
-            if(transactions[transactionID].type === "product" && (transactions[transactionID].to.uid === userID || transactions[transactionID].from.uid === userID )){
+            if(transactions[transactionID].type === type && (transactions[transactionID].to.uid === userID || transactions[transactionID].from.uid === userID )){
                 transactionList.push({
                     time:transactions[transactionID].time,
                     id: transactions[transactionID].info.id,

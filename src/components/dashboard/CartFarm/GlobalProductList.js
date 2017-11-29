@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {acceptProductRequest} from '../../../Actions/CartFarmAction'
-import {extractUserDetails} from './helper'
+import {extractUserDetails} from '../../../helpers/userAndTransaction'
 
 class GlobalProductList extends Component {
     acceptReq = () => {

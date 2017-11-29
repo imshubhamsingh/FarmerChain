@@ -5,7 +5,7 @@ import AcceptProduct from './AcceptProduct'
 import PastOrders from './PastOrders'
 import {setProductRequest, getUpdateProductList, deleteProductRequest} from '../../../Actions/CartFarmAction'
 import {connect} from 'react-redux'
-import { transactionDetailsSorted } from  './helper'
+import { transactionDetailsSorted } from '../../../helpers/userAndTransaction'
 import './cartfarm.css';
 import $ from 'jquery';
 const jQuery = $;
@@ -66,7 +66,7 @@ class CartFarm extends Component{
     }
 
     showPastOrders = () =>{
-        return (transactionDetailsSorted(this.props.transactions, this.props.user.uid))
+        return (transactionDetailsSorted(this.props.transactions, this.props.user.uid, "product"))
 
     }
     checkifBuyProduct = (product) =>{

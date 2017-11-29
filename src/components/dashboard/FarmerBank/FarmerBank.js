@@ -27,6 +27,36 @@ class FarmerBank extends Component{
         });
     }
 
+    state = {
+        loanDescription:'',
+        amount:0,
+        buttonText: 'Request Loan'
+    }
+
+    handleSubmit = (event) =>{
+        event.preventDefault();
+        this.setState({
+            buttonText: 'Request In Order'
+        })
+        this.props.setProductRequest({
+            loanDescription:this.state.loanDescription,
+            amount: this.state.amount,
+            createdAt: Date.now()
+        }).then(()=>{
+            this.setState({
+                buttonText: 'Request has been noted'
+            })
+
+            setTimeout(()=>{
+                this.setState({
+                    loanDescription:'',
+                    amount:0,
+                    buttonText: 'Request Loan'
+                })
+            },2000)
+        })
+    }
+
     render(){
         return(
             <div>
@@ -41,18 +71,37 @@ class FarmerBank extends Component{
                     <div className="tab_content">
 
                         <div className="tabs_item farmerBank-request">
-                            <form action="">
+                            <form onSubmit={this.handleSubmit} action="">
                                 <div>
-                                    <label htmlFor="pool">Loan Description</label>
-                                    <input type="text" id="pool"/>
+                                    <label htmlFor="load-desc">Loan Description</label>
+                                    <input type="text" id="load-desc" value={this.state.loanDescription} onChange={event=> this.setState({loanDescription:event.target.value})}/>
                                 </div>
                                 <div>
-                                    <label htmlFor="pool">Loan Amount (ETH)</label>
-                                    <input type="number" id="pool"/>
+                                    <label htmlFor="loan-amt">Loan Amount (ETH)</label>
+                                    <input type="number" id="loan-amt" value={this.state.amount} onChange={event=> this.setState({amount:event.target.value})}/>
                                 </div>
                                 <button className="btn btn-effect" type="submit">Request Loan</button>
-
                             </form>
+                            <div className="product-user-list">
+                                <h3>Your Requested Loan</h3>
+                                <ul>
+                                    {this.props.loans!==null?this.props.loans.map((loan)=> {
+                                        if(product.userId === this.props.user.uid){
+                                            return <li key={product.id}>
+                                                <div className="info">
+                                                    <div className="name">{loan.loanDescription}
+                                                        <div className="type">
+                                                            {loan.amount} ETH
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button className="btn-pool btn-effect" onClick={()=> this.props.deleteProductRequest(product)} style={{backgroundColor:this.checkifBuyProduct(product).result?'green':'red'}} disabled={this.checkifBuyProduct(product).result}>{this.checkifBuyProduct(product).result?`Request Accepted ${this.checkifBuyProduct(product).details.displayName}( ₹ ${this.checkifBuyProduct(product).details.price} )`:'Cancel Request'}</button>
+                                            </li>
+                                        }
+                                        return '';
+                                    }):''}
+                                </ul>
+                            </div>
                         </div>
 
                         <div className="tabs_item pool-list">

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import {rejectProductRequest, boughtProduct} from '../../../Actions/CartFarmAction'
-import { extractUserDetails} from './helper'
+import { extractUserDetails} from '../../../helpers/userAndTransaction'
 import swal from 'sweetalert2'
 
 
