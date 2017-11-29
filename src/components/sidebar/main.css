@@ -59,10 +59,13 @@ li.menu-list{
     color: wheat;
     border-radius: 21px;
     padding: 5px;
-    width: 100%;
+    width: 223px;
     transition: all 0.2s ease-in;
     outline: none;
     opacity: 0;
+    position: absolute;
+    bottom: 0;
+    margin: 10px 0 25px -118px;
 }
 
 .logOut:hover{
