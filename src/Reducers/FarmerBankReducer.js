@@ -1,4 +1,4 @@
-import { UPDATED_LOAN_LIST} from '../Actions/LoanAction';
+import { UPDATED_LOAN_LIST} from '../Actions/FarmerBankAction';
 
 
 const LoanList = [];

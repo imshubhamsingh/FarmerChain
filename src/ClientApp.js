@@ -12,6 +12,7 @@ import { getUser } from './Actions/UserActions';
 import {getUpdateProductList} from './Actions/CartFarmAction'
 import {getUpdatePoolList} from './Actions/PoolFarmAction'
 import { getUpdateTransactiontList} from './Actions/TransactionAction'
+import { getUpdateLoanList} from './Actions/FarmerBankAction'
 
 import getWeb3 from './utils/getWeb3'
 
@@ -26,7 +27,8 @@ class ClientApp extends Component{
         this.props.getUser();
         this.props.getUpdateProductList();
         this.props.getUpdatePoolList();
-        this.props.getUpdateTransactiontList()
+        this.props.getUpdateTransactiontList();
+        this.props.getUpdateLoanList();
         getWeb3
             .then(results => {
                 this.setState({ web3: results.web3 })
@@ -54,4 +56,4 @@ class ClientApp extends Component{
 function mapStateToProps(state) {
     return { user: state.user };
 }
-export default withRouter(connect(mapStateToProps,{getUser, getUpdateProductList, getUpdatePoolList, getUpdateTransactiontList})(ClientApp))
+export default withRouter(connect(mapStateToProps,{getUser, getUpdateProductList, getUpdatePoolList, getUpdateTransactiontList,getUpdateLoanList})(ClientApp))

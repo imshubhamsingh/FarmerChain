@@ -150,6 +150,16 @@ class FarmerBank extends Component{
                                 </li>
                             </ul>
                         </div>
+                        <div className="tabs_item pool-list">
+                            <div className="products-list">
+                                <h2>Past Orders Transaction</h2>
+                                <ul>
+                                    {this.showPastOrders().map(transaction => {
+                                        return <PastTransaction transaction={transaction} key={transaction.id}/>
+                                    })}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -158,5 +168,13 @@ class FarmerBank extends Component{
 
 }
 
+function mapStateToProps(state) {
+    return {
+        products: state.products,
+        user: state.user.user,
+        transactions: state.transactions
+    };
+}
 
-export default FarmerBank;
+
+export default connect(mapStateToProps,{setProductRequest, getUpdateProductList, deleteProductRequest})(FarmerBank);
