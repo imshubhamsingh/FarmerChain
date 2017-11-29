@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>Farmer Bank</title>
+        <link rel="stylesheet" href="style.css">
+
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css'/>
+        <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'></script>
+        <script type="text/javascript" src="js/web3.js"></script>
+        <script type="text/javascript" src="js/pre.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+    </head>
+    <body>
+
+        <div class="container">
+            <h1 class="text-center">Farmer Bank</h1>
+            <h6>Current Account: <span id="currentAccount"></span></h6>
+            <div class="col-sm-12 text-center">
+                <div id="receipt" class="alert alert-success hidden">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="col-md-3 well">
+                        <h5 class="">Balance: <span id="contractBalance">0</span> Ether</h2>
+                        <button class="btn btn-sm" style="margin-bottom: 5px;" onclick="updateBalance()">Update Balance</button>
+                        <!-- <input class="form-control" type="text" name="switchAccount" id="switchAccount" /> -->
+                </div>
+                <div class="col-md-9 well">
+                    <div class="input-group">
+                            <label for="addMemberAddress">Add Members</label>
+                            <input name="addMemberAddress" id="addMemberAddress" class="form-control" style="" type="text" placeholder="Enter beneficiary address"/>
+                            <!-- <input type="text" class="form-control"> -->
+                            <span class="input-group-btn">
+                                 <button class="btn btn-primary" onclick="addMembers()" type="button" style="margin-bottom: -25px;">Add Members</button>
+                            </span>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                            <label for="removeMemberAddress">Remove Members</label>
+                            <input name="removeMemberAddress" id="removeMemberAddress" class="form-control" style="" type="text" placeholder="Enter beneficiary address"/>
+                            <!-- <input type="text" class="form-control"> -->
+                            <span class="input-group-btn">
+                                 <button class="btn btn-primary" onclick="removeMembers()" type="button" style="margin-bottom: -25px;">Remove Members</button>
+                            </span>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                            <label for="addModAddress">Add Mods</label>
+                            <input name="addModAddress" id="addModAddress" class="form-control" style="" type="text" placeholder="Enter beneficiary address"/>
+                            <!-- <input type="text" class="form-control"> -->
+                            <span class="input-group-btn">
+                                 <button class="btn btn-primary" onclick="addMods()" type="button" style="margin-bottom: -25px;">Add Mods</button>
+                            </span>
+                    </div>
+
+                    <div class="input-group">
+                            <label for="payLoans">Add Mods</label>
+                            <input name="payLoans" id="payLoans" class="form-control" style="" type="text" placeholder="Enter amount in Wei"/>
+                            <!-- <input type="text" class="form-control"> -->
+                            <span class="input-group-btn">
+                                 <button class="btn btn-primary" onclick="payLoan()" type="button" style="margin-bottom: -25px;">Pay</button>
+                            </span>
+                    </div>
+                </div>
+        </div>
+
+        <script>
+                $(document).ready(function(){
+                    updateBalance();
+                    document.getElementById("currentAccount").innerText = currentEtherbase;
+                    // $(currentAccount).text = currentEtherbase;
+                });
+        </script>
+    </body>
+</html>
