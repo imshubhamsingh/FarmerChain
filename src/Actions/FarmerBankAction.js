@@ -47,7 +47,7 @@ export function acceptLoanRequest(loan, admin, user) {
             status: "granted",
             ...loan
         }).then(()=>{
-            tranferMoney(loan, admin, user)
+            transferMoney(loan, admin, user)
         })
     }
 }
@@ -61,7 +61,7 @@ export function rejectLoanRequest(loan, user) {
     }
 }
 
-export function tranferMoney(loan={}, user, admin) {
+export function transferMoney(loan={}, user, admin) {
     return dispatch => {
         database.ref(`transactions`).push({
             info:{

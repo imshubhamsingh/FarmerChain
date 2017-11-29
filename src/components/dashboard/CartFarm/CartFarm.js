@@ -67,7 +67,6 @@ class CartFarm extends Component{
 
     showPastOrders = () =>{
         return (transactionDetailsSorted(this.props.transactions, this.props.user.uid, "product"))
-
     }
     checkifBuyProduct = (product) =>{
         for (const userId in product.boughtBy) {

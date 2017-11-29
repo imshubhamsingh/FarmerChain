@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import PastTransactions from './PastTransactions'
+import { transactionDetailsSorted } from '../../../helpers/userAndTransaction'
+import {deleteLoanRequest, setLoanRequest} from '../../../Actions/FarmerBankAction'
 import './farmerbank.css'
 import $ from 'jquery';
 const jQuery = $;
@@ -38,7 +42,7 @@ class FarmerBank extends Component{
         this.setState({
             buttonText: 'Request In Order'
         })
-        this.props.setProductRequest({
+        this.props.setLoanRequest({
             loanDescription:this.state.loanDescription,
             amount: this.state.amount,
             createdAt: Date.now()
@@ -55,6 +59,10 @@ class FarmerBank extends Component{
                 })
             },2000)
         })
+    }
+
+    showPastTransactions = () => {
+        return (transactionDetailsSorted(this.props.transactions, this.props.user.uid, "loan"))
     }
 
     render(){
@@ -80,14 +88,14 @@ class FarmerBank extends Component{
                                     <label htmlFor="loan-amt">Loan Amount (ETH)</label>
                                     <input type="number" id="loan-amt" value={this.state.amount} onChange={event=> this.setState({amount:event.target.value})}/>
                                 </div>
-                                <button className="btn btn-effect" type="submit">Request Loan</button>
+                                <button className="btn btn-effect" type="submit" style={{width:'359px'}}>{this.state.buttonText}</button>
                             </form>
                             <div className="product-user-list">
                                 <h3>Your Requested Loan</h3>
                                 <ul>
                                     {this.props.loans!==null?this.props.loans.map((loan)=> {
-                                        if(product.userId === this.props.user.uid){
-                                            return <li key={product.id}>
+                                        if(loan.userId === this.props.user.uid){
+                                            return <li key={loan.id}>
                                                 <div className="info">
                                                     <div className="name">{loan.loanDescription}
                                                         <div className="type">
@@ -95,7 +103,7 @@ class FarmerBank extends Component{
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button className="btn-pool btn-effect" onClick={()=> this.props.deleteProductRequest(product)} style={{backgroundColor:this.checkifBuyProduct(product).result?'green':'red'}} disabled={this.checkifBuyProduct(product).result}>{this.checkifBuyProduct(product).result?`Request Accepted ${this.checkifBuyProduct(product).details.displayName}( ₹ ${this.checkifBuyProduct(product).details.price} )`:'Cancel Request'}</button>
+                                                <button className="btn-pool btn-effect" onClick={()=> this.props.deleteLoanRequest(loan)}>Cancel Request</button>
                                             </li>
                                         }
                                         return '';
@@ -120,20 +128,17 @@ class FarmerBank extends Component{
                                     Requested Loan
                                 </h2>
                             </div>
-                                <li>
-                                    <div className="info">
-                                        <div className="name">Rohan
-                                            <div className="type">
-                                                100 ETH
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div className="details">
-                                        Wheat crop production in ganaur harayana
-                                    </div>
-                                    <button className="btn-pool btn-effect" type="submit">Grant</button>
-                                </li>
+                                {/*{this.props.loans!==null?this.props.loans.map((loan)=> {*/}
+                                        {/*let flag = false;*/}
+                                        {/*for (const userId in product.boughtBy) {*/}
+                                            {/*if (loan.boughtBy[userId].uid === this.props.user.uid || product.boughtBy[userId].bought === true) {*/}
+                                                {/*flag = true*/}
+                                                {/*break*/}
+                                            {/*}*/}
+                                        {/*}*/}
+                                        {/*return (!flag)?<GlobalLoanList product={product} user={this.props.user}*/}
+                                                                          {/*key={product.id}/>:''*/}
+                                    {/*}):''}*/}
                                 <li>
                                     <div className="info">
                                         <div className="name">Rohan
@@ -152,10 +157,10 @@ class FarmerBank extends Component{
                         </div>
                         <div className="tabs_item pool-list">
                             <div className="products-list">
-                                <h2>Past Orders Transaction</h2>
+                                <h2>List of All transaction</h2>
                                 <ul>
-                                    {this.showPastOrders().map(transaction => {
-                                        return <PastTransaction transaction={transaction} key={transaction.id}/>
+                                    {this.showPastTransactions().map(transaction => {
+                                        return <PastTransactions transaction={transaction} key={transaction.id}/>
                                     })}
                                 </ul>
                             </div>
@@ -172,9 +177,10 @@ function mapStateToProps(state) {
     return {
         products: state.products,
         user: state.user.user,
-        transactions: state.transactions
+        transactions: state.transactions,
+        loans: state.loans
     };
 }
 
 
-export default connect(mapStateToProps,{setProductRequest, getUpdateProductList, deleteProductRequest})(FarmerBank);
+export default connect(mapStateToProps,{ setLoanRequest ,deleteLoanRequest})(FarmerBank);
