@@ -10,14 +10,14 @@ contract Bank{
     function Bank() {
         owner = msg.sender;
         mods[owner] = mod("FarmerBank", true);
-        members[owner] = member(true, true, 100, 0, 0);
+        members[owner] = member(true, true, 0, 0);
         previousBalance = this.balance;
     }
 
     struct member{
         bool isMember;
         bool isPermitted;
-        uint maxAmount;
+        //uint maxAmount;
         uint256 loanGranted;
         uint256 amountAddedToThePool;
     }
@@ -75,8 +75,8 @@ contract Bank{
         mods[_modAddress] = mod(_modName, true);
     }
 
-    function addMembers(address _memberaddress, uint _maxAmount) onlyowner{
-        members[_memberaddress] = member(true, true, _maxAmount, 0, 0);
+    function addMembers(address _memberaddress) onlyowner{
+        members[_memberaddress] = member(true, true, 0, 0);
     }
 
     function removeMembers(address _memberaddress) onlymods{
