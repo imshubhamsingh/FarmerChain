@@ -6,8 +6,9 @@ export function setLoanRequest(loan={}) {
     return dispatch => {
         var user = auth.currentUser;
         loan = {
-            userId: user.uid,
-            username: user.displayName,
+            uid: user.uid,
+            displayName: user.displayName,
+            email: user.email,
             status: "waiting",
             ...loan
         }
@@ -41,7 +42,37 @@ export function deleteLoanRequest(loan={}) {
     }
 }
 
-export function acceptLoanRequest(loan, userId, adminId) {
+export function payLoanBack(loan, user, admin) {
+    return dispatch => {
+        database.ref(`farmerBank/${loan.id}`).update({
+            ...loan,
+            status: "paid"
+        })
+        console.log({
+            loan,
+            admin,
+            user
+        })
+        database.ref(`transactions`).push({
+            info:{
+                ...loan,
+                status: "paid"
+            },
+            type: "loan",
+            time: Date.now(),
+            from: user,
+            to: admin
+        })
+        database.ref(`users/${user.uid}/money`).transaction(money =>{
+            return money - parseFloat(loan.amount)
+        })
+        database.ref(`users/${admin.uid}/money`).transaction(money =>{
+            return money + parseFloat(loan.amount)
+        })
+    }
+}
+
+export function acceptLoanRequest(loan, user, admin) {
     return dispatch => {
         database.ref(`farmerBank/${loan.id}`).update({
             ...loan,
@@ -49,22 +80,23 @@ export function acceptLoanRequest(loan, userId, adminId) {
         })
         console.log({
             loan,
-            adminId,
-            userId
+            admin,
+            user
         })
         database.ref(`transactions`).push({
             info:{
-                ...loan
+                ...loan,
+                status: "granted"
             },
             type: "loan",
             time: Date.now(),
-            from: userId,
-            to: adminId
+            from: user,
+            to: admin
         })
-        database.ref(`users/${userId}/money`).transaction(money =>{
+        database.ref(`users/${user.uid}/money`).transaction(money =>{
             return money - parseFloat(loan.amount)
         })
-        database.ref(`users/${adminId}/money`).transaction(money =>{
+        database.ref(`users/${admin.uid}/money`).transaction(money =>{
             return money + parseFloat(loan.amount)
         })
     }
@@ -76,16 +108,5 @@ export function rejectLoanRequest(loan) {
             ...loan,
             status:"rejected",
         })
-    }
-}
-
-function transferMoney(loan={}, userId, adminId) {
-    console.log({
-        from: userId,
-        to: userId,
-        ...adminId
-    })
-    return dispatch => {
-
     }
 }

@@ -35,6 +35,7 @@ export const transactionDone = (transactions, userID) => {
                 if (transaction.from.uid === userID) {
                     transactionDone++;
                 }
+                return null
         })
         return transactionDone
     }else return ''

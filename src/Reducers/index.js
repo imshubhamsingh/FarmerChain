@@ -20,7 +20,7 @@ export const reducer = persistCombineReducers(config, {
     products: CartFarmReducer,
     transactions: TransactionReducer,
     loans: FarmerBankReducer,
-    poolMoney: PoolReducer
+    admin: PoolReducer
 })
 
 

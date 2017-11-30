@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './login.css'
-import {auth, database} from '../../firebase/firebase'
 import { login, createAccount, getUser } from '../../Actions/UserActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'

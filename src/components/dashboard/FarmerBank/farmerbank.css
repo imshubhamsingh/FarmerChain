@@ -51,3 +51,37 @@
     font-size: 80px;
     font-weight: bold;
 }
+
+.farmer-admin{
+    display: flex;
+}
+
+.farmer-admin  button.farmer-admin-btn-1{
+    background-color: red;
+    margin: 0 2px;
+}
+
+.farmer-admin button.farmer-admin-btn-2 {
+    background-color: green;
+    margin: 0 2px;
+}
+
+@media screen and (max-width: 445px) {
+    .tabs_item .fund {
+        font-size: 46px !important;
+    }
+
+
+    .farmer-admin{
+        display: block;
+    }
+
+    .farmer-admin  button.farmer-admin-btn-1{
+        margin: 2px 0;
+    }
+
+    .farmer-admin button.farmer-admin-btn-2 {
+        margin: 2px 0;
+    }
+
+}

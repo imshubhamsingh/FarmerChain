@@ -5,11 +5,12 @@ import { withRouter } from 'react-router-dom'
 
 class PastTransactions extends Component {
     render(){
+        console.log(this.props.transaction)
         return(
             <li className="transaction-list">
                 <div className="info">
-                    {this.props.transaction.from.displayName} ⮕ {this.props.transaction.to.displayName}
-                    price: {this.props.transaction.info.price}<br/>
+                    {this.props.transaction.from.displayName} ⮕ {this.props.transaction.to.displayName}<br/>
+                    amount: ₹{this.props.transaction.info.amount}<br/>
                     transaction ID: {`0x${this.props.transaction.id}`}<br/>
                 </div>
             </li>

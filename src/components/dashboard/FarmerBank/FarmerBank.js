@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import PastTransactions from './PastTransactions'
 import GlobalLoanList from './GlobalLoanList'
 import { transactionDetailsSorted } from '../../../helpers/userAndTransaction'
-import {deleteLoanRequest, setLoanRequest} from '../../../Actions/FarmerBankAction'
+import {deleteLoanRequest, setLoanRequest, payLoanBack} from '../../../Actions/FarmerBankAction'
+import { colorStatus} from '../../../helpers/bankHelper'
+import {extractUserDetails} from '../../../helpers/userAndTransaction'
 import './farmerbank.css'
 import $ from 'jquery';
 const jQuery = $;
@@ -66,7 +68,14 @@ class FarmerBank extends Component{
         return (transactionDetailsSorted(this.props.transactions, this.props.user.uid, "loan"))
     }
 
+    payLoanBack = (loan)=>{
+        console.log(extractUserDetails(this.props.admin))
+        console.log(extractUserDetails(this.props.user))
+        this.props.payLoanBack(loan,extractUserDetails(this.props.admin), extractUserDetails(this.props.user))
+    }
+
     render(){
+        console.log(this.props.admin)
         return(
             <div>
                 <div className="tab">
@@ -86,16 +95,16 @@ class FarmerBank extends Component{
                                     <input type="text" id="load-desc" value={this.state.loanDescription} onChange={event=> this.setState({loanDescription:event.target.value})}/>
                                 </div>
                                 <div>
-                                    <label htmlFor="loan-amt">Loan Amount (ETH)</label>
-                                    <input type="number" id="loan-amt" value={this.state.amount} onChange={event=> this.setState({amount:event.target.value})}/>
+                                    <label htmlFor="loan-amt">Loan Amount (₹)</label>
+                                    <input type="number" id="loan-amt" value={this.state.amount} onChange={event=> this.setState({amount:event.target.value})} min="0"/>
                                 </div>
                                 <button className="btn btn-effect" type="submit" style={{width:'359px'}}>{this.state.buttonText}</button>
                             </form>
                             <div className="product-user-list">
-                                <h3>Your Requested Loan</h3>
+                                <h3>Your Loan Status</h3>
                                 <ul>
                                     {this.props.loans!==null?this.props.loans.map((loan)=> {
-                                        if(loan.userId === this.props.user.uid){
+                                        if(loan.uid === this.props.user.uid){
                                             return <li key={loan.id}>
                                                 <div className="info">
                                                     <div className="name">{loan.loanDescription}
@@ -104,7 +113,7 @@ class FarmerBank extends Component{
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button className="btn-pool btn-effect" onClick={()=> this.props.deleteLoanRequest(loan)}>Cancel Request</button>
+                                                <button className="btn-pool btn-effect" onClick={()=> (loan.status==="waiting" ||loan.status==="paid" || loan.status==="rejected")?this.props.deleteLoanRequest(loan):this.payLoanBack(loan)} style={{backgroundColor: colorStatus(loan.status,"red","green","orange")}}>{colorStatus(loan.status,"Rejected (Cancel Request)","Granted (Pay Loan Now)","Waiting (Cancel Request)","Paid (Remove loan)")}</button>
                                             </li>
                                         }
                                         return '';
@@ -117,7 +126,7 @@ class FarmerBank extends Component{
                             <ul>
                                 <li>
                                     <div className="fund">
-                                        ₹{this.props.poolMoney}
+                                        ₹{this.props.admin.poolMoney}
                                     </div>
                                     <div className="details" style={{textAlign:'center'}}>
                                         General Public Funds
@@ -139,6 +148,7 @@ class FarmerBank extends Component{
                                 <h2>List of All transaction</h2>
                                 <ul>
                                     {this.showPastTransactions().map(transaction => {
+                                        console.log(transaction)
                                         return <PastTransactions transaction={transaction} key={transaction.id}/>
                                     })}
                                 </ul>
@@ -158,9 +168,9 @@ function mapStateToProps(state) {
         user: state.user.user,
         transactions: state.transactions,
         loans: state.loans,
-        poolMoney: state.poolMoney
+        admin: state.admin
     };
 }
 
 
-export default connect(mapStateToProps,{ setLoanRequest ,deleteLoanRequest})(FarmerBank);
+export default connect(mapStateToProps,{ setLoanRequest ,deleteLoanRequest, payLoanBack})(FarmerBank);
