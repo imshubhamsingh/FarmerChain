@@ -19,11 +19,11 @@ class Sidebar extends Component{
      }
 
     current = () => {
-        return this.props.user.loading?<Login setDisplayName={this.setDisplayName}/>:<Main displayName={this.state.displayName}/>
+        return this.props.user.loading?<Login setDisplayName={this.setDisplayName}/>:<Main displayName={this.state.displayName} showSidebar={this.props.showSidebar}/>
     }
     render(){
         return(
-            <div className={'sidebar box ' + (this.props.user.loading?'login-sidebar':'')}>
+            <div className={'sidebar box ' + (this.props.user.loading?'login-sidebar':'')+" "+(this.props.sidebarShow?'showSidebar':'')}>
                 {this.current()}
             </div>            
         )

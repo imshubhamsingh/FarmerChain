@@ -22,7 +22,8 @@ import getWeb3 from './utils/getWeb3'
 
 class ClientApp extends Component{
     state = {
-        web3: null
+        web3: null,
+        sidebar: false
     }
     componentWillMount(){
         this.props.getUser();
@@ -31,6 +32,9 @@ class ClientApp extends Component{
         this.props.getUpdateTransactiontList();
         this.props.getUpdateLoanList();
         this.props.getAdminMoney()
+        this.setState({
+            sidebar: false
+        })
         getWeb3
             .then(results => {
                 this.setState({ web3: results.web3 })
@@ -39,13 +43,18 @@ class ClientApp extends Component{
                 console.log('Error finding web3.')
             })
     }
+    showSidebar = ()=>{
+        this.setState({
+            sidebar: !this.state.sidebar
+        })
+    }
 
     render(){
         return(
             < div className="app-layout">
-                    <Sidebar/>
+                    <Sidebar sidebarShow={this.state.sidebar} showSidebar={this.showSidebar}/>
                     {!this.props.user.loading?<div className='main-layout'  web3={this.state.web3}>
-                        <Header/>
+                        <Header showSidebar={this.showSidebar}/>
                         <Dashboard  web3={this.state.web3}/>
                         {!this.props.user.loading?<Bottombar  web3={this.state.web3}/>:''}
                     </div>:''}

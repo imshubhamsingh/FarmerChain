@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import 'font-awesome/css/font-awesome.min.css'
 import history from "../../history";
+import './header.css'
 
 
 class Header extends Component{
@@ -11,6 +12,7 @@ class Header extends Component{
     render(){
         return(
                 <div className='header box'>
+                    <span onClick={this.props.showSidebar} className="menu"><i className="fa fa-bars" aria-hidden="true"></i></span>
                     {this.showback()}
                     Dashboard
                     <i className="fa fa-cog" aria-hidden="true" style={{position: 'absolute',right:'77px',fontSize:'20px'}}></i>
