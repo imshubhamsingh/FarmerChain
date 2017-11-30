@@ -1,11 +1,23 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import swal from 'sweetalert2'
 import {acceptLoanRequest, rejectLoanRequest} from '../../../Actions/FarmerBankAction'
 import {extractUserDetails} from '../../../helpers/userAndTransaction'
 import { colorStatus} from '../../../helpers/bankHelper'
 
 class GlobalProductList extends Component {
+    grantRequest = () =>{
+        if(this.props.loan.amount> this.props.money){
+            swal(
+                'Oops...',
+                'Pool Fund is less than the requested Loan',
+                'error'
+            )
+        }else{
+            this.props.acceptLoanRequest(this.props.loan, extractUserDetails(this.props.user),extractUserDetails(this.props.loan))
+        }
+    }
     render(){
         return(
             <li>
@@ -24,7 +36,7 @@ class GlobalProductList extends Component {
                 {
                     this.props.type === "admin" && this.props.loan.status === "waiting"?<div className="farmer-admin">
                         <button className="btn-pool btn-effect farmer-admin-btn-1" onClick={()=> this.props.rejectLoanRequest(this.props.loan)}>Reject Request</button>
-                        <button className="btn-pool btn-effect farmer-admin-btn-2" onClick={()=> this.props.acceptLoanRequest(this.props.loan, extractUserDetails(this.props.user),extractUserDetails(this.props.loan))}>Grant Request</button>
+                        <button className="btn-pool btn-effect farmer-admin-btn-2" onClick={()=> this.grantRequest()}>Grant Request</button>
                     </div>: ''
                 }
             </li>
@@ -36,7 +48,8 @@ class GlobalProductList extends Component {
 function mapStateToProps(state) {
     return {
         user: state.user.user,
-        type: state.user.type
+        type: state.user.type,
+        money: state.user.money
     };
 }
 
