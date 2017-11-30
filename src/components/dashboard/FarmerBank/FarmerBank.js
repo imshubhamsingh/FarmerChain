@@ -149,7 +149,7 @@ class FarmerBank extends Component{
 
                 }
 
-            }g
+            }
         })
     }
 
