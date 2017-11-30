@@ -4,6 +4,8 @@ import config from './config';
 import express from 'express';
 import sassMiddleware from 'node-sass-middleware';
 import { join } from 'path';
+import cookieParser from 'cookie-parser'
+
 
 
 import { serverRender } from './serverRender';

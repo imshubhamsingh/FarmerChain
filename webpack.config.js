@@ -6,7 +6,7 @@ module.exports = {
     entry: ['./src/index.js','./scss/main.scss'],
     output: {
         path: __dirname+'/public',
-        filename:'bundle.js'
+        filename:'server.js'
     },
     module:{
         loaders:[

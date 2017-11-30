@@ -7,25 +7,18 @@ import { StaticRouter } from 'react-router'
 import {createStore, applyMiddleware} from 'redux'
 import { Provider } from 'react-redux'
 import { reducer } from './src/Reducers/index'
-import { persistStore} from 'redux-persist'
-import { PersistGate } from 'redux-persist/es/integration/react'
+import { persistStore, autoRehydrate } from 'redux-persist'
+import CookieStorage from 'redux-persist-cookie-storage'
 
-function configureStore () {
-    // ...
-    let store = createStore(reducer, applyMiddleware(thunk))
-    let persistor = persistStore(store)
-    return { persistor, store }
-}
-
-const { persistor, store } = configureStore()
 
 let serverRender = (req) =>{
-          return   ReactDOMServer.renderToString( <Provider store={store}>
-              <PersistGate persistor={persistor}>
+    const store = createStore(reducer, applyMiddleware(thunk),autoRehydrate())
+    const cookies = req.cookies
+    persistStore(store, { storage: new CookieStorage({ cookies }) })
+    return   ReactDOMServer.renderToString( <Provider store={store}>
                   <StaticRouter>
                       <ClientApp/>
                   </StaticRouter>
-              </PersistGate>
           </Provider>);
 
 };

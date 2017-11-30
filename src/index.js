@@ -7,27 +7,34 @@ import thunk from 'redux-thunk'
 import {reducer} from './Reducers/index'
 import {createStore, applyMiddleware} from 'redux'
 import ClientApp from './ClientApp'
-import { persistStore} from 'redux-persist'
-import { PersistGate } from 'redux-persist/es/integration/react'
+import { persistStore, autoRehydrate } from 'redux-persist'
+import CookieStorage from 'redux-persist-cookie-storage'
+
+let store = createStore(reducer, applyMiddleware(thunk),autoRehydrate())
+
+persistStore(store, { storage: new CookieStorage() })
+
+persistStore(store, { storage: new CookieStorage({
+    expiration: {
+        'default': 365 * 86400 // Cookies expire after one year
+    }
+  })
+})
+
+persistStore(store, { storage: new CookieStorage({
+    expiration: {
+        'default': null, // Session cookies used by default
+        'storeKey': 600 // State in key `storeKey` expires after 10 minutes
+    }
+})
+})
 
 
-
-
-function configureStore () {
-    // ...
-    let store = createStore(reducer, applyMiddleware(thunk))
-    let persistor = persistStore(store)
-    return { persistor, store }
-}
-
-const { persistor, store } = configureStore()
 
 render(
         <Provider store={store}>
-            <PersistGate persistor={persistor}>
                 <Router>
                    <ClientApp/>
                 </Router>
-            </PersistGate>
         </Provider>
      ,document.getElementById('root'))
