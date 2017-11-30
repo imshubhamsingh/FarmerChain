@@ -106,9 +106,15 @@ class FarmerBank extends Component{
             showCancelButton: true,
             confirmButtonText: 'Submit',
             showLoaderOnConfirm: true,
-            preConfirm: () => {
+            preConfirm: (number) => {
                 return new Promise((resolve) => {
                     setTimeout(() => {
+                        console.log(number)
+                        if (number > this.props.money) {
+                            swal.showValidationError(
+                                'Amount entered is more than your current balance'
+                            )
+                        }
                         resolve()
                     }, 2000)
                 })
@@ -118,7 +124,7 @@ class FarmerBank extends Component{
             if (result.value) {
                 let value = result.value;
                 if(value){
-                    if(value!=="" || !isNaN(value)|| value !== null){
+                    if((value!=="" || !isNaN(value)|| value !== null)){
                         const loan = {
                             amount: value,
                             createdAt: Date.now(),
@@ -143,13 +149,7 @@ class FarmerBank extends Component{
 
                 }
 
-            }else {
-                swal(
-                    'Oops...',
-                    'Something went wrong!',
-                    'error'
-                )
-            }
+            }g
         })
     }
 
@@ -245,6 +245,7 @@ function mapStateToProps(state) {
     return {
         products: state.products,
         user: state.user.user,
+        money: state.user.money,
         transactions: state.transactions,
         loans: state.loans,
         admin: state.admin
