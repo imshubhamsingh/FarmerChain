@@ -104,7 +104,7 @@ class PoolFarm extends Component{
 
                             </form>
                             <div className="user-pool-list">
-                                <h3>Your request pool</h3>
+                                <h3>Your requested pool</h3>
                                 <ul>
                                     {this.props.pool!==null?this.props.pools.map((pool)=> {
                                         if(pool.userId === this.props.user.uid){
@@ -120,7 +120,7 @@ class PoolFarm extends Component{
                                                     Accepted By:
                                                     <div className="accepted-user-list">
                                                         {
-                                                            Object.keys(pool.acceptedBy).map(user => {
+                                                            (pool.acceptedBy !== undefined)?Object.keys(pool.acceptedBy).map(user => {
                                                                 return <div className="user-info" key={user}>
                                                                     <div className="name">
                                                                         <div className="user-type">
@@ -128,7 +128,7 @@ class PoolFarm extends Component{
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            })
+                                                            }):''
                                                         }
                                                     </div>
                                                 </div>
