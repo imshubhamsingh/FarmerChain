@@ -1,10 +1,11 @@
+import 'babel-register'
 import config from './config';
 import express from 'express';
 import sassMiddleware from 'node-sass-middleware';
 import { join } from 'path';
 
 
-import serverRender from './serverRender';
+import { serverRender } from './serverRender';
 
 const server = express();
 
@@ -20,15 +21,10 @@ server.use(sassMiddleware({
 server.set('view engine', 'ejs');
 
 server.get('/',(req, res)=>{
-    serverRender()
-        .then(({initialMarkup, initialData})=>{
-            res.render('index', {
-                initialMarkup,
-                initialData
-            });
-        })
-        .catch(console.error);
-});
+    res.render('index', {
+        initialMarkup:  serverRender(req)
+    });
+})
 
 server.use(express.static('public'));
 

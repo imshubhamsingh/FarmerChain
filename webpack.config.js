@@ -35,7 +35,8 @@ module.exports = {
             'window.jQuery': 'jquery'
         }),
         new webpack.DefinePlugin({
-            BASE_URL: 'http://localhost:3030/'
+            BASE_URL: 'http://localhost:3030/',
+            'process.env.BROWSER': true,
         }),
         new ExtractTextPlugin({ // define where to save the file
             filename: './bundle.css',

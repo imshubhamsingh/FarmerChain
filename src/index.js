@@ -1,4 +1,5 @@
 import React from 'react'
+import history from '../history'
 import { render } from 'react-dom'
 import {BrowserRouter as Router} from 'react-router-dom'
 import { Provider } from 'react-redux'
@@ -8,6 +9,7 @@ import {createStore, applyMiddleware} from 'redux'
 import ClientApp from './ClientApp'
 import { persistStore} from 'redux-persist'
 import { PersistGate } from 'redux-persist/es/integration/react'
+
 
 
 
@@ -23,7 +25,7 @@ const { persistor, store } = configureStore()
 render(
         <Provider store={store}>
             <PersistGate persistor={persistor}>
-                <Router>
+                <Router history={history}>
                    <ClientApp/>
                 </Router>
             </PersistGate>
