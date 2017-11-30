@@ -6,6 +6,7 @@ import { transactionDetailsSorted } from '../../../helpers/userAndTransaction'
 import {deleteLoanRequest, setLoanRequest, payLoanBack} from '../../../Actions/FarmerBankAction'
 import { colorStatus} from '../../../helpers/bankHelper'
 import {extractUserDetails} from '../../../helpers/userAndTransaction'
+import swal from 'sweetalert2'
 import './farmerbank.css'
 import $ from 'jquery';
 const jQuery = $;
@@ -42,26 +43,48 @@ class FarmerBank extends Component{
 
     handleSubmit = (event) =>{
         event.preventDefault();
-        this.setState({
-            buttonText: 'Request In Order'
-        })
-        this.props.setLoanRequest({
-            loanDescription:this.state.loanDescription,
-            amount: this.state.amount,
-            createdAt: Date.now()
-        }).then(()=>{
+
+        let flag = false;
+        this.props.loans!==null?this.props.loans.map((loan)=> {
+                if (loan.uid === this.props.user.uid) {
+                    if (loan.status === "granted") {
+                        flag = true;
+                    }
+                }
+            }):'';
+
+        if(flag){
+            swal(
+                'Oops...',
+                'Please Pay your previous loan in order to request new loan',
+                'error'
+            )
+        }else{
+
             this.setState({
-                buttonText: 'Request has been noted'
+                buttonText: 'Request In Order'
             })
 
-            setTimeout(()=>{
+
+            this.props.setLoanRequest({
+                loanDescription:this.state.loanDescription,
+                amount: this.state.amount,
+                createdAt: Date.now()
+            }).then(()=>{
                 this.setState({
-                    loanDescription:'',
-                    amount:0,
-                    buttonText: 'Request Loan'
+                    buttonText: 'Request has been noted'
                 })
-            },2000)
-        })
+
+                setTimeout(()=>{
+                    this.setState({
+                        loanDescription:'',
+                        amount:0,
+                        buttonText: 'Request Loan'
+                    })
+                },2000)
+            })
+        }
+
     }
 
     showPastTransactions = () => {
