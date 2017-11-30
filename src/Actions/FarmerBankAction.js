@@ -42,6 +42,27 @@ export function deleteLoanRequest(loan={}) {
     }
 }
 
+export function payToPool(loan, admin, user) {
+    return dispatch => {
+        database.ref(`transactions`).push({
+            info:{
+                ...loan,
+                status: "pool"
+            },
+            type: "loan",
+            time: Date.now(),
+            from: user,
+            to: admin
+        })
+        database.ref(`users/${user.uid}/money`).transaction(money =>{
+            return money - parseFloat(loan.amount)
+        })
+        database.ref(`users/${admin.uid}/money`).transaction(money =>{
+            return money + parseFloat(loan.amount)
+        })
+    }
+}
+
 export function payLoanBack(loan, admin, user) {
     return dispatch => {
         database.ref(`farmerBank/${loan.id}`).update({

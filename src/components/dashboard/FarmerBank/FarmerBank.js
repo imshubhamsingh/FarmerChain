@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { database } from "../../../firebase/firebase";
 import { connect } from 'react-redux'
 import PastTransactions from './PastTransactions'
 import GlobalLoanList from './GlobalLoanList'
 import { transactionDetailsSorted } from '../../../helpers/userAndTransaction'
-import {deleteLoanRequest, setLoanRequest, payLoanBack} from '../../../Actions/FarmerBankAction'
+import {deleteLoanRequest, setLoanRequest, payLoanBack, payToPool} from '../../../Actions/FarmerBankAction'
 import { colorStatus} from '../../../helpers/bankHelper'
 import {extractUserDetails} from '../../../helpers/userAndTransaction'
 import swal from 'sweetalert2'
+import uuid from 'uuid/v1'
 import './farmerbank.css'
 import $ from 'jquery';
 const jQuery = $;
@@ -41,19 +43,21 @@ class FarmerBank extends Component{
         buttonText: 'Request Loan'
     }
 
-    handleSubmit = (event) =>{
-        event.preventDefault();
-
+    checkIfLoanPaid = () => {
         let flag = false;
         this.props.loans!==null?this.props.loans.map((loan)=> {
-                if (loan.uid === this.props.user.uid) {
-                    if (loan.status === "granted") {
-                        flag = true;
-                    }
+            if (loan.uid === this.props.user.uid) {
+                if (loan.status === "granted") {
+                    flag = true;
                 }
-            }):'';
+            }
+        }):'';
+        return flag
+    }
 
-        if(flag){
+    handleSubmit = (event) =>{
+        event.preventDefault();
+        if(this.checkIfLoanPaid()){
             swal(
                 'Oops...',
                 'Please Pay your previous loan in order to request new loan',
@@ -93,6 +97,60 @@ class FarmerBank extends Component{
 
     payLoanBack = (loan)=>{
         this.props.payLoanBack(loan,extractUserDetails(this.props.admin), extractUserDetails(this.props.user))
+    }
+
+    payToPool = ()=>{
+        swal({
+            title: 'Enter amount to add to pool (₹)',
+            input: 'number',
+            showCancelButton: true,
+            confirmButtonText: 'Submit',
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve()
+                    }, 2000)
+                })
+            },
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.value) {
+                let value = result.value;
+                if(value){
+                    if(value!=="" || !isNaN(value)|| value !== null){
+                        const loan = {
+                            amount: value,
+                            createdAt: Date.now(),
+                            email: this.props.user.email,
+                            loanDescription: "Paying to Pool",
+                            id: uuid(),
+                            status: "paid",
+                            uid: this.props.user.uid
+                        }
+                        this.props.payToPool(loan,extractUserDetails(this.props.admin), extractUserDetails(this.props.user))
+                        swal({
+                            type: 'success',
+                            title: 'Your money added to Pool'
+                        })
+                    }else{
+                        swal(
+                            'Oops...',
+                            'Something went wrong!',
+                            'error'
+                        )
+                    }
+
+                }
+
+            }else {
+                swal(
+                    'Oops...',
+                    'Something went wrong!',
+                    'error'
+                )
+            }
+        })
     }
 
     render(){
@@ -151,7 +209,7 @@ class FarmerBank extends Component{
                                     <div className="details" style={{textAlign:'center'}}>
                                         General Public Funds
                                     </div>
-                                    <button className="btn-pool btn-effect" type="submit">Add</button>
+                                    <button className="btn-pool btn-effect" type="submit" onClick={this.payToPool} disabled={this.checkIfLoanPaid()}>{this.checkIfLoanPaid()?'Pay your loan to add to pool': 'Add'}</button>
                                 </li>
                             <div>
                                 <h2>
@@ -194,4 +252,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps,{ setLoanRequest ,deleteLoanRequest, payLoanBack})(FarmerBank);
+export default connect(mapStateToProps,{ setLoanRequest ,deleteLoanRequest, payLoanBack, payToPool})(FarmerBank);
