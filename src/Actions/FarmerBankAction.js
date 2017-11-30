@@ -48,11 +48,6 @@ export function payLoanBack(loan, user, admin) {
             ...loan,
             status: "paid"
         })
-        console.log({
-            loan,
-            admin,
-            user
-        })
         database.ref(`transactions`).push({
             info:{
                 ...loan,
@@ -77,11 +72,6 @@ export function acceptLoanRequest(loan, user, admin) {
         database.ref(`farmerBank/${loan.id}`).update({
             ...loan,
             status: "granted"
-        })
-        console.log({
-            loan,
-            admin,
-            user
         })
         database.ref(`transactions`).push({
             info:{

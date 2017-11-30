@@ -6,13 +6,7 @@ import {extractUserDetails} from '../../../helpers/userAndTransaction'
 import { colorStatus} from '../../../helpers/bankHelper'
 
 class GlobalProductList extends Component {
-    acceptReq = () => {
-
-        this.props.acceptProductRequest(this.props.product.id,extractUserDetails(this.props.user))
-    }
-
     render(){
-        console.log(this.props.user)
         return(
             <li>
                 <div className="info">
@@ -22,7 +16,7 @@ class GlobalProductList extends Component {
                         </div>
                     </div>
                     <div className="name" style={{fontWeight: 'lighter'}}> Requested By: {this.props.loan.username}
-                        <div className="type" style={{backgroundColor: colorStatus(this.props.loan.status,"red","green","orange")}}>
+                        <div className="type" style={{backgroundColor: colorStatus(this.props.loan.status,"red","green","orange",'')}}>
                             Status: { this.props.loan.status }
                         </div>
                     </div>

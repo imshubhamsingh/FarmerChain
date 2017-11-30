@@ -69,13 +69,10 @@ class FarmerBank extends Component{
     }
 
     payLoanBack = (loan)=>{
-        console.log(extractUserDetails(this.props.admin))
-        console.log(extractUserDetails(this.props.user))
         this.props.payLoanBack(loan,extractUserDetails(this.props.admin), extractUserDetails(this.props.user))
     }
 
     render(){
-        console.log(this.props.admin)
         return(
             <div>
                 <div className="tab">
@@ -148,7 +145,6 @@ class FarmerBank extends Component{
                                 <h2>List of All transaction</h2>
                                 <ul>
                                     {this.showPastTransactions().map(transaction => {
-                                        console.log(transaction)
                                         return <PastTransactions transaction={transaction} key={transaction.id}/>
                                     })}
                                 </ul>

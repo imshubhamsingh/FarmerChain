@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom'
 
 class PastTransactions extends Component {
     render(){
-        console.log(this.props.transaction)
         return(
             <li className="transaction-list">
                 <div className="info">
