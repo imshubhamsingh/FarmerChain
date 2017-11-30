@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import 'font-awesome/css/font-awesome.min.css'
-import history from "../../history";
-
 
 class Header extends Component{
     showback = () => {

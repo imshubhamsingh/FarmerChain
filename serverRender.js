@@ -1,34 +1,25 @@
 import config from './config';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-import App from './src/ClientApp';
-
+import ClientApp from './src/ClientApp';
+import thunk from 'redux-thunk'
 import {BrowserRouter as Router} from 'react-router-dom'
 import {createStore, applyMiddleware} from 'redux'
 import { Provider } from 'react-redux'
-import reducer from './src/Reducers/index'
-import { persistStore} from 'redux-persist'
-import { PersistGate } from 'redux-persist/es/integration/react'
+import {reducer} from './src/Reducers/index'
 
-function configureStore () {
-    let store = createStore(reducer, applyMiddleware(thunk))
-    let persistor = persistStore(store)
-    return { persistor, store }
-}
 
-const { persistor, store } = configureStore()
-
+let store = createStore(reducer, applyMiddleware(thunk))
 
 const serverRender = () =>{
             const html = renderToString(ReactDOMServer.renderToString(<Provider store={store}>
-                <PersistGate persistor={persistor}>
                     <Router>
                         <ClientApp/>
                     </Router>
-                </PersistGate>
             </Provider>));
             return {
                 initialMarkup: html,
+                initialData: null
             };
 };
 
