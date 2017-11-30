@@ -144,7 +144,9 @@ class FarmerBank extends Component{
                             <div className="products-list">
                                 <h2>List of All transaction</h2>
                                 <ul>
-                                    {this.showPastTransactions().map(transaction => {
+                                    {this.showPastTransactions().sort((a,b)=>{
+                                        return new Date(b.createdAt) - new Date(a.createdAt)
+                                    }).map(transaction => {
                                         return <PastTransactions transaction={transaction} key={transaction.id}/>
                                     })}
                                 </ul>

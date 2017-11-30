@@ -15,7 +15,7 @@ class GlobalProductList extends Component {
                             ₹{this.props.loan.amount}
                         </div>
                     </div>
-                    <div className="name" style={{fontWeight: 'lighter'}}> Requested By: {this.props.loan.username}
+                    <div className="name" style={{fontWeight: 'lighter'}}> Requested By: {this.props.loan.displayName === this.props.user.displayName? "You": this.props.loan.displayName }
                         <div className="type" style={{backgroundColor: colorStatus(this.props.loan.status,"red","green","orange",'')}}>
                             Status: { this.props.loan.status }
                         </div>

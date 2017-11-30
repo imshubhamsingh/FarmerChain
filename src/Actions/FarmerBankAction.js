@@ -42,7 +42,7 @@ export function deleteLoanRequest(loan={}) {
     }
 }
 
-export function payLoanBack(loan, user, admin) {
+export function payLoanBack(loan, admin, user) {
     return dispatch => {
         database.ref(`farmerBank/${loan.id}`).update({
             ...loan,
