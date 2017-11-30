@@ -4,12 +4,17 @@ import CartFarmReducer from "./CartFarmReducer";
 import TransactionReducer from "./TransactionReducer";
 import FarmerBankReducer from "./FarmerBankReducer";
 import PoolReducer from "./PoolReducer";
-import { combineReducers } from 'redux'
 
 
+import { persistCombineReducers } from 'redux-persist'
+import storage from 'redux-persist/es/storage'
 
+const config = {
+    key: 'root',
+    storage,
+}
 
-export const reducer = combineReducers({
+export const reducer = persistCombineReducers(config, {
     user: UserReducer,
     pools: PoolFarmReducer,
     products: CartFarmReducer,

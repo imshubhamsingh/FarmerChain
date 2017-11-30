@@ -29,6 +29,7 @@
     "react-transition-group": "^2.2.1",
     "redux": "^3.7.2",
     "redux-persist": "^5.4.0",
+    "redux-persist-cookie-storage": "^0.4.0",
     "redux-thunk": "^2.2.0",
     "sweetalert2": "^7.0.5",
     "uuid": "^3.1.0",

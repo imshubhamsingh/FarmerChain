@@ -25,7 +25,7 @@ const { persistor, store } = configureStore()
 render(
         <Provider store={store}>
             <PersistGate persistor={persistor}>
-                <Router history={history}>
+                <Router>
                    <ClientApp/>
                 </Router>
             </PersistGate>
