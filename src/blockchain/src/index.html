@@ -18,6 +18,9 @@
                 <div id="receipt" class="alert alert-success hidden">
 
                 </div>
+                <div class="alert alert-danger hidden" id="errors">
+
+                </div>
             </div>
         </div>
 
@@ -61,6 +64,15 @@
                             <!-- <input type="text" class="form-control"> -->
                             <span class="input-group-btn">
                                  <button class="btn btn-primary" onclick="payLoan()" type="button" style="margin-bottom: -25px;">Pay</button>
+                            </span>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                            <label for="switchEtherbase">Switch Accounts</label>
+                            <input name="switchEtherbase" id="switchEtherbase" class="form-control" style="" type="text" placeholder="Enter address"/>
+                            <!-- <input type="text" class="form-control"> -->
+                            <span class="input-group-btn">
+                                 <button class="btn btn-primary" onclick="switchAccount()" type="button" style="margin-bottom: -25px;">Switch</button>
                             </span>
                     </div>
 

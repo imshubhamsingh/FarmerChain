@@ -75,7 +75,7 @@ contract Bank{
         mods[_modAddress] = mod(_modName, true);
     }
 
-    function addMembers(address _memberaddress) onlyowner{
+    function addMembers(address _memberaddress) onlymods{
         members[_memberaddress] = member(true, true, 0, 0);
     }
 
