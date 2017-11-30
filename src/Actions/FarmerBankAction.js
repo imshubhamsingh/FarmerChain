@@ -49,7 +49,7 @@ export function payToPool(loan, admin, user) {
                 ...loan,
                 status: "pool"
             },
-            type: "pool",
+            type: "loan",
             time: Date.now(),
             from: user,
             to: admin
