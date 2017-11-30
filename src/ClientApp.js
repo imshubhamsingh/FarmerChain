@@ -5,7 +5,6 @@ import Header from './components/header/Header'
 import Bottombar from './components/bottombar/Bottombar'
 import { withRouter } from 'react-router-dom'
 
-import './App.css';
 
 import {connect} from 'react-redux'
 import { getUser } from './Actions/UserActions';

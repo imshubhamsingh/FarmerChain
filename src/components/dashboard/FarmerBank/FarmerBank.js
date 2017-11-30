@@ -9,7 +9,6 @@ import { colorStatus} from '../../../helpers/bankHelper'
 import {extractUserDetails} from '../../../helpers/userAndTransaction'
 import swal from 'sweetalert2'
 import uuid from 'uuid/v1'
-import './farmerbank.css'
 import $ from 'jquery';
 const jQuery = $;
 

@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+.card-list {
+  display: flex;
+  padding: 80px 0 0 0;
+  flex-flow: nowrap;
+  justify-content: space-around;
+  .card-list-item {
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    width: 350px;
+    margin-top: 0;
+    padding: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    .card {
+      transition: all 0.5s ease;
+      width: 100%;
+      height: 400px;
+      padding: 14px;
+      margin-top: 17px;
+      font-family: 'Oswald', sans-serif;
+      background: #ffffff;
+      color: #5b5e66;
+      box-shadow: 2px 3px 23px rgb(212, 212, 212);
+      border-radius: 5px;
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .card-list {
+    flex-flow: row wrap;
+    padding: 10px 0 0 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card-list {
+    display: block;
+    padding: 10px 0 0 0;
+    .card-list-item {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .card-list {
+    display: flex;
+    .card-list-item {
+      .card {
+        width: 95%;
+      }
+      &:hover {
+        cursor: pointer;
+        transition: all 0.5s ease-in-out;
+        margin-top: -8px;
+      }
+    }
+  }
+}

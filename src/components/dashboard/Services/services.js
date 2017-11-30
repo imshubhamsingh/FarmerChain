@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-import './services.css';
 import {TimelineLite, Elastic} from "gsap";
 import $ from 'jquery';
 const jQuery = $;
