@@ -8,7 +8,7 @@ import { colorStatus} from '../../../helpers/bankHelper'
 
 class GlobalProductList extends Component {
     grantRequest = () =>{
-        if(this.props.loan.amount> this.props.money){
+        if(this.props.loan.amount > this.props.money){
             swal(
                 'Oops...',
                 'Pool Fund is less than the requested Loan',

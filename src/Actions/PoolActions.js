@@ -11,7 +11,6 @@ export function getAdminMoney(){
                  Object.keys(snapshot.val()).map(key => {
                     if(snapshot.val()[key].type === "admin"){
                             PoolMoney=snapshot.val()[key].money
-                            console.log(snapshot.val()[key])
                             adminDetails={
                                 displayName: snapshot.val()[key].name,
                                 uid: snapshot.val()[key].uid,
