@@ -4,25 +4,15 @@ import Main from './Main';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getUser } from '../../Actions/UserActions';
-import {reactLocalStorage} from 'reactjs-localstorage';
 
 
 class Sidebar extends Component{
   componentWillMount(){
     this.props.getUser();
-    this.getUSER();
   }
     state = {
-      displayName:'',
-        oldUser: ''
-  }
-  getUSER = () =>{
-
-
-              console.log("found user")
-  }
-
-
+      displayName:''
+    }
      setDisplayName = (displayName)=>{
        this.setState({
          displayName: displayName
@@ -33,7 +23,6 @@ class Sidebar extends Component{
       return this.props.user.loading?<Login setDisplayName={this.setDisplayName}/>:<Main displayName={this.state.displayName} showSidebar={this.props.showSidebar}/>;
     }
     render(){
-    console.log("Hi")
       return(
         <div className={'sidebar box ' + (this.props.user.loading?'login-sidebar':'')+' '+(this.props.sidebarShow?'showSidebar':'')}>
           {this.current()}

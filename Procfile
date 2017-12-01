@@ -1,1 +1,1 @@
-worker: node server.js
+web: babel-node server.js --ignore public/
