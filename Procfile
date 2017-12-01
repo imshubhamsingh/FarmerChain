@@ -1,1 +1,1 @@
-worker: npm run start:server
+worker: node server.js
