@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {setPoolRequest, getUpdatePoolList, deletePoolRequest} from '../../../Actions/PoolFarmAction'
+import { updateHeader } from '../../../Actions/HeaderTextAction'
 import {connect} from 'react-redux'
 
 
@@ -11,6 +12,7 @@ const jQuery = $;
 
 class PoolFarm extends Component{
     componentDidMount(){
+        this.props.updateHeader("Pool Farming");
         $(document).ready(function() {
 
             (function ($) {
@@ -202,4 +204,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps,{setPoolRequest, getUpdatePoolList, deletePoolRequest})(PoolFarm)
+export default connect(mapStateToProps,{setPoolRequest, getUpdatePoolList, deletePoolRequest, updateHeader})(PoolFarm)

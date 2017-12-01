@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import {TimelineLite, Elastic} from "gsap";
+import {connect} from 'react-redux'
+import { updateHeader } from '../../../Actions/HeaderTextAction'
 import $ from 'jquery';
 const jQuery = $;
 
 class Services extends Component{
     componentDidMount(){
+        this.props.updateHeader("Home");
+        console.log(this.props)
         $(document).ready(function() {
 
             (function ($) {
@@ -43,4 +47,4 @@ class Services extends Component{
     }
 }
 
-export default Services
+export default connect(null,{updateHeader})(Services)

@@ -16,10 +16,10 @@ class Dashboard extends Component{
             <div className="dashboard box">
 
                      <Switch>
-                        <Route path="/" exact component={PageShell(Services)} />
-                        <Route path="/poolfarm" component={PageShell(PoolFarm)} />
-                        <Route path="/cartfarm" component={PageShell(CartFarm)} />
-                        <Route path="/farmerBank" component={PageShell(FarmerBank)} />
+                        <Route path="/" exact changeHeader={this.props.changeHeader} component={PageShell(Services)} />
+                        <Route path="/poolfarm" changeHeader={this.props.changeHeader} component={PageShell(PoolFarm)} />
+                        <Route path="/cartfarm" changeHeader={this.props.changeHeader} component={PageShell(CartFarm)} />
+                        <Route path="/farmerBank" changeHeader={this.props.changeHeader} component={PageShell(FarmerBank)} />
                         <Route/>
                      </Switch>
             </div>

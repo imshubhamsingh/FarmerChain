@@ -4,6 +4,7 @@ import CartFarmReducer from "./CartFarmReducer";
 import TransactionReducer from "./TransactionReducer";
 import FarmerBankReducer from "./FarmerBankReducer";
 import PoolReducer from "./PoolReducer";
+import HeaderTextReducer from "./HeaderTextReducer";
 import { combineReducers } from 'redux'
 
 
@@ -15,7 +16,8 @@ export const reducer = combineReducers({
     products: CartFarmReducer,
     transactions: TransactionReducer,
     loans: FarmerBankReducer,
-    admin: PoolReducer
+    admin: PoolReducer,
+    header: HeaderTextReducer
 })
 
 

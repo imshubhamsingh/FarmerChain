@@ -47,14 +47,13 @@ class ClientApp extends Component{
             sidebar: !this.state.sidebar
         })
     }
-
     render(){
         return(
             < div className="app-layout">
                     <Sidebar sidebarShow={this.state.sidebar} showSidebar={this.showSidebar}/>
                     {!this.props.user.loading?<div className='main-layout'  web3={this.state.web3}>
-                        <Header showSidebar={this.showSidebar}/>
-                        <Dashboard  web3={this.state.web3}/>
+                        <Header showSidebar={this.showSidebar} />
+                        <Dashboard  web3={this.state.web3} />
                         {!this.props.user.loading?<Bottombar  web3={this.state.web3}/>:''}
                     </div>:''}
 

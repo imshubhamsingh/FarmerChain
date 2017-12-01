@@ -6,11 +6,13 @@ import PastOrders from './PastOrders'
 import {setProductRequest, getUpdateProductList, deleteProductRequest} from '../../../Actions/CartFarmAction'
 import {connect} from 'react-redux'
 import { transactionDetailsSorted } from '../../../helpers/userAndTransaction'
+import { updateHeader } from '../../../Actions/HeaderTextAction'
 import $ from 'jquery';
 const jQuery = $;
 
 class CartFarm extends Component{
     componentDidMount(){
+        this.props.updateHeader("Cart Farm");
         $(document).ready(function() {
 
             (function ($) {
@@ -230,4 +232,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps,{setProductRequest, getUpdateProductList, deleteProductRequest})(CartFarm)
+export default connect(mapStateToProps,{setProductRequest, getUpdateProductList, deleteProductRequest, updateHeader})(CartFarm)
