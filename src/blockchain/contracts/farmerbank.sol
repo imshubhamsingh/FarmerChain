@@ -103,7 +103,7 @@ contract Bank{
             return true;
         }
         else{
-            return false;
+            revert();
         }
     }
 
