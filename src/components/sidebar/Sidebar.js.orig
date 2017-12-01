@@ -6,14 +6,38 @@ import { withRouter } from 'react-router-dom';
 import { getUser } from '../../Actions/UserActions';
 
 
+<<<<<<< HEAD
+class Sidebar extends Component{
+  componentWillMount(){
+    this.props.getUser();
+  }
+=======
 
 class Sidebar extends Component{
     componentWillMount(){
         this.props.getUser();
     }
+>>>>>>> firebase
     state = {
-        displayName:''
+      displayName:''
     }
+<<<<<<< HEAD
+     setDisplayName = (displayName)=>{
+       this.setState({
+         displayName: displayName
+       });
+     }
+
+    current = () => {
+      return this.props.user.loading?<Login setDisplayName={this.setDisplayName}/>:<Main displayName={this.state.displayName} showSidebar={this.props.showSidebar}/>;
+    }
+    render(){
+      return(
+        <div className={'sidebar box ' + (this.props.user.loading?'login-sidebar':'')+' '+(this.props.sidebarShow?'showSidebar':'')}>
+          {this.current()}
+        </div>            
+      );
+=======
     setDisplayName = (displayName)=>{
         this.setState({
             displayName: displayName
@@ -29,11 +53,12 @@ class Sidebar extends Component{
                 {this.current()}
             </div>
         );
+>>>>>>> firebase
     }
 }
 
 function mapStateToProps(state) {
-    return { user: state.user };
+  return { user: state.user };
 }
 
 export default withRouter(connect(mapStateToProps,{getUser})(Sidebar));

@@ -1,0 +1,44 @@
+import UserReducer from './UserReducer';
+<<<<<<< HEAD
+import PoolFarmReducer from './PoolFarmReducer';
+import CartFarmReducer from './CartFarmReducer';
+import TransactionReducer from './TransactionReducer';
+import FarmerBankReducer from './FarmerBankReducer';
+import PoolReducer from './PoolReducer';
+import HeaderTextReducer from './HeaderTextReducer';
+import { combineReducers } from 'redux';
+=======
+import PoolFarmReducer from './PoolFarmReducer'
+import CartFarmReducer from "./CartFarmReducer";
+import TransactionReducer from "./TransactionReducer";
+import FarmerBankReducer from "./FarmerBankReducer";
+import PoolReducer from "./PoolReducer";
+import HeaderTextReducer from "./HeaderTextReducer";
+>>>>>>> firebase
+
+
+
+
+<<<<<<< HEAD
+export const reducer = combineReducers({
+  user: UserReducer,
+  pools: PoolFarmReducer,
+  products: CartFarmReducer,
+  transactions: TransactionReducer,
+  loans: FarmerBankReducer,
+  admin: PoolReducer,
+  header: HeaderTextReducer
+});
+=======
+export const reducer = persistCombineReducers(config, {
+    user: UserReducer,
+    pools: PoolFarmReducer,
+    products: CartFarmReducer,
+    transactions: TransactionReducer,
+    loans: FarmerBankReducer,
+    admin: PoolReducer,
+    header: HeaderTextReducer
+})
+>>>>>>> firebase
+
+
