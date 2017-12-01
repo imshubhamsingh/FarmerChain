@@ -1,0 +1,132 @@
+* {
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  user-select: none;
+  /*You just need this if you are only concerned with android and not desktop browsers.*/
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  &:before, &:after {
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
+    /*You just need this if you are only concerned with android and not desktop browsers.*/
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  background-color: #313042;
+  position: relative;
+  overflow-y: hidden;
+}
+
+.box {
+  color: #fff;
+  padding: 1em;
+  text-align: center;
+}
+
+.app-layout {
+  position: relative;
+}
+
+.header, .dashboard {
+  background-color: #f5f9fc;
+}
+
+.bottombar {
+  background-color: #313042;
+}
+
+.sidebar {
+  background-color: #313042;
+  width: 250px;
+  height: 100vh;
+  position: absolute;
+  z-index: 111;
+  transition: all 0.5s ease;
+}
+
+.login-sidebar {
+  width: 100%;
+  background-size: cover;
+}
+
+.main-layout {
+  display: grid;
+  height: 100vh;
+  width: calc(100% - 250px);
+  margin-left: 250px;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "header" "dashboard";
+  transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    margin-left: -250px;
+    &.showSidebar {
+      margin-left: -2px;
+      box-shadow: 12px 0 180px #1a1a23;
+      margin-top: -1px;
+    }
+  }
+  .login-sidebar {
+    margin-left: 0px;
+  }
+  .main-layout {
+    display: grid;
+    height: calc(100vh - 82px);
+    width: calc(100% - 0px);
+    margin-left: 0px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "header" "dashboard" "bottombar";
+  }
+  .dashboard {
+    grid-area: dashboard;
+    padding: 0 1em;
+    overflow-y: scroll;
+  }
+  .bottombar {
+    display: block !important;
+    width: 100vw;
+    margin-bottom: calc(100vh - 113vh);
+    padding: 6px;
+  }
+}
+
+.sidebar {
+  grid-area: sidebar;
+}
+
+.header {
+  grid-area: header;
+  color: #333;
+  border-bottom: 1px solid #f2f2f2;
+  position: relative;
+  box-shadow: 0px -5px 16px #000;
+  z-index: 2;
+}
+
+.bottombar {
+  grid-area: bottombar;
+  color: #fff;
+  display: none;
+}
+
+.dashboard {
+  grid-area: dashboard;
+  padding: 0 1em;
+  overflow-x: scroll;
+}
+
+.swal-overlay {
+  background-color: rgba(49, 48, 66, 0.45);
+}

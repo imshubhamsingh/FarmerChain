@@ -62,6 +62,12 @@ body {
   .sidebar   { 
     margin-left: -250px;
    }
+
+    .sidebar.showSidebar   {
+        margin-left: -2px;
+        box-shadow: 12px 0 180px #1a1a23;
+    }
+
    .login-sidebar{
      margin-left: 0px;    
   }

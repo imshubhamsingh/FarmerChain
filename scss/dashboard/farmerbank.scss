@@ -1,0 +1,82 @@
+.pool-list ul > li {
+  padding: 10px;
+  background-color: #f3f3f3;
+  margin: 20px 0px;
+}
+
+.yet-to-buy {
+  background-color: red !important;
+}
+
+.bought {
+  background-color: green !important;
+}
+
+.product-list {
+  display: flex;
+  .products-list {
+    width: 100%;
+  }
+}
+
+.products-list {
+  ul {
+    width: 100%;
+    overflow-y: scroll;
+    height: 324px;
+  }
+  h2 {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .tab li {
+    width: 100%;
+  }
+  .product-list {
+    display: -ms-flexbox;
+    display: block;
+  }
+}
+
+.tabs_item {
+  &.farmerBank-request {
+    padding: 30px;
+  }
+  .fund {
+    display: inline;
+    position: relative;
+    width: 100%;
+    font-size: 80px;
+    font-weight: bold;
+  }
+}
+
+.farmer-admin {
+  display: flex;
+  button {
+    &.farmer-admin-btn-1 {
+      background-color: red;
+      margin: 0 2px;
+    }
+    &.farmer-admin-btn-2 {
+      background-color: green;
+      margin: 0 2px;
+    }
+  }
+}
+
+@media screen and (max-width: 445px) {
+  .tabs_item .fund {
+    font-size: 46px !important;
+  }
+  .farmer-admin {
+    display: block;
+    button {
+      &.farmer-admin-btn-1, &.farmer-admin-btn-2 {
+        margin: 2px 0;
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import createBrowserHistory from 'history/createBrowserHistory'
+import createBrowserHistory from 'history/createBrowserHistory';
+import createMemoryHistory from 'history/createMemoryHistory';
 
-const customHistory = createBrowserHistory()
-export default customHistory;
+export default process.env.BROWSER ? createBrowserHistory() : createMemoryHistory();
