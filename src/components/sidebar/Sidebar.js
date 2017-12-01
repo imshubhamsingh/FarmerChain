@@ -4,6 +4,7 @@ import Main from './Main';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { getUser } from '../../Actions/UserActions';
+import './sidebar.css'
 
 
 
@@ -25,7 +26,7 @@ class Sidebar extends Component{
     }
     render(){
         return(
-            <div className={'sidebar box ' + (this.props.user.loading?'login-sidebar':'')+' '+(this.props.sidebarShow?'showSidebar':'')}>
+            <div className={'sidebar box ' + (this.props.user.loading?'login-sidebar sidebar-background':'')+' '+(this.props.sidebarShow?'showSidebar':'')}>
                 {this.current()}
             </div>
         );
