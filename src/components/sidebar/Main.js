@@ -40,7 +40,7 @@ class Main extends Component{
     render(){
         return(
             <div className="sidebar-main ">
-                <span onClick={this.props.showSidebar} className="sideArrow"><i class="fa fa-arrow-right" aria-hidden="true"></i></span>
+                <span onClick={this.props.showSidebar} className="sideArrow"><i classgit ="fa fa-arrow-right" aria-hidden="true"></i></span>
                 <div className="wrapper">
                     <img alt="userPic"src={gravatar.url(this.props.user.email,{s:'200'})} className="image--cover" />
                 </div>
