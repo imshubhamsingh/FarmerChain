@@ -210,11 +210,11 @@ class FarmerBank extends Component{
                                     </div>
                                     <button className="btn-pool btn-effect" type="submit" onClick={this.payToPool} disabled={this.checkIfLoanPaid()}>{this.checkIfLoanPaid()?'Pay your loan to add to pool': 'Add'}</button>
                                 </li>
-                            <div>
-                                <h2>
-                                    Requested Loan
-                                </h2>
-                            </div>
+                                <div>
+                                    <h2>
+                                        Requested Loan
+                                    </h2>
+                                </div>
                                 {
                                     this.props.loans.map((loan)=> <GlobalLoanList loan={loan} user={this.props.user} key={loan.id} />)
                                 }

@@ -52,7 +52,6 @@
     color: blue;
     font-size: 20px;
 }
-
 .tabs_item:first-child {
     display: block;
 }
@@ -62,8 +61,7 @@
     background: blue;
 }
 
-
-input, select{
+input, select {
     border: none;
     background: #d2d2d2;
     width: 100%;
@@ -74,12 +72,12 @@ input, select{
     margin-bottom: 20px;
 }
 
-label{
+label {
     display: block;
     text-align: left;
 }
 
-.btn{
+.btn {
     text-align: center;
     display: inline-block;
     position: relative;
@@ -98,10 +96,9 @@ label{
     outline: 0;
     border: none;
 }
-
 .btn.btn-effect {
     transition: all 0.2s linear 0s;
-    background-color:  #3268fb;
+    background-color: #3268fb;
 }
 .btn.btn-effect:before {
     content: "\f178";
@@ -126,7 +123,7 @@ label{
     text-indent: 0px;
 }
 
-.btn-pool{
+.btn-pool {
     text-align: center;
     display: inline-block;
     position: relative;
@@ -145,10 +142,9 @@ label{
     outline: 0;
     border: none;
 }
-
 .btn-pool.btn-effect {
     transition: all 0.2s linear 0s;
-    background-color:  #3268fb;
+    background-color: #3268fb;
 }
 .btn-pool.btn-effect:before {
     content: "\f178";
@@ -173,18 +169,16 @@ label{
     text-indent: 0px;
 }
 
-.tabs_item{
+.tabs_item {
     height: 80vh;
     overflow-y: scroll;
 }
-
-.tabs_item .info{
+.tabs_item .info {
     display: inline;
     position: relative;
     width: 100%;
 }
-
-.tabs_item .info .name{
+.tabs_item .info .name {
     color: #333333;
     font-size: 20px;
     font-weight: 600;
@@ -192,8 +186,7 @@ label{
     display: flex;
     justify-content: space-between;
 }
-
-.tabs_item .info .name .type{
+.tabs_item .info .name .type {
     color: #ffff;
     background: #3268fb;
     width: 100px;
@@ -208,24 +201,21 @@ label{
     font-size: 10px;
     font-weight: 600;
 }
-
-.tabs_item .details{
+.tabs_item .details {
     text-align: left;
 }
 
-.pool-list ul>li{
+.pool-list ul > li {
     padding: 10px;
     background-color: #f3f3f3;
     margin: 20px;
 }
 
-@media screen and (max-width: 463px){
-    .tab li{
+@media screen and (max-width: 463px) {
+    .tab li {
         width: 100%;
     }
-
 }
-
-.tabs_item.pool-request{
+.tabs_item.pool-request {
     padding: 30px;
 }

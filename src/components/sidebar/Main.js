@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
-import  gravatar from 'gravatar'
-import {TimelineLite, Elastic} from "gsap";
+import React, { Component } from 'react';
+import  gravatar from 'gravatar';
+import {TimelineLite, Elastic} from 'gsap';
 import { connect } from 'react-redux';
-import {logout} from "../../Actions/UserActions";
-import { withRouter } from 'react-router-dom'
-import {countAcceptedPool, orderProducts, transactionDone, transactionReceived} from '../../helpers/userServiceDetails'
-
+import {logout} from '../../Actions/UserActions';
+import { withRouter } from 'react-router-dom';
+import {countAcceptedPool, orderProducts, transactionDone, transactionReceived} from '../../helpers/userServiceDetails';
 import './main.css'
 
 import $ from 'jquery';
@@ -31,7 +30,7 @@ class Main extends Component{
                     { y: 0, autoAlpha:1, ease: Elastic.SlowMo},
                     0.5
                 )
-                    .fromTo(img, 0.5, {y:50, autoAlpha:0},{ y: 0, autoAlpha:1, ease: Elastic.SlowMo}, "-=3.25")
+                    .fromTo(img, 0.5, {y:50, autoAlpha:0},{ y: 0, autoAlpha:1, ease: Elastic.SlowMo}, '-=3.25');
             })(jQuery);
 
         });
@@ -40,7 +39,7 @@ class Main extends Component{
     render(){
         return(
             <div className="sidebar-main ">
-                <span onClick={this.props.showSidebar} className="sideArrow"><i classgit ="fa fa-arrow-right" aria-hidden="true"></i></span>
+                <span onClick={this.props.showSidebar} className="sideArrow"><i className ="fa fa-arrow-right" aria-hidden="true"></i></span>
                 <div className="wrapper">
                     <img alt="userPic"src={gravatar.url(this.props.user.email,{s:'200'})} className="image--cover" />
                 </div>
@@ -101,14 +100,14 @@ class Main extends Component{
                                 </h1>
                             </div>
                         </li>
-                    </ul>                    
+                    </ul>
                 </div>
                 <button className="logOut" onClick={this.props.logout}>
                     Log Out
                 </button>
 
             </div>
-        )
+        );
     }
 }
 
@@ -123,4 +122,4 @@ function mapStateToProps(state) {
 }
 
 
-export default withRouter(connect(mapStateToProps,{logout})(Main))
+export default withRouter(connect(mapStateToProps,{logout})(Main));

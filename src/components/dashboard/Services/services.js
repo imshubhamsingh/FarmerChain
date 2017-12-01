@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
-import './services.css';
-import {TimelineLite, Elastic} from "gsap";
+import {Link} from 'react-router-dom';
+import {TimelineLite, Elastic} from 'gsap';
+import {connect} from 'react-redux';
+import { updateHeader } from '../../../Actions/HeaderTextAction';
 import $ from 'jquery';
+import './services.css'
 const jQuery = $;
 
 class Services extends Component{
     componentDidMount(){
+        this.props.updateHeader('Home');
+        console.log(this.props);
         $(document).ready(function() {
 
             (function ($) {
@@ -19,7 +23,7 @@ class Services extends Component{
                     { y: +20, autoAlpha:0},
                     { y: 0, autoAlpha:1, ease:Elastic.easeIn},
                     0.5
-                )
+                );
             })(jQuery);
 
         });
@@ -27,21 +31,20 @@ class Services extends Component{
 
     render(){
         return(
-                <ul className="card-list">
-                    <Link to="/poolFarm" style={{ textDecoration: 'none' }} className="card-list-item">
-                        <div className="card">
-                            <div>Pool Farming</div>
-                        </div>
-                    </Link>
-                    <Link to="/cartFarm" style={{ textDecoration: 'none' }} className="card-list-item">
-                        <div className="card">Cart Farm</div>
-                    </Link>
-                    <Link to="/farmerBank" style={{ textDecoration: 'none' }} className="card-list-item">
-                        <div className="card">Farmers' Bank</div>
-                    </Link>
-                </ul>
-        )
+            <ul className="card-list">
+                <Link to="/poolFarm" style={{ textDecoration: 'none' }} className="card-list-item">
+                    <div className="card">
+                        <div>Pool Farming</div>
+                    </div>
+                </Link>
+                <Link to="/cartFarm" style={{ textDecoration: 'none' }} className="card-list-item">
+                    <div className="card">Cart Farm</div>
+                </Link>
+                <Link to="/farmerBank" style={{ textDecoration: 'none' }} className="card-list-item">
+                    <div className="card">Farmers' Bank</div>
+                </Link>
+            </ul>
+        );
     }
 }
-
-export default Services
+export default connect(null,{updateHeader})(Services);

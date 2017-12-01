@@ -4,12 +4,14 @@
   "private": true,
   "dependencies": {
     "animated": "^0.2.1",
+    "express": "^4.16.2",
     "firebase": "^4.6.2",
     "font-awesome": "^4.7.0",
     "gravatar": "^1.6.0",
     "gsap": "^1.20.3",
     "history": "^4.7.2",
     "jquery": "^3.2.1",
+    "path": "^0.12.7",
     "react": "^16.1.0",
     "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.1.0",
@@ -32,6 +34,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
+    "create-react-app-sass": "^1.1.0",
     "eslint": "^4.11.0",
     "eslint-plugin-flowtype": "^2.39.1",
     "eslint-plugin-import": "^2.8.0",

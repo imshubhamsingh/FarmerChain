@@ -13,53 +13,46 @@
     opacity: 0;
 }
 
-#name{
+#name {
     opacity: 0;
     margin-top: -10px;
 }
 
-#accountNo{
+#accountNo {
     opacity: 0;
     margin-top: -12px;
 }
 
-.menu{
-
-}
-
-ul{
+ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-li.menu-list{
+li.menu-list {
     padding-right: 25px;
     font-size: 16px;
     opacity: 0;
 }
 
-.menu-list-item{
+.menu-list-item {
     text-align: right;
-
 }
-
-.menu-list-item h6{
+.menu-list-item h6 {
     margin-top: 10px;
     color: #7a78a2 !important;
 }
-
-.menu-list-item h1{
+.menu-list-item h1 {
     margin-top: -28px;
 }
 
-.logOut{
+.logOut {
     border: none;
     background-color: #21212d;
     color: wheat;
     border-radius: 21px;
     padding: 5px;
-    width: 223px;
+    width: 236px;
     transition: all 0.2s ease-in;
     outline: none;
     opacity: 0;
@@ -67,17 +60,15 @@ li.menu-list{
     bottom: 0;
     margin: 10px 0 25px -118px;
 }
-
-.logOut:hover{
+.logOut:hover {
     background-color: #fff;
     color: black;
 }
-
-.logOut:active{
+.logOut:active {
     transform: translateY(2px);
 }
 
-.sideArrow{
+.sideArrow {
     position: absolute;
     transform: rotate(180deg);
     right: 23px;
@@ -86,7 +77,16 @@ li.menu-list{
 }
 
 @media screen and (max-width: 768px) {
-    .sideArrow{
+    .sideArrow {
         display: block;
+    }
+}
+.menu {
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .menu {
+        display: none;
     }
 }

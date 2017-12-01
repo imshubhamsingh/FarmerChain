@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import {withRouter} from 'react-router-dom'
-import { orderProducts, countAcceptedPool, transactionDone, transactionReceived} from '../../helpers/userServiceDetails'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import { orderProducts, countAcceptedPool, transactionDone, transactionReceived} from '../../helpers/userServiceDetails';
 import './bottombar.css'
 
 class Bottombar extends Component{
     render(){
         return(
             <div className='bottombar box'>
-                <div>
+                <div className="main-menu">
                     <ul id="bottombar-menu">
                         <li className="bottom-menu-list">
                             <div className="bottom-menu-list-item">
@@ -65,7 +65,7 @@ class Bottombar extends Component{
                     </ul>
                 </div>
             </div>
-        )
+        );
     }
 }
 
@@ -80,4 +80,4 @@ function mapStateToProps(state) {
 }
 
 
-export default withRouter(connect(mapStateToProps,null)(Bottombar))
+export default withRouter(connect(mapStateToProps,null)(Bottombar));
