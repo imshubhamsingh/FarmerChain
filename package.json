@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "animated": "^0.2.1",
+    "babel-cli": "^6.26.0",
     "babel-register": "^6.26.0",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
@@ -42,7 +43,6 @@
     "dev": "webpack -wd"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.2",
     "babel-loader": "^7.1.2",
