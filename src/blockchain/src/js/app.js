@@ -59,7 +59,7 @@ function requestLoan(){
     }else{
       console.log(result);
       // console.log(getReceipts(result));
-      await getReceipts(result).then(function(receipt){
+      getReceipts(result).then(function(receipt){
         console.log(receipt);
         document.getElementById("receipt").classList.remove("hidden");
         document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
@@ -79,10 +79,13 @@ function payLoan(){
     }else{
       console.log(result);
       // console.log(getReceipts(result));
-      await getReceipts(result).then(function(receipt){
+      getReceipts(result).then(function(receipt){
         console.log(receipt);
         document.getElementById("receipt").classList.remove("hidden");
         document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
+        setTimeout(function(){
+          document.getElementById("receipt").classList.add("hidden");
+        }, 5000);
       }).catch(function(error){
         console.log(error);
       });
@@ -105,7 +108,7 @@ function removeMembers(){
     }else{
       console.log(result);
       // console.log(getReceipts(result));
-      await getReceipts(result).then(function(receipt){
+      getReceipts(result).then(function(receipt){
         console.log(receipt);
         document.getElementById("receipt").classList.remove("hidden");
         document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
@@ -128,7 +131,7 @@ function addMods(){
     }else{
       console.log(result);
       // console.log(getReceipts(result));
-      await getReceipts(result).then(function(receipt){
+      getReceipts(result).then(function(receipt){
         console.log(receipt);
         document.getElementById("receipt").classList.remove("hidden");
         document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
@@ -158,7 +161,7 @@ function addMembers(){
     }else{
       console.log(result);
       // console.log(getReceipts(result));
-      await getReceipts(result).then(function(receipt){
+      getReceipts(result).then(function(receipt){
         console.log(receipt);
         document.getElementById("receipt").classList.remove("hidden");
         document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
