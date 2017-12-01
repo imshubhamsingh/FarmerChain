@@ -35,6 +35,10 @@ class Main extends Component{
 
         });
     }
+    logOutFn = () => {
+        this.props.showSidebar()
+        this.props.logout()
+    }
 
     render(){
         return(
@@ -102,7 +106,7 @@ class Main extends Component{
                         </li>
                     </ul>
                 </div>
-                <button className="logOut" onClick={this.props.logout}>
+                <button className="logOut" onClick={this.logOutFn}>
                     Log Out
                 </button>
 
