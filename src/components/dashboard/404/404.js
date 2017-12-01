@@ -1,255 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import PastTransactions from './PastTransactions'
-import GlobalLoanList from './GlobalLoanList'
-import { transactionDetailsSorted } from '../../../helpers/userAndTransaction'
-import {deleteLoanRequest, setLoanRequest, payLoanBack, payToPool} from '../../../Actions/FarmerBankAction'
-import { colorStatus} from '../../../helpers/bankHelper'
-import {extractUserDetails} from '../../../helpers/userAndTransaction'
-import swal from 'sweetalert2'
-import uuid from 'uuid/v1'
-import './farmerbank.css'
+import './404.css'
 import $ from 'jquery';
 const jQuery = $;
 
-class FarmerBank extends Component{
+class NotFound extends Component{
     componentDidMount(){
-        $(document).ready(function() {
+        var Gear = document.getElementById('Gear');
+        var MainBody = document.getElementById('MainBody');
+        var GearSpeed = 1;
 
-            (function ($) {
-                $('.tab ul.tabs').addClass('active').find('> li:eq(0)').addClass('current');
-
-                $('.tab ul.tabs li a').click(function (g) {
-                    var tab = $(this).closest('.tab'),
-                        index = $(this).closest('li').index();
-
-                    tab.find('ul.tabs > li').removeClass('current');
-                    $(this).closest('li').addClass('current');
-
-                    tab.find('.tab_content').find('div.tabs_item').not('div.tabs_item:eq(' + index + ')').slideUp();
-                    tab.find('.tab_content').find('div.tabs_item:eq(' + index + ')').slideDown();
-
-                    g.preventDefault();
-                } );
-            })(jQuery);
-
+        Gear.addEventListener('click', function(ev){
+            console.log(GearSpeed);
+            Gear.style.cssText =
+                'animation-duration:' + GearSpeed +'s';
+            GearSpeed = GearSpeed/1.2;
+            if(GearSpeed <= 0.1) {
+                MainBody.style.cssText = 'animation: ColorFiesta 3s infinite';
+            }
         });
-    }
-
-    state = {
-        loanDescription:'',
-        amount:0,
-        buttonText: 'Request Loan'
-    }
-
-    checkIfLoanPaid = () => {
-        let flag = false;
-        this.props.loans!==null?this.props.loans.map((loan)=> {
-            if (loan.uid === this.props.user.uid) {
-                if (loan.status === "granted") {
-                    flag = true;
-                }
-            }
-        }):'';
-        return flag
-    }
-
-    handleSubmit = (event) =>{
-        event.preventDefault();
-        if(this.checkIfLoanPaid()){
-            swal(
-                'Oops...',
-                'Please Pay your previous loan in order to request new loan',
-                'error'
-            )
-        }else{
-
-            this.setState({
-                buttonText: 'Request In Order'
-            })
-
-
-            this.props.setLoanRequest({
-                loanDescription:this.state.loanDescription,
-                amount: this.state.amount,
-                createdAt: Date.now()
-            }).then(()=>{
-                this.setState({
-                    buttonText: 'Request has been noted'
-                })
-
-                setTimeout(()=>{
-                    this.setState({
-                        loanDescription:'',
-                        amount:0,
-                        buttonText: 'Request Loan'
-                    })
-                },2000)
-            })
-        }
-
-    }
-
-    showPastTransactions = () => {
-        return (transactionDetailsSorted(this.props.transactions, this.props.user.uid, "loan"))
-    }
-
-    payLoanBack = (loan)=>{
-        this.props.payLoanBack(loan,extractUserDetails(this.props.admin), extractUserDetails(this.props.user))
-    }
-
-    payToPool = ()=>{
-        swal({
-            title: 'Enter amount to add to pool (₹)',
-            input: 'number',
-            showCancelButton: true,
-            confirmButtonText: 'Submit',
-            showLoaderOnConfirm: true,
-            preConfirm: (number) => {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        console.log(number)
-                        if (number > this.props.money) {
-                            swal.showValidationError(
-                                'Amount entered is more than your current balance'
-                            )
-                        }
-                        resolve()
-                    }, 2000)
-                })
-            },
-            allowOutsideClick: false
-        }).then((result) => {
-            if (result.value) {
-                let value = result.value;
-                if(value){
-                    if((value!=="" || !isNaN(value)|| value !== null)){
-                        const loan = {
-                            amount: value,
-                            createdAt: Date.now(),
-                            email: this.props.user.email,
-                            loanDescription: "Paying to Pool",
-                            id: uuid(),
-                            status: "paid",
-                            uid: this.props.user.uid
-                        }
-                        this.props.payToPool(loan,extractUserDetails(this.props.admin), extractUserDetails(this.props.user))
-                        swal({
-                            type: 'success',
-                            title: 'Your money added to Pool'
-                        })
-                    }else{
-                        swal(
-                            'Oops...',
-                            'Something went wrong!',
-                            'error'
-                        )
-                    }
-
-                }
-
-            }
-        })
     }
 
     render(){
         return(
             <div>
-                <div className="tab">
-
-                    <ul className="tabs">
-                        <li><a>Request a Loan</a></li>
-                        <li><a>Add Funds</a></li>
-                        <li><a>Transaction History</a></li>
-                    </ul>
-
-                    <div className="tab_content">
-
-                        <div className="tabs_item farmerBank-request">
-                            <form onSubmit={this.handleSubmit} action="">
-                                <div>
-                                    <label htmlFor="load-desc">Loan Description</label>
-                                    <input type="text" id="load-desc" value={this.state.loanDescription} onChange={event=> this.setState({loanDescription:event.target.value})}/>
-                                </div>
-                                <div>
-                                    <label htmlFor="loan-amt">Loan Amount (₹)</label>
-                                    <input type="number" id="loan-amt" value={this.state.amount} onChange={event=> this.setState({amount:event.target.value})} min="0"/>
-                                </div>
-                                <button className="btn btn-effect" type="submit" style={{width:'359px'}}>{this.state.buttonText}</button>
-                            </form>
-                            <div className="product-user-list">
-                                <h3>Your Loan Status</h3>
-                                <ul>
-                                    {this.props.loans!==null?this.props.loans.map((loan)=> {
-                                        if(loan.uid === this.props.user.uid){
-                                            return <li key={loan.id}>
-                                                <div className="info">
-                                                    <div className="name">{loan.loanDescription}
-                                                        <div className="type">
-                                                            {loan.amount} ETH
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <button className="btn-pool btn-effect" onClick={()=> (loan.status==="waiting" ||loan.status==="paid" || loan.status==="rejected")?this.props.deleteLoanRequest(loan):this.payLoanBack(loan)} style={{backgroundColor: colorStatus(loan.status,"red","green","orange")}}>{colorStatus(loan.status,"Rejected (Cancel Request)","Granted (Pay Loan Now)","Waiting (Cancel Request)","Paid (Remove loan)")}</button>
-                                            </li>
-                                        }
-                                        return '';
-                                    }):''}
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div className="tabs_item pool-list">
-                            <ul>
-                                <li>
-                                    <div className="fund">
-                                        ₹{this.props.admin.poolMoney}
-                                    </div>
-                                    <div className="details" style={{textAlign:'center'}}>
-                                        General Public Funds
-                                    </div>
-                                    <button className="btn-pool btn-effect" type="submit" onClick={this.payToPool} disabled={this.checkIfLoanPaid()}>{this.checkIfLoanPaid()?'Pay your loan to add to pool': 'Add'}</button>
-                                </li>
-                                <div>
-                                    <h2>
-                                        Requested Loan
-                                    </h2>
-                                </div>
-                                {
-                                    this.props.loans.map((loan)=> <GlobalLoanList loan={loan} user={this.props.user} key={loan.id} />)
-                                }
-                            </ul>
-                        </div>
-                        <div className="tabs_item pool-list">
-                            <div className="products-list">
-                                <h2>List of All transaction</h2>
-                                <ul>
-                                    {this.showPastTransactions().sort((a,b)=>{
-                                        return new Date(b.createdAt) - new Date(a.createdAt)
-                                    }).map(transaction => {
-                                        return <PastTransactions transaction={transaction} key={transaction.id}/>
-                                    })}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                <div class="MainGraphic">
+                    <svg id="Gear" class="Cog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M29.18 19.07c-1.678-2.908-.668-6.634 2.256-8.328L28.29 5.295c-.897.527-1.942.83-3.057.83-3.36 0-6.085-2.743-6.085-6.126h-6.29c.01 1.043-.25 2.102-.81 3.07-1.68 2.907-5.41 3.896-8.34 2.21L.566 10.727c.905.515 1.69 1.268 2.246 2.234 1.677 2.904.673 6.624-2.24 8.32l3.145 5.447c.895-.522 1.935-.82 3.044-.82 3.35 0 6.066 2.725 6.083 6.092h6.29c-.004-1.035.258-2.08.81-3.04 1.676-2.902 5.4-3.893 8.325-2.218l3.145-5.447c-.9-.515-1.678-1.266-2.232-2.226zM16 22.48c-3.578 0-6.48-2.902-6.48-6.48S12.423 9.52 16 9.52c3.578 0 6.48 2.902 6.48 6.48s-2.902 6.48-6.48 6.48z"/></svg>
                 </div>
+
+                <svg class="Spanner" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.285 7.12c-.05-.17-.184-.3-.354-.345-.17-.047-.35.003-.476.126L16.838 9.46l-1.914-.383-.38-1.907 2.644-2.585c.126-.123.178-.303.137-.474s-.168-.31-.336-.362c-.532-.166-1.02-.248-1.49-.248-2.757 0-5 2.243-5 5 0 .323.038.65.118 1.01-.562.463-1.096.862-1.7 1.314-.866.646-1.846 1.377-3.183 2.506C4.95 14.016 4.5 14.99 4.5 16c0 1.93 1.57 3.5 3.5 3.5 1.02 0 1.993-.456 2.662-1.25 1.15-1.347 1.89-2.336 2.544-3.21.442-.59.832-1.11 1.283-1.66.36.082.687.12 1.01.12 2.757 0 5-2.243 5-5 0-.437-.068-.875-.215-1.38zM8 17c-.553 0-1-.447-1-1s.447-1 1-1 1 .447 1 1-.447 1-1 1z"/>
+                </svg>
+                <h1 class="MainTitle">
+                    Oops! We're No such Page!
+                </h1>
             </div>
         )
     }
 
 }
 
-function mapStateToProps(state) {
-    return {
-        products: state.products,
-        user: state.user.user,
-        money: state.user.money,
-        transactions: state.transactions,
-        loans: state.loans,
-        admin: state.admin
-    };
-}
 
 
-export default connect(mapStateToProps,{ setLoanRequest ,deleteLoanRequest, payLoanBack, payToPool})(FarmerBank);
+export default connect(null,null)(NotFound);

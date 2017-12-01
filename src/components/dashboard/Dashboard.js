@@ -3,6 +3,7 @@ import Services from './Services/services';
 import PoolFarm from './PoolFarming/PoolFarm';
 import CartFarm from './CartFarm/CartFarm';
 import FarmerBank from './FarmerBank/FarmerBank';
+import NotFound from './404/404'
 import { Route,Switch, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import './dashboard.css'
@@ -20,7 +21,7 @@ class Dashboard extends Component{
                     <Route path="/poolfarm" changeHeader={this.props.changeHeader} component={PageShell(PoolFarm)} />
                     <Route path="/cartfarm" changeHeader={this.props.changeHeader} component={PageShell(CartFarm)} />
                     <Route path="/farmerBank" changeHeader={this.props.changeHeader} component={PageShell(FarmerBank)} />
-                    <Route/>
+                    <Route path="*" component={PageShell(NotFound)} />
                 </Switch>
             </div>
 

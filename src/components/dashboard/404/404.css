@@ -1,0 +1,97 @@
+.MainTitle {
+    display: block;
+    font-size: 3rem;
+    font-weight: lighter;
+    text-align: center;
+}
+.MainGraphic {
+    position: relative;
+}
+.Cog {
+    width: 14rem;
+    height: 14rem;
+    fill: #6AAFE6;
+    -webkit-animation: CogAnimation 5s infinite;
+    animation: CogAnimation 5s infinite;
+    cursor: pointer;
+}
+.Spanner {
+    position: absolute;
+    -webkit-transform: rotate(20deg);
+    transform: rotate(20deg);
+    top: 10%;
+    left: 20%;
+    width: 10rem;
+    height: 10rem;
+    fill: #8EC0E4;
+}
+.Hummingbird {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    fill: #30A9DE;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+@-webkit-keyframes CogAnimation {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes CogAnimation {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes ColorFiesta {
+    0% {
+        background: #a5dff9;
+    }
+    20% {
+        background: #ef5285;
+    }
+    40% {
+        background: #60c5ba;
+    }
+    60% {
+        background: #feee7d;
+    }
+    80% {
+        background: #6a60a9;
+    }
+    100% {
+        background: #a5dff9;
+    }
+}
+@keyframes ColorFiesta {
+    0% {
+        background: #a5dff9;
+    }
+    20% {
+        background: #ef5285;
+    }
+    40% {
+        background: #60c5ba;
+    }
+    60% {
+        background: #feee7d;
+    }
+    80% {
+        background: #6a60a9;
+    }
+    100% {
+        background: #a5dff9;
+    }
+}
