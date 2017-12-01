@@ -118,7 +118,8 @@ body {
 
 .dashboard {
   grid-area: dashboard;
-  padding: 0 1em;  
+  padding: 0 1em;
+    overflow-x: scroll;
 }
 
 .swal-overlay {
