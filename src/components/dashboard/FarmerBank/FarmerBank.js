@@ -188,7 +188,7 @@ class FarmerBank extends Component{
                                                 <div className="info">
                                                     <div className="name">{loan.loanDescription}
                                                         <div className="type">
-                                                            {loan.amount} ETH
+                                                            ₹{loan.amount}
                                                         </div>
                                                     </div>
                                                 </div>
