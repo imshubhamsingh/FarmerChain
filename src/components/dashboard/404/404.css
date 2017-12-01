@@ -2,12 +2,22 @@
 
 .MainTitle {
     display: block;
-    font-size: 3rem;
-    font-weight: lighter;
+    font-size: 9rem;
     text-align: center;
     color: #313041;
     font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    margin-top: 0px;
 }
+
+.MainDescription {
+    max-width: 50%;
+    font-size: 1.2rem;
+    font-weight: lighter;
+    color: #2f2d3c;
+    margin: -114px auto;
+}
+
 .MainGraphic {
     position: relative;
 }
@@ -52,43 +62,4 @@
         transform: rotate(360deg);
     }
 }
-@-webkit-keyframes ColorFiesta {
-    0% {
-        background: #a5dff9;
-    }
-    20% {
-        background: #ef5285;
-    }
-    40% {
-        background: #60c5ba;
-    }
-    60% {
-        background: #feee7d;
-    }
-    80% {
-        background: #6a60a9;
-    }
-    100% {
-        background: #a5dff9;
-    }
-}
-@keyframes ColorFiesta {
-    0% {
-        background: #a5dff9;
-    }
-    20% {
-        background: #ef5285;
-    }
-    40% {
-        background: #60c5ba;
-    }
-    60% {
-        background: #feee7d;
-    }
-    80% {
-        background: #6a60a9;
-    }
-    100% {
-        background: #a5dff9;
-    }
-}
+
