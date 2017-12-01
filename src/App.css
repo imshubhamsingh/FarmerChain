@@ -87,6 +87,7 @@ body {
     grid-area: dashboard;
     padding: 0 1em;  
     overflow-y: scroll;
+      overflow-x: hidden !important;
   }
   .bottombar {
     display: block !important;
