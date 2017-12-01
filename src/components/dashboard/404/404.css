@@ -1,0 +1,65 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.MainTitle {
+    display: block;
+    font-size: 9rem;
+    text-align: center;
+    color: #313041;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    margin-top: 0px;
+}
+
+.MainDescription {
+    max-width: 50%;
+    font-size: 1.2rem;
+    font-weight: lighter;
+    color: #2f2d3c;
+    margin: -114px auto;
+}
+
+.MainGraphic {
+    position: relative;
+}
+.Cog {
+    width: 14rem;
+    height: 14rem;
+    -webkit-animation: CogAnimation 5s infinite;
+    animation: CogAnimation 5s infinite;
+    cursor: pointer;
+    fill: #4f4d67fc;
+
+}
+.Spanner {
+    position: absolute;
+    -webkit-transform: rotate(20deg);
+    -ms-transform: rotate(20deg);
+    transform: rotate(20deg) translate(50%,50%);
+    right: 50%;
+    top: -23%;
+    width: 10rem;
+    height: 10rem;
+    fill: #313041;
+}
+
+@-webkit-keyframes CogAnimation {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes CogAnimation {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+

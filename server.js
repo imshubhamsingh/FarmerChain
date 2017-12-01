@@ -1,29 +1,19 @@
-"use strict";
-import 'babel-register'
-import config from './config';
-import express from 'express';
+const express = require('express');
+const path = require('path');
 
-import { serverRender } from './serverRender';
+const app = express();
 
-const server = express();
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '/build')));
 
-
-
-server.set('view engine', 'ejs');
-
-
-server.get(['/','/cartfarm','/poolfarm','/farmerbank'],(req, res)=>{
-    let url = req.url;
-    res.render('index', {
-        initialMarkup:  serverRender(url)
-    });
-})
-
-server.use(express.static('public'));
-
-
-
-
-server.listen(config.port, config.host, ()=>{
-    console.info('Express listening on port ',config.port);
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/build/index.html'));
 });
+
+
+const port = process.env.PORT || 5000;
+app.listen(port);
+
+console.log(`Project running on ${port}`);

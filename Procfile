@@ -1,1 +1,1 @@
-web: babel-node server.js --ignore public/
+web: node server.js

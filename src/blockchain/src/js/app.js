@@ -18,7 +18,6 @@ window.addEventListener('load', function() {
     }
   });
 
-
 function deployContract(){
   window.currentEtherbase = web3.eth.coinbase;
   var contract = web3.eth.contract([{"constant":true,"inputs":[],"name":"getBalance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_memberaddress","type":"address"}],"name":"removeMembers","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"addFundsorPayLoan","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"loanAmount","type":"uint256"}],"name":"requestLoan","outputs":[{"name":"status","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_memberaddress","type":"address"}],"name":"addMembers","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_modAddress","type":"address"},{"name":"_modName","type":"string"}],"name":"addMods","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getAmoundAdded","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"whoAdded","type":"address"},{"indexed":false,"name":"howMuch","type":"uint256"}],"name":"addedFunds","type":"event"}]);
@@ -32,7 +31,7 @@ function deployContract(){
       if (typeof contract.address !== 'undefined') {
             console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
       }
-    });
+   })
 
     updateBalance();
 }

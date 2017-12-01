@@ -1,0 +1,13 @@
+.sidebar-background{
+    background: url("./bg.jpg") center
+}
+
+.sidebar-background::after{
+    content: '';
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #3b3859a1;
+}

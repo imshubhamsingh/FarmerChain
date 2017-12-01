@@ -1,23 +1,19 @@
-@import url('https://fonts.googleapis.com/css?family=Oswald');
-
-
-.card-list{
+@import url("https://fonts.googleapis.com/css?family=Oswald");
+.card-list {
     display: flex;
     padding: 80px 0 0 0;
     flex-flow: nowrap;
     justify-content: space-around;
 }
-
-.card-list .card-list-item{
+.card-list .card-list-item {
     opacity: 0;
     transition: all 0.5s ease-in-out;
     width: 350px;
     margin-top: 0;
-    padding:0;
+    padding: 0;
     border-radius: 5px;
     cursor: pointer;
 }
-
 .card-list .card-list-item .card {
     transition: all 0.5s ease;
     width: 100%;
@@ -27,38 +23,56 @@
     font-family: 'Oswald', sans-serif;
     background: #ffffff;
     color: #5b5e66;
-    box-shadow: 2px 3px 23px rgb(212, 212, 212);
+    box-shadow: 2px 3px 23px #d4d4d4;
     border-radius: 5px;
 }
 
 @media screen and (max-width: 425px) {
-    .card-list{
+    .card-list {
         flex-flow: row wrap;
         padding: 10px 0 0 0;
     }
 }
 @media screen and (max-width: 768px) {
-    .card-list{
+    .card-list {
         display: block;
-        padding: 10px 0 0 0;
-
+        padding: 0px 0 10px 0;
     }
-    .card-list .card-list-item{
+    .card-list .card-list-item {
         width: 100%;
     }
 }
-
 @media screen and (min-width: 1024px) {
-    .card-list{
+    .card-list {
         display: flex;
     }
-    .card-list .card-list-item .card{
+    .card-list .card-list-item .card {
         width: 95%;
     }
-
-    .card-list .card-list-item:hover{
+    .card-list .card-list-item:hover {
         cursor: pointer;
         transition: all 0.5s ease-in-out;
-        margin-top: -8px
+        margin-top: -8px;
+    }
+}
+
+.service-card{
+    top: -244px;
+    left: -77px;
+    position: absolute;
+    width: 132%;
+    height: 100%;
+    font-size: 325%;
+    -ms-transform: rotate(-14deg);
+    transform: rotate(-14deg);
+    color: black;
+    padding-top: 290px;
+    padding-left: 0px;
+}
+
+@media (min-width: 768px) and (max-width: 1074px) {
+    .service-card{
+        font-size: 232%;
+        margin-left: 23px;
     }
 }
