@@ -65,7 +65,7 @@ class Bottombar extends Component{
                     </ul>
                 </div>
             </div>
-        )
+        );
     }
 }
 
@@ -80,4 +80,4 @@ function mapStateToProps(state) {
 }
 
 
-export default withRouter(connect(mapStateToProps,null)(Bottombar))
+export default withRouter(connect(mapStateToProps,null)(Bottombar));

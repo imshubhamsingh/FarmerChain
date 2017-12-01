@@ -15,7 +15,6 @@ class CartFarm extends Component{
     componentDidMount(){
         this.props.updateHeader('Cart Farm');
         $(document).ready(function() {
-
             (function ($) {
                 $('.tab ul.tabs').addClass('active').find('> li:eq(0)').addClass('current');
 
