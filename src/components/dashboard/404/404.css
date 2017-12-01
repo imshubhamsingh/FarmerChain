@@ -1,8 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
 .MainTitle {
     display: block;
     font-size: 3rem;
     font-weight: lighter;
     text-align: center;
+    color: #313041;
+    font-family: 'Roboto', sans-serif;
 }
 .MainGraphic {
     position: relative;
@@ -10,31 +14,24 @@
 .Cog {
     width: 14rem;
     height: 14rem;
-    fill: #6AAFE6;
     -webkit-animation: CogAnimation 5s infinite;
     animation: CogAnimation 5s infinite;
     cursor: pointer;
+    fill: #4f4d67fc;
+
 }
 .Spanner {
     position: absolute;
     -webkit-transform: rotate(20deg);
-    transform: rotate(20deg);
-    top: 10%;
-    left: 20%;
+    -ms-transform: rotate(20deg);
+    transform: rotate(20deg) translate(50%,50%);
+    right: 50%;
+    top: -23%;
     width: 10rem;
     height: 10rem;
-    fill: #8EC0E4;
+    fill: #313041;
 }
-.Hummingbird {
-    position: absolute;
-    width: 3rem;
-    height: 3rem;
-    fill: #30A9DE;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-}
+
 @-webkit-keyframes CogAnimation {
     0% {
         -webkit-transform: rotate(0deg);

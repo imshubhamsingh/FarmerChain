@@ -6,6 +6,7 @@ import { transactionDetailsSorted } from '../../../helpers/userAndTransaction'
 import {deleteLoanRequest, setLoanRequest, payLoanBack, payToPool} from '../../../Actions/FarmerBankAction'
 import { colorStatus} from '../../../helpers/bankHelper'
 import {extractUserDetails} from '../../../helpers/userAndTransaction'
+import { updateHeader } from '../../../Actions/HeaderTextAction';
 import swal from 'sweetalert2'
 import uuid from 'uuid/v1'
 import './farmerbank.css'
@@ -14,6 +15,7 @@ const jQuery = $;
 
 class FarmerBank extends Component{
     componentDidMount(){
+        this.props.updateHeader('Farmers Bank');
         $(document).ready(function() {
 
             (function ($) {
@@ -252,4 +254,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect(mapStateToProps,{ setLoanRequest ,deleteLoanRequest, payLoanBack, payToPool})(FarmerBank);
+export default connect(mapStateToProps,{ setLoanRequest ,deleteLoanRequest, payLoanBack, payToPool, updateHeader})(FarmerBank);

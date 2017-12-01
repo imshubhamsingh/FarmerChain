@@ -6,14 +6,15 @@ import PastOrders from './PastOrders'
 import {setProductRequest, getUpdateProductList, deleteProductRequest} from '../../../Actions/CartFarmAction'
 import {connect} from 'react-redux'
 import { transactionDetailsSorted } from '../../../helpers/userAndTransaction'
+import { updateHeader } from '../../../Actions/HeaderTextAction';
 import './cartfarm.css';
 import $ from 'jquery';
 const jQuery = $;
 
 class CartFarm extends Component{
     componentDidMount(){
+        this.props.updateHeader('Cart Farm');
         $(document).ready(function() {
-
             (function ($) {
                 $('.tab ul.tabs').addClass('active').find('> li:eq(0)').addClass('current');
 
@@ -231,4 +232,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps,{setProductRequest, getUpdateProductList, deleteProductRequest})(CartFarm)
+export default connect(mapStateToProps,{setProductRequest, getUpdateProductList, deleteProductRequest, updateHeader})(CartFarm);
