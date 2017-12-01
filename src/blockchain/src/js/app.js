@@ -221,3 +221,12 @@ var isChecksumAddress = function (address) {
   return true;
 };
 
+/* BlockChain length{
+  web3.eth.blockNumber  //Highest block in the chain
+}
+
+  DetailsofBlock{
+    web3.eth.getBlock(<blockNumber>);
+  }
+
+*/
