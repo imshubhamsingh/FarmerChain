@@ -118,6 +118,9 @@ class Login extends Component{
                         </div>
                     </form>
                     <div className="form-recovery login">{this.state.errorLogin.message}</div>
+                    <div className="signUp-bottom" onClick={this.openSignUp}>
+                        Sign Up
+                    </div>
                 </div>
             </div>
             <div className={"form-panel two "+(this.state.signUp?"show":'')} onClick={this.openSignUp}>

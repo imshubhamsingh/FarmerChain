@@ -7,12 +7,11 @@ form{
     position: relative;
     background: #FFFFFF;
     width: 600px;
-    border-radius: 4px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     margin: 100px auto 10px;
     overflow: hidden;
-    border-radius: 6px 0 0 6px;
+    border-radius: 6px 0 0 0;
     display: none;
 }
 
@@ -46,7 +45,7 @@ form{
         width: 82vw;       
     }
     .form-panel {
-        padding: 59px calc(-11% + 60px) 73px 23px !important;
+        padding: 59px calc(-11% + 87px) 73px 23px !important;
       
     }
     .form-panel.two {
@@ -61,8 +60,7 @@ form{
         width: 82vw;       
     }
     .form-panel {
-        padding: 59px calc(-8% + 93px) 73px 23px !important;
-      
+
     }
     .form-panel.two {
         padding: 59px calc(-6% + 102px) calc(-8% + 60px) 39px !important;
@@ -258,4 +256,16 @@ form{
     60% {
        transform: translateX(-15px);
     }
+}
+
+.signUp-bottom{
+    background-color: #3b3859;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    line-height: 2;
+    height: 31px;
+    width: 100%;
+    margin-left: -11px;
 }
