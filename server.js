@@ -1,29 +1,32 @@
 "use strict";
-import 'babel-register'
-import config from './config';
-import express from 'express';
 
-import { serverRender } from './serverRender';
+require('babel-register');
 
-const server = express();
+var _config = require('./config');
 
+var _config2 = _interopRequireDefault(_config);
 
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
+var _serverRender = require('./serverRender');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var server = (0, _express2.default)();
 
 server.set('view engine', 'ejs');
 
-
-server.get(['/','/cartfarm','/poolfarm','/farmerbank'],(req, res)=>{
-    let url = req.url;
+server.get(['/', '/cartfarm', '/poolfarm', '/farmerbank'], function (req, res) {
+    var url = req.url;
     res.render('index', {
-        initialMarkup:  serverRender(url)
+        initialMarkup: (0, _serverRender.serverRender)(url)
     });
-})
+});
 
-server.use(express.static('public'));
+server.use(_express2.default.static('public'));
 
-
-
-
-server.listen(config.port, config.host, ()=>{
-    console.info('Express listening on port ',config.port);
+server.listen(_config2.default.port, _config2.default.host, function () {
+    console.info('Express listening on port ', _config2.default.port);
 });
