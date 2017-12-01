@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
 
 
 module.exports = {
@@ -8,6 +9,7 @@ module.exports = {
         path: __dirname+'/public',
         filename:'bundle.js'
     },
+    devtool: 'source-map',
     module:{
         loaders:[
             {
@@ -42,6 +44,31 @@ module.exports = {
         new ExtractTextPlugin({ // define where to save the file
             filename: './bundle.css',
             allChunks: true,
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            mangle: true,
+            compress: {
+                warnings: false, // Suppress uglification warnings
+                pure_getters: true,
+                unsafe: true,
+                unsafe_comps: true,
+                screw_ie8: true
+            },
+            output: {
+                comments: false,
+            },
+            exclude: [/\.min\.js$/gi] // skip pre-minified libs
+        }),
+        new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
+        new webpack.NoErrorsPlugin(),
+        new CompressionPlugin({
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.js$|\.css$|\.html$/,
+            threshold: 10240,
+            minRatio: 0
         })
+
     ]
 };
