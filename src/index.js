@@ -1,31 +1,23 @@
 import React from 'react'
-import { render } from 'react-dom'
-import {BrowserRouter as Router} from 'react-router-dom'
+import history from '../history'
+import { hydrate } from 'react-dom'
+import { Router} from 'react-router-dom'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import {reducer} from './Reducers/index'
 import {createStore, applyMiddleware} from 'redux'
 import ClientApp from './ClientApp'
-import { persistStore} from 'redux-persist'
-import { PersistGate } from 'redux-persist/es/integration/react'
 
 
 
-function configureStore () {
-    // ...
-    let store = createStore(reducer, applyMiddleware(thunk))
-    let persistor = persistStore(store)
-    return { persistor, store }
-}
+let store = createStore(reducer, applyMiddleware(thunk))
 
-const { persistor, store } = configureStore()
 
-render(
+
+hydrate(
         <Provider store={store}>
-            <PersistGate persistor={persistor}>
-                <Router>
+            <Router history={history}>
                    <ClientApp/>
                 </Router>
-            </PersistGate>
         </Provider>
      ,document.getElementById('root'))

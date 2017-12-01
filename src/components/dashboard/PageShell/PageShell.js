@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import './pageshell.css';
 
 const PageShell = Service => {
     return props =>

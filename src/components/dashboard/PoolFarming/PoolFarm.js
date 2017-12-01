@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {setPoolRequest, getUpdatePoolList, deletePoolRequest} from '../../../Actions/PoolFarmAction'
 import {connect} from 'react-redux'
-import './poolfarm.css';
 
 
 import $ from 'jquery';

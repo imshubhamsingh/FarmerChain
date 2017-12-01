@@ -6,7 +6,6 @@ import {logout} from "../../Actions/UserActions";
 import { withRouter } from 'react-router-dom'
 import {countAcceptedPool, orderProducts, transactionDone, transactionReceived} from '../../helpers/userServiceDetails'
 
-import './main.css'
 
 import $ from 'jquery';
 const jQuery = $;
