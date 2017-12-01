@@ -36,7 +36,7 @@
 @media screen and (max-width: 768px) {
     .card-list {
         display: block;
-        padding: 10px 0 0 0;
+        padding: 0px 0 10px 0;
     }
     .card-list .card-list-item {
         width: 100%;
