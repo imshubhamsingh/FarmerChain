@@ -55,3 +55,24 @@
         margin-top: -8px;
     }
 }
+
+.service-card{
+    top: -244px;
+    left: -77px;
+    position: absolute;
+    width: 132%;
+    height: 100%;
+    font-size: 325%;
+    -ms-transform: rotate(-14deg);
+    transform: rotate(-14deg);
+    color: black;
+    padding-top: 290px;
+    padding-left: 0px;
+}
+
+@media (min-width: 768px) and (max-width: 1074px) {
+    .service-card{
+        font-size: 232%;
+        margin-left: 23px;
+    }
+}

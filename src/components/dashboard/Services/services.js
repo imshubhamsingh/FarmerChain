@@ -4,6 +4,9 @@ import {TimelineLite, Elastic} from 'gsap';
 import {connect} from 'react-redux';
 import { updateHeader } from '../../../Actions/HeaderTextAction';
 import $ from 'jquery';
+import PoolFarmImg from './poolFarming.jpg'
+import FarmerBank from './farmerBank.png'
+import CartFarm from './cartFarm.jpg'
 import './services.css'
 const jQuery = $;
 
@@ -33,15 +36,19 @@ class Services extends Component{
         return(
             <ul className="card-list">
                 <Link to="/poolFarm" style={{ textDecoration: 'none' }} className="card-list-item">
-                    <div className="card">
-                        <div>Pool Farming</div>
+                    <div className="card" style={{background:`url(${PoolFarmImg}) center`,overflow:'hidden', position:'relative'}}>
+                        <div className="service-card" style={{backgroundColor:'lime'}}>Pool Farming</div>
                     </div>
                 </Link>
                 <Link to="/cartFarm" style={{ textDecoration: 'none' }} className="card-list-item">
-                    <div className="card">Cart Farm</div>
+                    <div className="card" style={{background:`url(${CartFarm}) center`,overflow:'hidden', position:'relative',objectFit: 'cover',objectPosition: 'center right'}}>
+                        <div className="service-card" style={{backgroundColor:'yellow'}}>Cart Farming</div>
+                    </div>
                 </Link>
                 <Link to="/farmerBank" style={{ textDecoration: 'none' }} className="card-list-item">
-                    <div className="card">Farmers' Bank</div>
+                    <div className="card" style={{background:`url(${FarmerBank}) center`,overflow:'hidden', position:'relative'}}>
+                        <div className="service-card" style={{backgroundColor:'blue'}}>Farmers' Bank</div>
+                    </div>
                 </Link>
             </ul>
         );
