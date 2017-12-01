@@ -1,7 +1,7 @@
 "use strict"
 import config from './config';
 import React from 'react';
-import history from './history'
+import history from './src/history'
 import {renderToString} from 'react-dom/server';
 import ClientApp from './src/ClientApp';
 import thunk from 'redux-thunk'
