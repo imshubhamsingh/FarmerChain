@@ -1,6 +1,7 @@
 #bottombar-menu {
   display: flex;
   justify-content: space-around;
+  height: 100%;
   .bottom-menu-list {
     padding: 0 10px;
     margin: 0;
@@ -27,7 +28,11 @@
     }
   }
 }
-
+@media (min-width: 320px) and (max-width: 768px) {
+  #bottombar-menu {
+    width: 764px;
+  }
+}
 @media screen and (max-width: 320px) {
   #bottombar-menu {
     li.bottom-menu-list {
@@ -58,5 +63,31 @@
       }
     }
     margin-top: 1px;
+  }
+}
+
+.main-menu {
+  position: absolute;
+  display: block;
+  width: 98%;
+  height: 74px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  ul {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    overflow: hidden;
+    float: left;
+    li {
+      display: inline-block;
+      margin: 0px;
+      padding: 10px 20px;
+    }
   }
 }

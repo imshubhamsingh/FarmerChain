@@ -69,3 +69,17 @@ li.menu-list {
     transform: translateY(2px);
   }
 }
+
+.sideArrow {
+  position: absolute;
+  transform: rotate(180deg);
+  right: 23px;
+  font-size: 26px;
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .sideArrow {
+    display: block;
+  }
+}

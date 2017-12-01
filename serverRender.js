@@ -1,3 +1,4 @@
+"use strict"
 import config from './config';
 import React from 'react';
 import history from './history'

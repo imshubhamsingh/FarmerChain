@@ -1,4 +1,4 @@
-"user strict";
+"use strict";
 import 'babel-register'
 import config from './config';
 import express from 'express';

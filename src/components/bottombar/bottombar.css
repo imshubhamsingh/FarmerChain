@@ -62,3 +62,29 @@
         margin-top: 1px;
     }
 }
+
+.main-menu {
+    position: absolute;
+    display: block;
+    width: 320px;
+    height: 40px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+.main-menu ul {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    overflow: hidden;
+    float: left;
+}
+.main-menu ul li {
+    display: inline-block;
+    margin: 0px;
+    padding: 10px 20px;
+}

@@ -107,9 +107,17 @@ body {
 .swal-overlay {
   background-color: rgba(49, 48, 66, 0.45); }
 
+.menu {
+  display: none; }
+
+@media screen and (max-width: 768px) {
+  .menu {
+    display: block; } }
+
 #bottombar-menu {
   display: flex;
-  justify-content: space-around; }
+  justify-content: space-around;
+  height: 100%; }
   #bottombar-menu .bottom-menu-list {
     padding: 0 10px;
     margin: 0;
@@ -128,6 +136,10 @@ body {
       text-align: center;
       margin: -24px 0 -7px;
       color: white; }
+
+@media (min-width: 320px) and (max-width: 768px) {
+  #bottombar-menu {
+    width: 764px; } }
 
 @media screen and (max-width: 320px) {
   #bottombar-menu {
@@ -149,6 +161,29 @@ body {
       text-align: center;
       font-size: 25px;
       margin-top: -18px; } }
+
+.main-menu {
+  position: absolute;
+  display: block;
+  width: 98%;
+  height: 74px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch; }
+  .main-menu ul {
+    position: relative;
+    display: inline-block;
+    width: auto;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+    overflow: hidden;
+    float: left; }
+    .main-menu ul li {
+      display: inline-block;
+      margin: 0px;
+      padding: 10px 20px; }
 
 form {
   display: block; }
@@ -415,6 +450,17 @@ li.menu-list {
     color: black; }
   .logOut:active {
     transform: translateY(2px); }
+
+.sideArrow {
+  position: absolute;
+  transform: rotate(180deg);
+  right: 23px;
+  font-size: 26px;
+  display: none; }
+
+@media screen and (max-width: 768px) {
+  .sideArrow {
+    display: block; } }
 
 .SlideIn-appear {
   transform: translateY(30px);

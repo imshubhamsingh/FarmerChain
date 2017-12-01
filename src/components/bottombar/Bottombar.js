@@ -7,7 +7,7 @@ class Bottombar extends Component{
     render(){
         return(
             <div className='bottombar box'>
-                <div>
+                <div className="main-menu">
                     <ul id="bottombar-menu">
                         <li className="bottom-menu-list">
                             <div className="bottom-menu-list-item">
