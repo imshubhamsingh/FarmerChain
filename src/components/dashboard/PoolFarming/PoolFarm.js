@@ -62,18 +62,6 @@ class PoolFarm extends Component{
         })
     }
 
-    acceptedUserList = (pool)=>{
-        // const list = [];
-        // if(pool.acceptedBy !== null || pool.acceptedBy !== undefined){
-        //     for(const poolAcceptedId in pool.acceptedBy){
-        //         list.push(pool.acceptedBy[poolAcceptedId].displayName)
-        //     }
-        // }
-        // if(list.length >0) {
-        //     return list.join(" ,  ")
-        // }else return "None"
-        return
-    }
     render(){
         return(
             <div>
@@ -91,7 +79,7 @@ class PoolFarm extends Component{
                             <form onSubmit={this.handleSubmit} action="">
                                 <div>
                                     <label htmlFor="pool">Pool Description</label>
-                                    <input type="text" id="pool" value={this.state.description} onChange={event=> this.setState({description:event.target.value})}/>
+                                    <input type="text" id="pool" value={this.state.description} onChange={event=> this.setState({description:event.target.value})} required/>
                                 </div>
                                 <div>
                                     <label htmlFor="type">Pool Type</label>

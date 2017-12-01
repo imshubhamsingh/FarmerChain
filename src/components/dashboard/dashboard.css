@@ -205,11 +205,7 @@ label {
     text-align: left;
 }
 
-.pool-list ul > li {
-    padding: 10px;
-    background-color: #f3f3f3;
-    margin: 20px;
-}
+
 
 @media screen and (max-width: 463px) {
     .tab li {

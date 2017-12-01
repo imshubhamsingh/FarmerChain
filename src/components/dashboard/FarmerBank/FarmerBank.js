@@ -171,13 +171,13 @@ class FarmerBank extends Component{
                             <form onSubmit={this.handleSubmit} action="">
                                 <div>
                                     <label htmlFor="load-desc">Loan Description</label>
-                                    <input type="text" id="load-desc" value={this.state.loanDescription} onChange={event=> this.setState({loanDescription:event.target.value})}/>
+                                    <input type="text" id="load-desc" value={this.state.loanDescription} onChange={event=> this.setState({loanDescription:event.target.value})} required/>
                                 </div>
                                 <div>
                                     <label htmlFor="loan-amt">Loan Amount (₹)</label>
-                                    <input type="number" id="loan-amt" value={this.state.amount} onChange={event=> this.setState({amount:event.target.value})} min="0"/>
+                                    <input type="number" id="loan-amt" value={this.state.amount} onChange={event=> this.setState({amount:event.target.value})} min="0" />
                                 </div>
-                                <button className="btn btn-effect" type="submit" style={{width:'359px'}}>{this.state.buttonText}</button>
+                                <button className="btn btn-effect" type="submit" >{this.state.buttonText}</button>
                             </form>
                             <div className="product-user-list">
                                 <h3>Your Loan Status</h3>

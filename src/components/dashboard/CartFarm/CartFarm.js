@@ -99,7 +99,7 @@ class CartFarm extends Component{
                             <form onSubmit={this.handleSubmit}>
                                 <div>
                                     <label htmlFor="product">Product Name</label>
-                                    <input type="text" id="product" value={this.state.productName} onChange={event=> this.setState({productName:event.target.value})}/>
+                                    <input type="text" id="product" value={this.state.productName} onChange={event=> this.setState({productName:event.target.value})} required/>
                                 </div>
                                 <div>
                                     <label htmlFor="type">Quantity(kg)</label>
@@ -108,6 +108,8 @@ class CartFarm extends Component{
                                         <option value="2">2</option>
                                         <option value="3">3</option>
                                         <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
                                     </select>
                                 </div>
                                 <button className="btn btn-effect" type="submit">{this.state.buttonText}</button>
