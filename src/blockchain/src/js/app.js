@@ -60,7 +60,7 @@ function requestLoan(){
     }else{
       console.log(result);
       // console.log(getReceipts(result));
-      getReceipts(result).then(function(receipt){
+      await getReceipts(result).then(function(receipt){
         console.log(receipt);
         document.getElementById("receipt").classList.remove("hidden");
         document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
@@ -80,7 +80,7 @@ function payLoan(){
     }else{
       console.log(result);
       // console.log(getReceipts(result));
-      getReceipts(result).then(function(receipt){
+      await getReceipts(result).then(function(receipt){
         console.log(receipt);
         document.getElementById("receipt").classList.remove("hidden");
         document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
@@ -106,7 +106,7 @@ function removeMembers(){
     }else{
       console.log(result);
       // console.log(getReceipts(result));
-      getReceipts(result).then(function(receipt){
+      await getReceipts(result).then(function(receipt){
         console.log(receipt);
         document.getElementById("receipt").classList.remove("hidden");
         document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
@@ -129,7 +129,7 @@ function addMods(){
     }else{
       console.log(result);
       // console.log(getReceipts(result));
-      getReceipts(result).then(function(receipt){
+      await getReceipts(result).then(function(receipt){
         console.log(receipt);
         document.getElementById("receipt").classList.remove("hidden");
         document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
@@ -159,7 +159,7 @@ function addMembers(){
     }else{
       console.log(result);
       // console.log(getReceipts(result));
-      getReceipts(result).then(function(receipt){
+      await getReceipts(result).then(function(receipt){
         console.log(receipt);
         document.getElementById("receipt").classList.remove("hidden");
         document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
@@ -191,41 +191,10 @@ function switchAccount(){
 
 }
 
-//problematic function
-        // function payLoan(){
-        //   var address = $(payLoan).val();
-        //   console.log(address);
-        //   instance.addFundsorPayLoan.sendTransaction({from: currentEtherbase, value: address}, function(error, result){
-        //     if(error){
-        //       console.log("Error: ", error);
-        //     }else{
-        //       console.log(result);
-        //       // console.log(getReceipts(result));
-        //       getReceipts(result).then(function(receipt){
-        //         console.log(receipt);
-        //         document.getElementById("receipt").classList.remove("hidden");
-        //         document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
-        //       }).catch(function(error){
-        //         console.log(error);
-        //       });
-        //     }
-        //   });
-        // }
-/* somehow executing multiple times in a infinite loop */
-
 async function getReceipts(hash){
   var receipt = web3.eth.getTransactionReceipt(hash);
   return receipt;
 }
-
-// /**
-//  * Checks if the given string is an address
-//  *
-//  *@method isAddress
-//  * @param {String} address the given HEX adress
-//  * @return {Boolean}
-// */
-
 
 var isAddress = function (address) {
   if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
@@ -240,15 +209,7 @@ var isAddress = function (address) {
   }
 };
 
-// /**
-// * Checks if the given string is a checksummed address
-// *
-// * @method isChecksumAddress
-// * @param {String} address the given HEX adress
-// * @return {Boolean}
-// */
 var isChecksumAddress = function (address) {
-  // Check each case
   address = address.replace('0x','');
   var addressHash = web3.sha3(address.toLowerCase());
   for (var i = 0; i < 40; i++ ) {
