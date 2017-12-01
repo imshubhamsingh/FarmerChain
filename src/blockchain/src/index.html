@@ -26,8 +26,10 @@
 
         <div class="container">
                 <div class="col-md-3 well">
-                        <h5 class="">Balance: <span id="contractBalance">0</span> Ether</h2>
+                        <h5 class="">Contract Balance: <span id="contractBalance">0</span> Ether</h2>
                         <button class="btn btn-sm" style="margin-bottom: 5px;" onclick="updateBalance()">Update Balance</button>
+                        <h5>Account Balance: <span id="accountBalance">0</span> Ether</h5>
+                        <!-- <button class="btn btn-sm" onclick="updateBalance()"></button> -->
                         <!-- <input class="form-control" type="text" name="switchAccount" id="switchAccount" /> -->
                 </div>
                 <div class="col-md-9 well">
@@ -75,8 +77,17 @@
                                  <button class="btn btn-primary" onclick="switchAccount()" type="button" style="margin-bottom: -25px;">Switch</button>
                             </span>
                     </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="requestLoan">Request Loan</label>
+                        <input name="requestLoan" id="requestLoan" class="form-control" style="" type="text" placeholder="Enter amount in Wei"/>
+                        <!-- <input type="text" class="form-control"> -->
+                        <span class="input-group-btn">
+                             <button class="btn btn-primary" onclick="requestLoan()" type="button" style="margin-bottom: -25px;">Request Loan</button>
+                        </span>
+                    </div>
 
-                    <button class="btn btn-primary" onclick="paynow()" type="button" style="margin-bottom: -25px;">Pay</button>
+                    <!-- <button class="btn btn-primary" onclick="paynow()" type="button" style="margin-bottom: -25px;">Pay</button> -->
                 </div>
         </div>
 

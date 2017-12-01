@@ -53,6 +53,8 @@ function deployContract(){
 function updateBalance(){
   x = web3.fromWei(instance.getBalance(), "ether").toNumber();
   document.getElementById("contractBalance").innerHTML = x;
+  y = web3.fromWei(web3.eth.getBalance(currentEtherbase).toNumber(), "ether");
+  document.getElementById("accountBalance").innerHTML = y;
   console.log(x);
 }
 
@@ -157,25 +159,25 @@ function switchAccount(){
 }
 
 //problematic function
-        function payLoan(){
-          var address = $(payLoan).val();
-          console.log(address);
-          instance.addFundsorPayLoan.sendTransaction({from: currentEtherbase, value: address}, function(error, result){
-            if(error){
-              console.log("Error: ", error);
-            }else{
-              console.log(result);
-              // console.log(getReceipts(result));
-              getReceipts(result).then(function(receipt){
-                console.log(receipt);
-                document.getElementById("receipt").classList.remove("hidden");
-                document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
-              }).catch(function(error){
-                console.log(error);
-              });
-            }
-          });
-        }
+        // function payLoan(){
+        //   var address = $(payLoan).val();
+        //   console.log(address);
+        //   instance.addFundsorPayLoan.sendTransaction({from: currentEtherbase, value: address}, function(error, result){
+        //     if(error){
+        //       console.log("Error: ", error);
+        //     }else{
+        //       console.log(result);
+        //       // console.log(getReceipts(result));
+        //       getReceipts(result).then(function(receipt){
+        //         console.log(receipt);
+        //         document.getElementById("receipt").classList.remove("hidden");
+        //         document.getElementById("receipt").innerHTML = "<b>Success!</b><br /><b>Transaction Hash</b>: " + receipt.transactionHash + "<br /><b>Blockhash</b>:" + receipt.blockHash + "<br/><b>Gas Used<b>: " + receipt.gasUsed;
+        //       }).catch(function(error){
+        //         console.log(error);
+        //       });
+        //     }
+        //   });
+        // }
 /* somehow executing multiple times in a infinite loop */
 
 async function getReceipts(hash){
