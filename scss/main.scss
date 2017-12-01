@@ -4,3 +4,23 @@
 @import "sidebar/sidebar";
 @import "pageshell";
 @import "dashboard/main";
+
+::-webkit-scrollbar-track
+{
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  display: none;
+}
+
+::-webkit-scrollbar
+{
+  width: 5px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb
+{
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(49, 48, 66,.1);
+  background-color: rgb(49, 48, 66);
+}

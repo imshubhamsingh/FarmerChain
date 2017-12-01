@@ -83,3 +83,14 @@ li.menu-list {
     display: block;
   }
 }
+
+.menu{
+  display: block;
+}
+
+@media screen and (max-width: 768px){
+  .menu{
+    display: none;
+
+  }
+}
