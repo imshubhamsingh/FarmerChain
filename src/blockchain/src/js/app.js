@@ -18,19 +18,6 @@ window.addEventListener('load', function() {
     }
   });
 
-function updateBalance(){
-  contractBalance = web3.fromWei(instance.getBalance(), "ether").toNumber();
-  document.getElementById("contractBalance").innerHTML = contractBalance;
-  accountBalance = web3.fromWei(web3.eth.getBalance(currentEtherbase).toNumber(), "ether");
-  document.getElementById("accountBalance").innerHTML = accountBalance;
-}
-
-
-function printcoinbase(){
-  console.log("coinbase: ", currentEtherbase);
-  $("#currentAccount").text = toString(currentEtherbase);
-  document.getElementById("currentAccount").innerText = currentEtherbase;
-}
 
 function deployContract(){
   window.currentEtherbase = web3.eth.coinbase;
@@ -49,6 +36,20 @@ function deployContract(){
 
     updateBalance();
 }
+
+function updateBalance(){
+  contractBalance = web3.fromWei(instance.getBalance(), "ether").toNumber();
+  document.getElementById("contractBalance").innerHTML = contractBalance;
+  accountBalance = web3.fromWei(web3.eth.getBalance(currentEtherbase).toNumber(), "ether");
+  document.getElementById("accountBalance").innerHTML = accountBalance;
+}
+
+function printCoinbase(){
+  console.log("coinbase: ", currentEtherbase);
+  $("#currentAccount").text = toString(currentEtherbase);
+  document.getElementById("currentAccount").innerText = currentEtherbase;
+}
+
 
 function requestLoan(){
   requestedAmount = $(requestLoanAmount).val();
