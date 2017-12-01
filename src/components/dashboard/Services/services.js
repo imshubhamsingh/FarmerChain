@@ -36,7 +36,7 @@ class Services extends Component{
         return(
             <ul className="card-list">
                 <Link to="/poolFarm" style={{ textDecoration: 'none' }} className="card-list-item">
-                    <div className="card" style={{background:`url(${PoolFarmImg}) center`,overflow:'hidden', position:'relative'}}>
+                    <div className="card" style={{background:`url(${PoolFarmImg}) center`,overflow:'hidden', position:'relative',objectFit: 'cover',objectPosition: 'center right'}}>
                         <div className="service-card" style={{backgroundColor:'lime'}}>Pool Farming</div>
                     </div>
                 </Link>
