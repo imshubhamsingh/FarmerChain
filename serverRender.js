@@ -1,6 +1,7 @@
 import config from './config';
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import history from './history'
+import {renderToString} from 'react-dom/server';
 import ClientApp from './src/ClientApp';
 import thunk from 'redux-thunk'
 import { StaticRouter } from 'react-router'
@@ -12,9 +13,9 @@ let store = createStore(reducer, applyMiddleware(thunk))
 
 
 
-let serverRender = (req) =>{
-          return   ReactDOMServer.renderToString(<Provider store={store}>
-                    <StaticRouter location={req.url}>
+let serverRender = (url) =>{
+          return   renderToString(<Provider store={store}>
+                    <StaticRouter location={url}>
                         <ClientApp/>
                     </StaticRouter>
             </Provider>);
