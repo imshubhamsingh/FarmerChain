@@ -1,1 +1,1 @@
-web: npm run bnode server.js
+web: npm run build
