@@ -1,14 +1,14 @@
-let getEthValueofAccount = (web3,account) => new Promise((resolve, reject) => {
-    console.log("web3",web3)
-    console.log(typeof account)
-    web3.eth.getBalance(account, (value)=>{
-        if (value = null) {
-            reject(value);
-        } else {
-            console.log(value)
-            resolve(value);
-        }
-    } )
-})
+import { web3 } from './getWeb3'
+let getEthValueofAccount = (account) =>{
+    let moneyVal = 0;
+    web3((web3)=>{
+        return web3.eth.getBalance(account).then(money=>{
+            console.log(money)
+            moneyVal = money
+        })
+    })
+    return moneyVal
+}
+
 
 export default getEthValueofAccount

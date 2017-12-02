@@ -14,21 +14,10 @@ const jQuery = $;
 
 class Main extends Component{
     state = {
-        money: 0
+        money: 0 || getEthValue(this.props.ethaccount)
     }
     componentDidMount(){
-        getWeb3
-            .then(results => {
-               const web3 = results.web3
-                web3.eth.getBalance(this.props.ethaccount).then(money=>{
-                    this.setState({
-                        money
-                    })
-                })
-            })
-            .catch(() => {
-                console.log('Error finding web3.')
-            })
+
         $(document).ready(function() {
 
             (function ($) {
@@ -57,9 +46,6 @@ class Main extends Component{
         this.props.logout()
     }
 
-    getEth = ()=>{
-        console.log(this.props.web3)
-    }
     render(){
         return(
             <div className="sidebar-main ">

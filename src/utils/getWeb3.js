@@ -36,3 +36,16 @@ let getWeb3 = new Promise(function(resolve, reject) {
 })
 
 export default getWeb3
+
+
+export function web3(fn){
+    return getWeb3
+        .then(results => {
+            const web3 = results.web3
+            return fn(web3)
+        })
+        .catch(() => {
+            console.log('Error finding web3.')
+        })
+
+}
