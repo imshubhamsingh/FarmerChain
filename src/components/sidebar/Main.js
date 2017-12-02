@@ -3,7 +3,7 @@ import  gravatar from 'gravatar';
 import {TimelineLite, Elastic} from 'gsap';
 import { connect } from 'react-redux';
 import {logout} from '../../Actions/UserActions';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import {countAcceptedPool, orderProducts, transactionDone, transactionReceived} from '../../helpers/userServiceDetails';
 import './main.css'
 import getEthValue from '../../utils/getEthValueofAccount'
@@ -114,9 +114,9 @@ class Main extends Component{
                         </li>
                     </ul>
                 </div>
-                <button className="logOut" onClick={this.logOutFn}>
+                <Link to="/" className="logOut" style={{textDecoration: "none"}} onClick={this.logOutFn}>
                     Log Out
-                </button>
+                </Link>
 
             </div>
         );
