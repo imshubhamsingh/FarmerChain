@@ -24,7 +24,7 @@ class Sidebar extends Component{
     }
 
     current = () => {
-        return this.props.user.loading?<Login setDisplayName={this.setDisplayName}/>:<Main account={this.state.account} displayName={this.state.displayName} showSidebar={this.props.showSidebar}/>;
+        return this.props.user.loading?<Login setDisplayName={this.setDisplayName}/>:<Main account={this.state.account} web3={this.props.web3} displayName={this.state.displayName} showSidebar={this.props.showSidebar}/>;
     }
     render(){
         return(

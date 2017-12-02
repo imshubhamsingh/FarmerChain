@@ -6,12 +6,29 @@ import {logout} from '../../Actions/UserActions';
 import { withRouter } from 'react-router-dom';
 import {countAcceptedPool, orderProducts, transactionDone, transactionReceived} from '../../helpers/userServiceDetails';
 import './main.css'
+import getEthValue from '../../utils/getEthValueofAccount'
+import getWeb3 from '../../utils/getWeb3'
 
 import $ from 'jquery';
 const jQuery = $;
 
 class Main extends Component{
+    state = {
+        money: 0
+    }
     componentDidMount(){
+        getWeb3
+            .then(results => {
+               const web3 = results.web3
+                web3.eth.getBalance(this.props.ethaccount).then(money=>{
+                    this.setState({
+                        money
+                    })
+                })
+            })
+            .catch(() => {
+                console.log('Error finding web3.')
+            })
         $(document).ready(function() {
 
             (function ($) {
@@ -40,6 +57,9 @@ class Main extends Component{
         this.props.logout()
     }
 
+    getEth = ()=>{
+        console.log(this.props.web3)
+    }
     render(){
         return(
             <div className="sidebar-main ">
@@ -59,7 +79,7 @@ class Main extends Component{
                                     Current Balance
                                 </h6>
                                 <h1>
-                                    ₹{this.props.money}
+                                    <span style={{fontSize:'10px'}}>₹{ this.state.money }</span>
                                 </h1>
                             </div>
                         </li>
