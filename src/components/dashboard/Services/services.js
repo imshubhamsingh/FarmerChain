@@ -22,10 +22,10 @@ class Services extends Component{
 
                 t1Loader.staggerFromTo(
                     serviceList,
-                    1,
+                    0.1,
                     { y: +20, autoAlpha:0},
                     { y: 0, autoAlpha:1, ease:Elastic.easeIn},
-                    0.5
+                    0.2
                 );
             })(jQuery);
 

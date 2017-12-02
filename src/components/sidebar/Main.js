@@ -25,12 +25,12 @@ class Main extends Component{
 
                 t1Loader.staggerFromTo(
                     serviceList,
-                    1,
+                    0.25,
                     { y: +20, autoAlpha:0},
                     { y: 0, autoAlpha:1, ease: Elastic.SlowMo},
-                    0.5
+                    0.15
                 )
-                    .fromTo(img, 0.5, {y:50, autoAlpha:0},{ y: 0, autoAlpha:1, ease: Elastic.SlowMo}, '-=3.25');
+                    .fromTo(img, 0.5, {y:50, autoAlpha:0},{ y: 0, autoAlpha:1, ease: Elastic.SlowMo}, '-=1.25');
             })(jQuery);
 
         });

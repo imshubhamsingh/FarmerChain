@@ -118,7 +118,7 @@ class Login extends Component{
                         </div>
                     </form>
                     <div className="form-recovery login">{this.state.errorLogin.message}</div>
-                    <div className="signUp-bottom" onClick={this.openSignUp}>
+                    <div style={{cursor:'pointer'}} className="signUp-bottom" onClick={this.openSignUp}>
                         Sign Up
                     </div>
                 </div>
