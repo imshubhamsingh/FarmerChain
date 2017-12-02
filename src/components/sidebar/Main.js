@@ -15,10 +15,14 @@ const jQuery = $;
 class Main extends Component{
     state = {
         money: 0,
-        web3: window.web3
     }
     componentDidMount(){
-        console.log(this.state.web3)
+        this.props.web3.eth.getBalance(this.props.ethaccount).then(money => {
+            this.setState({
+                money: parseFloat(money / 1e16).toFixed(2)
+            })
+        })
+        console.log("sidebar", this.props.web3)
         $(document).ready(function() {
 
             (function ($) {
@@ -66,7 +70,7 @@ class Main extends Component{
                                     Current Balance
                                 </h6>
                                 <h1>
-                                    {/*<span style={{fontSize:'10px'}}>₹{ this.state.web3.}</span>*/}
+                                 ₹{this.state.money}
                                 </h1>
                             </div>
                         </li>
@@ -131,7 +135,6 @@ function mapStateToProps(state) {
         ethaccount: state.user.account,
         products: state.products,
         transactions: state.transactions,
-        eth: state.web3
     };
 }
 

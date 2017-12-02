@@ -27,6 +27,12 @@ class ClientApp extends Component{
         sidebar: false
     }
     componentWillMount(){
+        getWeb3.then(result=>{
+            console.log("result", result)
+            this.setState({
+                web3:result.web3
+            })
+        })
         this.props.getUser();
         this.props.getUpdateProductList();
         this.props.getUpdatePoolList();
@@ -44,7 +50,11 @@ class ClientApp extends Component{
     }
 
     render(){
-        return(
+        if(this.state.web3 ===null){
+            return(
+                <div></div>
+            )
+        }else return(
             < div className="app-layout">
                     <Sidebar sidebarShow={this.state.sidebar} showSidebar={this.showSidebar} web3={this.state.web3} />
                     {!this.props.user.loading?<div className='main-layout'  web3={this.state.web3}>

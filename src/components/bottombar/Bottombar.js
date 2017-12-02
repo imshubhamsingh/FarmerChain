@@ -5,6 +5,16 @@ import { orderProducts, countAcceptedPool, transactionDone, transactionReceived}
 import './bottombar.css'
 
 class Bottombar extends Component{
+    state = {
+        money:''
+    }
+    componentDidMount(){
+     this.props.web3.eth.getBalance(this.props.ethaccount).then(money => {
+            this.setState({
+                money: parseFloat(money / 1e16).toFixed(2)
+            })
+        })
+    }
     render(){
         return(
             <div className='bottombar box'>
@@ -16,7 +26,7 @@ class Bottombar extends Component{
                                     Current Balance
                                 </h6>
                                 <h1>
-                                    ₹{this.props.money}
+                                    ₹{this.state.money}
                                 </h1>
                             </div>
                         </li>
@@ -75,7 +85,8 @@ function mapStateToProps(state) {
         money: state.user.money,
         pools: state.pools,
         products: state.products,
-        transactions: state.transactions
+        transactions: state.transactions,
+        ethaccount: state.user.account
     };
 }
 
