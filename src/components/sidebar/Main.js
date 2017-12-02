@@ -14,10 +14,11 @@ const jQuery = $;
 
 class Main extends Component{
     state = {
-        money: getEthValue(this.props.ethaccount)
+        money: 0,
+        web3: window.web3
     }
     componentDidMount(){
-
+        console.log(this.state.web3)
         $(document).ready(function() {
 
             (function ($) {
@@ -65,7 +66,7 @@ class Main extends Component{
                                     Current Balance
                                 </h6>
                                 <h1>
-                                    <span style={{fontSize:'10px'}}>₹{ this.state.money }</span>
+                                    <span style={{fontSize:'10px'}}>₹{ this.state.web3.}</span>
                                 </h1>
                             </div>
                         </li>
@@ -129,7 +130,8 @@ function mapStateToProps(state) {
         pools: state.pools,
         ethaccount: state.user.account,
         products: state.products,
-        transactions: state.transactions
+        transactions: state.transactions,
+        eth: state.web3
     };
 }
 

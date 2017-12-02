@@ -162,8 +162,10 @@ class FarmerBank extends Component{
 
                     <ul className="tabs">
                         <li><a>Request a Loan</a></li>
-                        <li><a>Add Funds</a></li>
-                        <li><a>Transaction History</a></li>
+                        <li><a>Add Members</a></li>
+                        <li><a>Remove Members</a></li>
+                        <li><a>Remove Members</a></li>
+                        <li><a>Add Moderators</a></li>
                     </ul>
 
                     <div className="tab_content">
@@ -201,40 +203,172 @@ class FarmerBank extends Component{
                                 </ul>
                             </div>
                         </div>
-
-                        <div className="tabs_item pool-list">
-                            <ul>
-                                <li>
-                                    <div className="fund">
-                                        ₹{this.props.admin.poolMoney}
-                                    </div>
-                                    <div className="details" style={{textAlign:'center'}}>
-                                        General Public Funds
-                                    </div>
-                                    <button className="btn-pool btn-effect" type="submit" onClick={this.payToPool} disabled={this.checkIfLoanPaid()}>{this.checkIfLoanPaid()?'Pay your loan to add to pool': 'Add'}</button>
-                                </li>
-                            <div>
-                                <h2>
-                                    Requested Loan
-                                </h2>
-                            </div>
-                                {
-                                    this.props.loans.map((loan)=> <GlobalLoanList loan={loan} user={this.props.user} key={loan.id} />)
-                                }
-                            </ul>
-                        </div>
-                        <div className="tabs_item pool-list">
-                            <div className="products-list">
-                                <h2>List of All transaction</h2>
+                        <div className="tabs_item farmerBank-request">
+                            <form onSubmit={this.handleSubmit} action="">
+                                <div>
+                                    <label htmlFor="load-desc">Loan Description</label>
+                                    <input type="text" id="load-desc" value={this.state.loanDescription} onChange={event=> this.setState({loanDescription:event.target.value})} required/>
+                                </div>
+                                <div>
+                                    <label htmlFor="loan-amt">Loan Amount (₹)</label>
+                                    <input type="number" id="loan-amt" value={this.state.amount} onChange={event=> this.setState({amount:event.target.value})} min="0" />
+                                </div>
+                                <button className="btn btn-effect" type="submit" >{this.state.buttonText}</button>
+                            </form>
+                            <div className="product-user-list">
+                                <h3>Your Loan Status</h3>
                                 <ul>
-                                    {this.showPastTransactions().sort((a,b)=>{
-                                        return new Date(b.createdAt) - new Date(a.createdAt)
-                                    }).map(transaction => {
-                                        return <PastTransactions transaction={transaction} key={transaction.id}/>
-                                    })}
+                                    {this.props.loans!==null?this.props.loans.map((loan)=> {
+                                        if(loan.uid === this.props.user.uid){
+                                            return <li key={loan.id}>
+                                                <div className="info">
+                                                    <div className="name">{loan.loanDescription}
+                                                        <div className="type">
+                                                            ₹{loan.amount}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button className="btn-pool btn-effect" onClick={()=> (loan.status==="waiting" ||loan.status==="paid" || loan.status==="rejected")?this.props.deleteLoanRequest(loan):this.payLoanBack(loan)} style={{backgroundColor: colorStatus(loan.status,"red","green","orange")}}>{colorStatus(loan.status,"Rejected (Cancel Request)","Granted (Pay Loan Now)","Waiting (Cancel Request)","Paid (Remove loan)")}</button>
+                                            </li>
+                                        }
+                                        return '';
+                                    }):''}
                                 </ul>
                             </div>
                         </div>
+                        <div className="tabs_item farmerBank-request">
+                            <form onSubmit={this.handleSubmit} action="">
+                                <div>
+                                    <label htmlFor="load-desc">Loan Description</label>
+                                    <input type="text" id="load-desc" value={this.state.loanDescription} onChange={event=> this.setState({loanDescription:event.target.value})} required/>
+                                </div>
+                                <div>
+                                    <label htmlFor="loan-amt">Loan Amount (₹)</label>
+                                    <input type="number" id="loan-amt" value={this.state.amount} onChange={event=> this.setState({amount:event.target.value})} min="0" />
+                                </div>
+                                <button className="btn btn-effect" type="submit" >{this.state.buttonText}</button>
+                            </form>
+                            <div className="product-user-list">
+                                <h3>Your Loan Status</h3>
+                                <ul>
+                                    {this.props.loans!==null?this.props.loans.map((loan)=> {
+                                        if(loan.uid === this.props.user.uid){
+                                            return <li key={loan.id}>
+                                                <div className="info">
+                                                    <div className="name">{loan.loanDescription}
+                                                        <div className="type">
+                                                            ₹{loan.amount}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button className="btn-pool btn-effect" onClick={()=> (loan.status==="waiting" ||loan.status==="paid" || loan.status==="rejected")?this.props.deleteLoanRequest(loan):this.payLoanBack(loan)} style={{backgroundColor: colorStatus(loan.status,"red","green","orange")}}>{colorStatus(loan.status,"Rejected (Cancel Request)","Granted (Pay Loan Now)","Waiting (Cancel Request)","Paid (Remove loan)")}</button>
+                                            </li>
+                                        }
+                                        return '';
+                                    }):''}
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="tabs_item farmerBank-request">
+                            <form onSubmit={this.handleSubmit} action="">
+                                <div>
+                                    <label htmlFor="load-desc">Loan Description</label>
+                                    <input type="text" id="load-desc" value={this.state.loanDescription} onChange={event=> this.setState({loanDescription:event.target.value})} required/>
+                                </div>
+                                <div>
+                                    <label htmlFor="loan-amt">Loan Amount (₹)</label>
+                                    <input type="number" id="loan-amt" value={this.state.amount} onChange={event=> this.setState({amount:event.target.value})} min="0" />
+                                </div>
+                                <button className="btn btn-effect" type="submit" >{this.state.buttonText}</button>
+                            </form>
+                            <div className="product-user-list">
+                                <h3>Your Loan Status</h3>
+                                <ul>
+                                    {this.props.loans!==null?this.props.loans.map((loan)=> {
+                                        if(loan.uid === this.props.user.uid){
+                                            return <li key={loan.id}>
+                                                <div className="info">
+                                                    <div className="name">{loan.loanDescription}
+                                                        <div className="type">
+                                                            ₹{loan.amount}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button className="btn-pool btn-effect" onClick={()=> (loan.status==="waiting" ||loan.status==="paid" || loan.status==="rejected")?this.props.deleteLoanRequest(loan):this.payLoanBack(loan)} style={{backgroundColor: colorStatus(loan.status,"red","green","orange")}}>{colorStatus(loan.status,"Rejected (Cancel Request)","Granted (Pay Loan Now)","Waiting (Cancel Request)","Paid (Remove loan)")}</button>
+                                            </li>
+                                        }
+                                        return '';
+                                    }):''}
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="tabs_item farmerBank-request">
+                            <form onSubmit={this.handleSubmit} action="">
+                                <div>
+                                    <label htmlFor="load-desc">Loan Description</label>
+                                    <input type="text" id="load-desc" value={this.state.loanDescription} onChange={event=> this.setState({loanDescription:event.target.value})} required/>
+                                </div>
+                                <div>
+                                    <label htmlFor="loan-amt">Loan Amount (₹)</label>
+                                    <input type="number" id="loan-amt" value={this.state.amount} onChange={event=> this.setState({amount:event.target.value})} min="0" />
+                                </div>
+                                <button className="btn btn-effect" type="submit" >{this.state.buttonText}</button>
+                            </form>
+                            <div className="product-user-list">
+                                <h3>Your Loan Status</h3>
+                                <ul>
+                                    {this.props.loans!==null?this.props.loans.map((loan)=> {
+                                        if(loan.uid === this.props.user.uid){
+                                            return <li key={loan.id}>
+                                                <div className="info">
+                                                    <div className="name">{loan.loanDescription}
+                                                        <div className="type">
+                                                            ₹{loan.amount}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button className="btn-pool btn-effect" onClick={()=> (loan.status==="waiting" ||loan.status==="paid" || loan.status==="rejected")?this.props.deleteLoanRequest(loan):this.payLoanBack(loan)} style={{backgroundColor: colorStatus(loan.status,"red","green","orange")}}>{colorStatus(loan.status,"Rejected (Cancel Request)","Granted (Pay Loan Now)","Waiting (Cancel Request)","Paid (Remove loan)")}</button>
+                                            </li>
+                                        }
+                                        return '';
+                                    }):''}
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/*<div className="tabs_item pool-list">*/}
+                            {/*<ul>*/}
+                                {/*<li>*/}
+                                    {/*<div className="fund">*/}
+                                        {/*₹{this.props.admin.poolMoney}*/}
+                                    {/*</div>*/}
+                                    {/*<div className="details" style={{textAlign:'center'}}>*/}
+                                        {/*General Public Funds*/}
+                                    {/*</div>*/}
+                                    {/*<button className="btn-pool btn-effect" type="submit" onClick={this.payToPool} disabled={this.checkIfLoanPaid()}>{this.checkIfLoanPaid()?'Pay your loan to add to pool': 'Add'}</button>*/}
+                                {/*</li>*/}
+                            {/*<div>*/}
+                                {/*<h2>*/}
+                                    {/*Requested Loan*/}
+                                {/*</h2>*/}
+                            {/*</div>*/}
+                                {/*{*/}
+                                    {/*this.props.loans.map((loan)=> <GlobalLoanList loan={loan} user={this.props.user} key={loan.id} />)*/}
+                                {/*}*/}
+                            {/*</ul>*/}
+                        {/*</div>*/}
+                        {/*<div className="tabs_item pool-list">*/}
+                            {/*<div className="products-list">*/}
+                                {/*<h2>List of All transaction</h2>*/}
+                                {/*<ul>*/}
+                                    {/*{this.showPastTransactions().sort((a,b)=>{*/}
+                                        {/*return new Date(b.createdAt) - new Date(a.createdAt)*/}
+                                    {/*}).map(transaction => {*/}
+                                        {/*return <PastTransactions transaction={transaction} key={transaction.id}/>*/}
+                                    {/*})}*/}
+                                {/*</ul>*/}
+                            {/*</div>*/}
+                        {/*</div>*/}
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@ import TransactionReducer from "./TransactionReducer";
 import FarmerBankReducer from "./FarmerBankReducer";
 import PoolReducer from "./PoolReducer";
 import HeaderTextReducer from "./HeaderTextReducer";
-
+import Web3Reducer from "./Web3Reducer";
 
 import { persistCombineReducers } from 'redux-persist'
 import storage from 'redux-persist/es/storage'
@@ -22,7 +22,8 @@ export const reducer = persistCombineReducers(config, {
     transactions: TransactionReducer,
     loans: FarmerBankReducer,
     admin: PoolReducer,
-    header: HeaderTextReducer
+    header: HeaderTextReducer,
+    web3: Web3Reducer
 })
 
 

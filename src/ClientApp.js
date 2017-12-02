@@ -14,6 +14,7 @@ import {getUpdatePoolList} from './Actions/PoolFarmAction'
 import { getUpdateTransactiontList} from './Actions/TransactionAction'
 import { getUpdateLoanList} from './Actions/FarmerBankAction'
 import { getAdminMoney } from './Actions/PoolActions'
+import { updateWeb3 } from './Actions/Web3Action'
 
 import getWeb3 from './utils/getWeb3'
 
@@ -35,13 +36,6 @@ class ClientApp extends Component{
         this.setState({
             sidebar: false
         })
-        getWeb3
-            .then(results => {
-                this.setState({ web3: results.web3 })
-            })
-            .catch(() => {
-                console.log('Error finding web3.')
-            })
     }
     showSidebar = ()=>{
         this.setState({
@@ -67,4 +61,4 @@ class ClientApp extends Component{
 function mapStateToProps(state) {
     return { user: state.user };
 }
-export default withRouter(connect(mapStateToProps,{ getAdminMoney,getUser, getUpdateProductList, getUpdatePoolList, getUpdateTransactiontList,getUpdateLoanList})(ClientApp))
+export default withRouter(connect(mapStateToProps,{ getAdminMoney,getUser, getUpdateProductList, getUpdatePoolList, getUpdateTransactiontList,getUpdateLoanList, updateWeb3})(ClientApp))
