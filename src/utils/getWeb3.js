@@ -29,7 +29,7 @@ let getWeb3 = new Promise(function(resolve, reject) {
             }
 
             console.log('No web3 instance injected, using Local web3.');
-
+            console.log('Connected!');
             resolve(results)
         }
     })

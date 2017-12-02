@@ -52,6 +52,7 @@ class FarmerBank extends Component{
                     flag = true;
                 }
             }
+            return null
         }):'';
         return flag
     }

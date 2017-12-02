@@ -13,7 +13,6 @@ const jQuery = $;
 class Services extends Component{
     componentDidMount(){
         this.props.updateHeader('Home');
-        console.log(this.props);
         $(document).ready(function() {
 
             (function ($) {

@@ -22,7 +22,7 @@ class AcceptProduct extends Component {
             allowOutsideClick: false
         }).then((result) => {
             if (result.value) {
-                const {displayName, email, uid} = this.props.user
+                const { displayName, email, uid } = this.props.user
                 const info = {
                     productName:this.props.product.productName,
                     quantity: this.props.product.quantity,
