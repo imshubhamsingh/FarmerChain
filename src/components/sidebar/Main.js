@@ -66,7 +66,7 @@ class Main extends Component{
                                     Current Balance
                                 </h6>
                                 <h1>
-                                    <span style={{fontSize:'10px'}}>₹{ this.state.web3.}</span>
+                                    {/*<span style={{fontSize:'10px'}}>₹{ this.state.web3.}</span>*/}
                                 </h1>
                             </div>
                         </li>

@@ -40,7 +40,7 @@
 }
 
 .tabs_item.farmerBank-request{
-    padding: 30px;
+
 }
 
 
@@ -66,11 +66,71 @@
     margin: 0 2px;
 }
 
+
+input[name='panel'] {
+    display: none;
+}
+
+.service-label{
+    display: block;
+    padding: 0.8em;
+    width: 100%;
+    height: 46px;
+    border-bottom: 0.1em solid hsla(244, 15%, 22%, 0.31);
+    background: hsl(244, 14%, 35%);
+    color: hsl(0, 100%, 100%);
+    text-transform: uppercase;
+    font-size: 21px;
+    line-height: 13px;
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+}
+
+.service-label:hover {
+    background: hsl(244, 15%, 22%);;
+}
+
+.collapsible {
+    display: block;
+    padding: 0 1em;
+    width: 100%;
+    background: hsl(0, 1%, 90%);
+}
+
+input[name='panel'] + .collapsible {
+    overflow: hidden;
+    height: 0;
+    transition: height 0.2s ease;
+}
+
+input[name='panel']:checked + .collapsible {
+    overflow: auto;
+    height: 147px;
+    padding: 10px 15px;
+}
+
+input[name='panel']:checked + .collapsible.loan {
+    overflow: auto;
+    height: 232px;
+    padding: 10px 15px;
+}
+
+input[name='panel']:checked + .collapsible.loan-pay {
+    overflow: auto;
+    height: 332px;
+    padding: 10px 15px;
+}
+
 @media screen and (max-width: 445px) {
     .tabs_item .fund {
         font-size: 46px !important;
     }
-
+    .service-label{
+        font-size: 15px;
+        line-height: 25px;
+    } codepen
 
     .farmer-admin{
         display: block;
@@ -85,3 +145,6 @@
     }
 
 }
+
+
+
