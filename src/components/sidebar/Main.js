@@ -48,7 +48,8 @@ class Main extends Component{
                     <img alt="userPic"src={gravatar.url(this.props.user.email,{s:'200'})} className="image--cover" />
                 </div>
                 <h3 id="name">{this.props.displayName || this.props.user.displayName}</h3>
-                <h6 id="accountNo">{`0x${this.props.user.uid}`}</h6>
+                <h6 id="accountNo" style={{marginLeft: "-8px",fontSize: "10px"}}>{this.props.account ||this.props.ethaccount}</h6>
+                {console.log(this.props.user)}
 
                 <div className="menu">
                     <ul>
@@ -120,6 +121,7 @@ function mapStateToProps(state) {
         user: state.user.user,
         money: state.user.money,
         pools: state.pools,
+        ethaccount: state.user.account,
         products: state.products,
         transactions: state.transactions
     };

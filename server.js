@@ -16,7 +16,6 @@ app.get('/api/accounts', (req, res) => {
             let chosenAccount = null;
             let flag = false
             Object.keys(accounts).forEach(function(account) {
-                console.log(account, accounts[account]);
                 if(!accounts[account] && !flag){
                     chosenAccount = account
                     accounts[account] = flag = true
@@ -25,6 +24,7 @@ app.get('/api/accounts', (req, res) => {
             if(chosenAccount !== null){
                 let updatedAccounts = JSON.stringify(accounts); //convert it back to json
                 fs.writeFile('./accounts/accounts.txt', updatedAccounts, 'utf8'); // write it back
+                console.log(chosenAccount)
                 res.json({
                     account: chosenAccount
                 })

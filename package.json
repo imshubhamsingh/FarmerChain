@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "animated": "^0.2.1",
+    "axios": "^0.17.1",
     "express": "^4.16.2",
     "firebase": "^4.6.2",
     "font-awesome": "^4.7.0",
@@ -32,7 +33,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001",
+  "proxy": "http://localhost:5000",
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "create-react-app-sass": "^1.1.0",

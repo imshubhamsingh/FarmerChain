@@ -13,16 +13,18 @@ class Sidebar extends Component{
         this.props.getUser();
     }
     state = {
-        displayName:''
+        displayName:'',
+        account:''
     }
-    setDisplayName = (displayName)=>{
+    setDisplayName = (displayName, account)=>{
         this.setState({
-            displayName: displayName
+            displayName: displayName,
+            account: account
         });
     }
 
     current = () => {
-        return this.props.user.loading?<Login setDisplayName={this.setDisplayName}/>:<Main displayName={this.state.displayName} showSidebar={this.props.showSidebar}/>;
+        return this.props.user.loading?<Login setDisplayName={this.setDisplayName}/>:<Main account={this.state.account} displayName={this.state.displayName} showSidebar={this.props.showSidebar}/>;
     }
     render(){
         return(

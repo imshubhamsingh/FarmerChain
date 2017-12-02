@@ -3,6 +3,7 @@ import './login.css'
 import { login, createAccount, getUser } from '../../Actions/UserActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
+import axios from 'axios'
 
 class Login extends Component{
     state = {
@@ -56,20 +57,30 @@ class Login extends Component{
         if(this.state.confirmPassword === this.state.signUpPassword){
             const {signUpEmail, signUpPassword,signUpDisplayName } = this.state
             this.setState({login:true})
-            this.props.setDisplayName(signUpDisplayName);
-            this.props.createAccount(signUpEmail,signUpPassword,  signUpDisplayName)
-                .then(()=>{
-                    setTimeout(this.props.onLogin,2000);
-                })
-                .catch(error=>{
-                    this.setState({login:false})
-                    console.error('error',error)
-                    this.setState({errorSignUp:error, error:true})
-                    setTimeout(()=>{
-                        this.setState({error: false})
-                    }, 2000)
+            let that = this;
+            axios.get('/api/accounts').then(function (response) {
+                const {data} = response
+                const {accounts} = data
+                that.props.setDisplayName(signUpDisplayName, accounts);
+                console.log(data)
+                that.props.createAccount(signUpEmail, signUpPassword, signUpDisplayName, data)
+                    .then(() => {
+                        setTimeout(that.props.onLogin, 2000);
+                    })
+                    .catch(error => {
+                        that.setState({login: false})
+                        console.error('error', error)
+                        that.setState({errorSignUp: error, error: true})
+                        setTimeout(() => {
+                            that.setState({error: false})
+                        }, 2000)
 
-                })
+                    })
+            }).catch(function (error) {
+                    console.log(that)
+                    console.log(error)
+                });
+
         }else{
             this.setState({
                 errorSignUp: {
@@ -84,6 +95,18 @@ class Login extends Component{
 
 
     }
+
+    error = () =>{
+        this.setState({
+            errorSignUp: {
+                message: 'No Account left'
+            },
+            error:true
+        })
+        setTimeout(()=>{
+            this.setState({error: false})
+        }, 2000)
+   }
     closeSignUp = ()=>{
         if(this.state.signUp === true){
             this.setState({signUp: false})

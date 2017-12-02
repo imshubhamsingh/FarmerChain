@@ -11,16 +11,14 @@ export function getUser() {
           const {uid} = auth.currentUser;
           database.ref(`users/${uid}`).on('value',(snapshot)=>{
             if(snapshot.val()!==null){
-              let userBankMoney = snapshot.val()['money'];
-              let type = snapshot.val()['type'];
-              dispatch({
-                type: GET_USER,
-                payload: {
+              const payload = {
                   loading: false,
                   user,
-                  money:userBankMoney,
-                  type
-                }
+                  ...snapshot.val()
+              }
+              dispatch({
+                type: GET_USER,
+                payload
               });
             }
           });
@@ -47,20 +45,23 @@ export function logout() {
   return dispatch => auth.signOut();
 }
 
-export function createAccount(email, password, signUpDisplayName) {
+export function createAccount(email, password, signUpDisplayName, account) {
   return dispatch => auth.createUserWithEmailAndPassword(email, password).then(user =>{
     user.updateProfile({'displayName': signUpDisplayName});
+    console.log(account.accounts);
     var newUser = auth.currentUser;
     var userDetails = {};
     if (user != null) {
       userDetails = {
-        name: signUpDisplayName,
-        email: newUser.email,
-        uid: newUser.uid,
-        money: 1000,
-        poolAccepted: []
+          name: signUpDisplayName,
+          email: newUser.email,
+          uid: newUser.uid,
+          money: 1000,
+          poolAccepted: [],
+              ...account
       };
     }
+    console.log(userDetails)
     database.ref(`users/${userDetails.uid}`).set(userDetails);
   });
 }
