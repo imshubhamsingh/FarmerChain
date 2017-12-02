@@ -14,7 +14,7 @@ const jQuery = $;
 
 class Main extends Component{
     state = {
-        money: 0 || getEthValue(this.props.ethaccount)
+        money: getEthValue(this.props.ethaccount)
     }
     componentDidMount(){
 
