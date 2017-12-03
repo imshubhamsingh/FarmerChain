@@ -9,11 +9,11 @@ class Bottombar extends Component{
         money:''
     }
     componentDidMount(){
-     this.props.web3.eth.getBalance(this.props.ethaccount).then(money => {
-            this.setState({
-                money: parseFloat(money / 1e16).toFixed(2)
-            })
-        })
+     // this.props.web3.eth.getBalance(this.props.ethaccount).then(money => {
+     //        this.setState({
+     //            money: parseFloat(money / 1e16).toFixed(2)
+     //        })
+     //    })
     }
     render(){
         return(

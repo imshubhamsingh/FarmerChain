@@ -373,6 +373,8 @@ label {
 .pool-list ul > li {
   padding: 10px;
   background-color: #f3f3f3;
+  list-style: none;
+  font-weight: bold;
   margin: 20px 0px; }
 
 .yet-to-buy {
@@ -484,3 +486,15 @@ input[name='panel']:checked + .collapsible.loan-pay {
     margin: 2px 0; }
   .farmer-admin button.farmer-admin-btn-2 {
     margin: 2px 0; } }
+
+    .arrowHash{
+      position: absolute;
+      left: 50%;
+      margin-top: -32px;
+    }
+    .transactionhistory{
+      position: relative
+    }
+    .history{
+      position: relative;
+    }

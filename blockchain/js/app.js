@@ -12,6 +12,7 @@ window.addEventListener('load', function() {
     console.log('Connected!');
     deployContract();
   } else {
+    alert('Install and Unlock Metamask');
     console.log('Disconnected!');
   }
 });
@@ -33,7 +34,7 @@ function deployContract(){
   updateBalance();
 }
 
-function updateBalance(){
+function updateBalance(e){
   contractBalance = web3.fromWei(instance.getBalance(), 'ether').toNumber();
   document.getElementById('contractBalance').innerHTML = contractBalance;
   accountBalance = web3.fromWei(web3.eth.getBalance(currentEtherbase).toNumber(), 'ether');
@@ -47,8 +48,8 @@ function printCoinbase(){
 }
 
 
-function requestLoan(){
-  requestedAmount = $(requestLoanAmount).val();
+function requestLoan(){ 
+  requestedAmount = $('.requestLoanAmount').val();
   console.log(requestedAmount);
   instance.requestLoan.sendTransaction(requestedAmount, {from: currentEtherbase}, function(error, result){
     if(error){
@@ -58,17 +59,26 @@ function requestLoan(){
       // console.log(getReceipts(result));
       getReceipts(result).then(function(receipt){
         console.log(receipt);
-        document.getElementById('receipt').classList.remove('hidden');
-        document.getElementById('receipt').innerHTML = '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed;
+        swal({
+          title: 'Details',
+          type: 'success',
+          html: '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed
+        })
       }).catch(function(error){
         console.log(error);
+        swal(
+          'Oops...',
+           error.toString(),
+          'error'
+        )
       });
     }
   });
 }
 
-function payLoan(){
-  var address = $(payLoansAmount).val();
+function payLoan(e){
+  
+  var address = $('.payLoansAmount').val();
   console.log(address);
   instance.addFundsorPayLoan.sendTransaction({from: currentEtherbase, value: address}, function(error, result){
     if(error){
@@ -78,13 +88,18 @@ function payLoan(){
       // console.log(getReceipts(result));
       getReceipts(result).then(function(receipt){
         console.log(receipt);
-        document.getElementById('receipt').classList.remove('hidden');
-        document.getElementById('receipt').innerHTML = '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed;
-        setTimeout(function(){
-          document.getElementById('receipt').classList.add('hidden');
-        }, 5000);
+        swal({
+          title: 'Details',
+          type: 'success',
+          html: '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed
+        })
       }).catch(function(error){
         console.log(error);
+        swal(
+          'Oops...',
+           error.toString(),
+          'error'
+        )
       });
     }
   });
@@ -96,8 +111,8 @@ function restofprogram(){
   console.log('Balance', web3.fromWei(instance.getBalance(), 'ether').toNumber());
 }
 
-function removeMembers(){
-  var address = $(removeMemberAddress).val();
+function removeMembers(e){
+  var address = $('.removeMemberAddress :selected').text();  
   console.log(address);
   instance.removeMembers.sendTransaction(address, {from: currentEtherbase}, function(error, result){
     if(error){
@@ -107,20 +122,27 @@ function removeMembers(){
       // console.log(getReceipts(result));
       getReceipts(result).then(function(receipt){
         console.log(receipt);
-        document.getElementById('receipt').classList.remove('hidden');
-        document.getElementById('receipt').innerHTML = '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed;
-        setTimeout(function(){
-          document.getElementById('receipt').classList.add('hidden');
-        }, 5000);
+        swal({
+          title: 'Details',
+          type: 'success',
+          html: '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed
+        })
       }).catch(function(error){
         console.log(error);
+        swal(
+          'Oops...',
+           error.toString(),
+          'error'
+        )
       });
     }
   });
 }
 
-function addMods(){
-  var address = $(addModAddress).val();
+function addMods(e){
+  
+  var address = $('.addModAddress :selected').text();
+  
   console.log(address);
   instance.addMods.sendTransaction(address, 'bob', {from: currentEtherbase}, function(error, result){
     if(error){
@@ -130,49 +152,55 @@ function addMods(){
       // console.log(getReceipts(result));
       getReceipts(result).then(function(receipt){
         console.log(receipt);
-        document.getElementById('receipt').classList.remove('hidden');
-        document.getElementById('receipt').innerHTML = '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed;
-        setTimeout(function(){
-          document.getElementById('receipt').classList.add('hidden');
-        }, 5000);
+        swal({
+          title: 'Details',
+          type: 'success',
+          html: '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed
+        })
       }).catch(function(error){
         console.log(error);
+        swal(
+          'Oops...',
+           error.toString(),
+          'error'
+        )
       });
     }
   });
 }
 
-function paynow(){
+function paynow(e){
+  
   console.log('in paynow');
   web3.eth.sendTransaction({from:'0x627306090abaB3A6e1400e9345bC60c78a8BEf57', to:'0xf17f52151EbEF6C7334FAD080c5704D77216b732', value:'8000000000000000000'});
   console.log('after');
 }
 
 
-function addMembers(){
-  var address = $(addMemberAddress).val();
+function addMembers(e){
+  
+  var address = $('.addMemberAddress :selected').text();
+  alert(address)
   console.log(address);
   instance.addMembers.sendTransaction(address, {from: currentEtherbase}, function(error, result){
     if(error){
       console.log('Error: ', error);
+      swal(
+        'Oops...',
+         'You are authorized to add members',
+        'error'
+      )
     }else{
       console.log(result);
       // console.log(getReceipts(result));
       getReceipts(result).then(function(receipt){
         console.log(receipt);
-        document.getElementById('receipt').classList.remove('hidden');
-        document.getElementById('receipt').innerHTML = 
-        setTimeout(function(){
-          document.getElementById('receipt').classList.add('hidden');
-        }, 5000);
         swal({
-          title: 'Detials',
+          title: 'Details',
           type: 'success',
           html: '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed
         })
       }).catch(function(error){
-        console.error(error);
-        document.getElementById('errors').classList.remove('hidden');
         console.log(error);
         swal(
           'Oops...',
@@ -185,11 +213,16 @@ function addMembers(){
 }
 
 function switchAccount(){
-  var address = $(switchEtherbase).val();
+  var address = $('.switchEtherbase :selected').text();  
   if(web3.isAddress(address)){
     currentEtherbase = address;
     console.log(currentEtherbase);
-    printcoinbase();
+    //printcoinbase();
+    swal(
+      'Yeah.',
+      'Account Changed to!',
+      'success'
+    )
   }else{
     swal(
       'Oops...',
@@ -230,6 +263,17 @@ var isChecksumAddress = function (address) {
   return true;
 };
 
+function transactionHistory(){
+  var n = "none";
+  $('#totalBlock').text(web3.eth.blockNumber)
+  $("ul.history").empty()
+  for(var i=2;i<= web3.eth.blockNumber;i++){
+    var details = web3.eth.getBlock(i)
+    var d= i===web3.eth.blockNumber? "none":"inherit"
+    $("ul.history").prepend('<li key={'+i+'}><div className="info transactionhistory"><div class="arrowHash" style="display:'+d+'"><i class="fa fa-arrow-up" aria-hidden="true"></i></div><div className="name">Block number: '+details.number+'<br/> Hash:'+details.hash+'<br/>Transaction Hash: '+ details.transactions[0]|| n +'</div></div></li>');
+    
+  }
+}
 /* BlockChain length{
   web3.eth.blockNumber  //Highest block in the chain
 }

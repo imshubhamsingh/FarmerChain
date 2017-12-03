@@ -17,11 +17,11 @@ class Main extends Component{
         money: 0,
     }
     componentDidMount(){
-        this.props.web3.eth.getBalance(this.props.ethaccount).then(money => {
-            this.setState({
-                money: parseFloat(money / 1e16).toFixed(2)
-            })
-        })
+        // this.props.web3.eth.getBalance(this.props.ethaccount).then(money => {
+        //     this.setState({
+        //         money: parseFloat(money / 1e16).toFixed(2)
+        //     })
+        // })
         console.log("sidebar", this.props.web3)
         $(document).ready(function() {
 
