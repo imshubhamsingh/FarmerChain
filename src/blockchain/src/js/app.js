@@ -9,6 +9,7 @@ if (typeof web3 !== 'undefined') {
 
 window.addEventListener('load', function() {
   if (typeof web3 !== 'undefined') {
+    alert('Unlock Metamask');
     console.log('Connected!');
     deployContract();
   } else {

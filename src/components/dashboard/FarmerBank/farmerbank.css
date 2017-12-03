@@ -147,4 +147,10 @@ input[name='panel']:checked + .collapsible.loan-pay {
 }
 
 
-
+iframe{
+    border: none;
+    width: 100%;
+    height: 585px;
+    margin-top: -43px;
+    overflow-x: hidden;
+}
