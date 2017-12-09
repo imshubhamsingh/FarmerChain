@@ -93,7 +93,7 @@ class Main extends Component{
                 <div className="menu">
                     <ul>
                         <li className="menu-list">
-                            <div className="menu-list-item">
+                            <div className="menu-list-item" onClick={()=>this.getMoneyFromAccount()}>
                                 <h6>
                                     Current Balance
                                 </h6>
@@ -114,7 +114,7 @@ class Main extends Component{
                         </li>
 
                         <li className="menu-list">
-                            <div className="menu-list-item">
+                            <div className="menu-list-item" onClick={()=>this.getToatalTransaction()}>
                                 <h6>
                                     Ordered Products
                                 </h6>

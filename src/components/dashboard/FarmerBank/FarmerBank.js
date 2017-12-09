@@ -492,7 +492,7 @@ class FarmerBank extends Component{
                         <div className="tab_content">
                             <div className="tabs_item farmerBank-request">
 
-                                <div className="fund">
+                                <div className="fund" onClick={()=>this.checkFund()}>
                                     ₹{this.state.fund}
                                 </div>
                                 <div className="details" style={{textAlign:'center',marginBottom: '12px'}}>
