@@ -15,7 +15,7 @@ class Dashboard extends Component{
     render(){
         return(
             <div className="dashboard box">
-
+                <div className="dashboard-bg" />
                 <Switch>
                     <Route path="/" exact changeHeader={this.props.changeHeader} component={PageShell(Services, this.props.web3)} />
                     <Route path="/poolfarm" changeHeader={this.props.changeHeader} component={PageShell(PoolFarm, this.props.web3)} />

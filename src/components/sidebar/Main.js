@@ -6,8 +6,7 @@ import {logout} from '../../Actions/UserActions';
 import { Link, withRouter } from 'react-router-dom';
 import {countAcceptedPool, orderProducts, transactionDone, transactionReceived} from '../../helpers/userServiceDetails';
 import './main.css'
-import getEthValue from '../../utils/getEthValueofAccount'
-import getWeb3 from '../../utils/getWeb3'
+import logo from './logo-main.svg';
 
 import $ from 'jquery';
 const jQuery = $;
@@ -83,6 +82,7 @@ class Main extends Component{
         return(
             <div className="sidebar-main ">
                 <span onClick={this.props.showSidebar} className="sideArrow"><i className ="fa fa-arrow-right" aria-hidden="true"></i></span>
+                <img src={logo} alt="logo" className="logo-main" />
                 <div className="wrapper">
                     <img alt="userPic"src={gravatar.url(this.props.user.email,{s:'200'})} className="image--cover" />
                 </div>

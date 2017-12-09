@@ -1,92 +1,99 @@
 .wrapper {
-    padding: 100px;
+	padding: 100px;
 }
 
 .image--cover {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin: -67px;
-    object-fit: cover;
-    object-position: center right;
-    border: 2px #fff solid;
-    opacity: 0;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	margin: -67px;
+	object-fit: cover;
+	object-position: center right;
+	border: 2px #fff solid;
+	opacity: 0;
 }
 
 #name {
-    opacity: 0;
-    margin-top: -10px;
+	opacity: 0;
+	margin-top: -10px;
 }
 
 #accountNo {
-    opacity: 0;
-    margin-top: -12px;
+	opacity: 0;
+	margin-top: -12px;
 }
 
 ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+	list-style: none;
+	padding: 0;
+	margin: 0;
 }
 
 li.menu-list {
-    padding-right: 25px;
-    font-size: 16px;
-    opacity: 0;
+	padding-right: 25px;
+	font-size: 16px;
+	opacity: 0;
 }
 
 .menu-list-item {
-    text-align: right;
+	text-align: right;
 }
 .menu-list-item h6 {
-    margin-top: 10px;
-    color: #7a78a2 !important;
+	margin-top: 10px;
+	color: #7a78a2 !important;
 }
 .menu-list-item h1 {
-    margin-top: -28px;
+	margin-top: -28px;
 }
 
 .logOut {
-    border: none;
-    background-color: #21212d;
-    color: wheat;
-    border-radius: 21px;
-    padding: 5px;
-    width: 236px;
-    transition: all 0.2s ease-in;
-    outline: none;
-    opacity: 0;
-    position: absolute;
-    bottom: 0;
-    margin: 10px 0 25px -118px;
+	border: none;
+	background-color: #21212d;
+	color: wheat;
+	border-radius: 21px;
+	padding: 5px;
+	width: 236px;
+	transition: all 0.2s ease-in;
+	outline: none;
+	opacity: 0;
+	position: absolute;
+	bottom: 0;
+	margin: 10px 0 25px -118px;
 }
 .logOut:hover {
-    background-color: #fff;
-    color: black;
+	background-color: #fff;
+	color: black;
 }
 .logOut:active {
-    transform: translateY(2px);
+	transform: translateY(2px);
 }
 
 .sideArrow {
-    position: absolute;
-    transform: rotate(180deg);
-    right: 23px;
-    font-size: 26px;
-    display: none;
+	position: absolute;
+	transform: rotate(180deg);
+	right: 23px;
+	font-size: 26px;
+	display: none;
 }
 
 @media screen and (max-width: 768px) {
-    .sideArrow {
-        display: block;
-    }
+	.sideArrow {
+		display: block;
+	}
 }
 .menu {
-    display: block;
+	display: block;
 }
 
 @media screen and (max-width: 768px) {
-    .menu {
-        display: none;
-    }
+	.menu {
+		display: none;
+	}
+}
+
+.logo-main {
+	width: 71px;
+	margin-top: -15px;
+	margin-bottom: -42px;
+	margin-left: -162px;
 }

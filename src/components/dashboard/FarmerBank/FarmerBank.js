@@ -316,6 +316,7 @@ class FarmerBank extends Component{
             preConfirm: () => {
                 return new Promise((resolve) => {
                     this.state.instance.removeMembers.sendTransaction(this.state.removeMember,{from: this.props.web3.eth.accounts[0]}, function(error, result){
+                        console.log(result,error)
                         if(error){
                             console.log('Error: ', error);
                             swal(

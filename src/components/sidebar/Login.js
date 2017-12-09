@@ -4,6 +4,7 @@ import { login, createAccount, getUser } from '../../Actions/UserActions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
+import logo from './logo.svg';
 
 class Login extends Component{
     state = {
@@ -117,6 +118,7 @@ class Login extends Component{
         return  <div className={"form "+(this.state.login?"remove-form":'') + (this.state.error?"error":'')} style={{display: this.props.user.loading ? 'block' : 'none' }}
         >
             <div className="form-panel one">
+                <img src={logo} alt="logo" className="logo" />
                 <div className="form-header">
                     <h1>Account Login</h1>
                 </div>
