@@ -37,7 +37,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:9545",
+  "proxy": "http://localhost:5020",
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "create-react-app-sass": "^1.1.0",

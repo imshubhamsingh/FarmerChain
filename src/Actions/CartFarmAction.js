@@ -58,21 +58,23 @@ export function rejectProductRequest(productId, userkey) {
   };
 }
 
-export function boughtProduct(productId, userkey, user, price) {
+export function boughtProduct(productId,account, userkey, user, price) {
   return dispatch => {
     database.ref(`cartFarm/${productId}/boughtBy/${userkey}`).update({
       bought:true,
       price: price,
+      boughtAccount: account,
       ...user
     });
   };
 }
 
-export function payForProduct(product={}, user, buyer) {
+export function payForProduct(product={}, user, buyer,result) {
   return dispatch => {
     database.ref('transactions').push({
       info:{
-        ...product
+        ...product,
+          id: result
       },
       type: 'product',
       time: Date.now(),

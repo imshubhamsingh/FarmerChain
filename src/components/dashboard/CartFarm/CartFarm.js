@@ -47,7 +47,8 @@ class CartFarm extends Component{
         this.props.setProductRequest({
             productName:this.state.productName,
             quantity: this.state.quantity,
-            createdAt: Date.now()
+            createdAt: Date.now(),
+            account: this.props.account
         }).then(()=>{
             this.setState({
                 buttonText: 'Order in Queue'
@@ -202,7 +203,7 @@ class CartFarm extends Component{
                                     <ul>
                                         {this.props.products!==null?this.props.products.map((product)=> {
                                             if(product.userId === this.props.user.uid && this.checkifBuyProduct(product).result){
-                                                return <AcceptProduct key={product.id} product={product} boughtbyDetails={this.checkifBuyProduct(product).details}/>
+                                                return <AcceptProduct key={product.id} product={product} web3={this.props.web3} boughtbyDetails={this.checkifBuyProduct(product).details}/>
                                             }
                                             return '';
                                         }):''}
@@ -230,7 +231,8 @@ function mapStateToProps(state) {
     return {
         products: state.products,
         user: state.user.user,
-        transactions: state.transactions
+        transactions: state.transactions,
+        account: state.user.account
     };
 }
 

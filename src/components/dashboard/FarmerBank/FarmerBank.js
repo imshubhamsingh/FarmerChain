@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import PastTransactions from './PastTransactions'
-import GlobalLoanList from './GlobalLoanList'
 import {TimelineLite, Elastic} from 'gsap';
 import { transactionDetailsSorted } from '../../../helpers/userAndTransaction'
 import {deleteLoanRequest, setLoanRequest, payLoanBack, payToPool} from '../../../Actions/FarmerBankAction'
@@ -9,11 +7,10 @@ import { colorStatus} from '../../../helpers/bankHelper'
 import {extractUserDetails} from '../../../helpers/userAndTransaction'
 import { updateHeader } from '../../../Actions/HeaderTextAction';
 import swal from 'sweetalert2'
-import uuid from 'uuid/v1'
 import './farmerbank.css'
-import contract from "truffle-contract"
-
 import { deployContract } from '../../../utils/deployContract'
+import Blockchain from './Blockchain'
+
 import $ from 'jquery';
 const jQuery = $;
 
@@ -25,7 +22,14 @@ class FarmerBank extends Component{
         buttonText: 'Request Loan',
         currentEtherbase: null,
         instance: null,
-        fund: null
+        fund: null,
+        removeMember:"0x627306090abab3a6e1400e9345bc60c78a8bef57",
+        addMember:"0x627306090abab3a6e1400e9345bc60c78a8bef57",
+        addMod:"0x627306090abab3a6e1400e9345bc60c78a8bef57",
+        transactionHistory: [
+            {}
+        ],
+        blockChainLen:0
     }
     async loadContractInstance(web3) {
         const instance = await deployContract(web3)
@@ -37,16 +41,14 @@ class FarmerBank extends Component{
     componentDidMount(){
         this.props.updateHeader('Farmers Bank');
         this.checkFund()
-        console.log(this.state.instance)
-
         $(document).ready(function() {
-
             (function ($) {
                 $('.tab ul.tabs').addClass('active').find('> li:eq(0)').addClass('current');
 
                 $('.tab ul.tabs li a').click(function (g) {
                     var tab = $(this).closest('.tab'),
                         index = $(this).closest('li').index();
+                    console.log(index)
 
                     tab.find('ul.tabs > li').removeClass('current');
                     $(this).closest('li').addClass('current');
@@ -56,15 +58,11 @@ class FarmerBank extends Component{
 
                     g.preventDefault();
                 } );
-
-                $('button.payloan').on('click',()=> {
-
-
-                })
-
             })(jQuery);
 
         });
+        console.log(this.state.instance)
+
     }
 
     checkFund = () =>{
@@ -96,38 +94,6 @@ class FarmerBank extends Component{
 
     handleSubmit = (event) =>{
         event.preventDefault();
-        // if(this.checkIfLoanPaid()){
-        //     swal(
-        //         'Oops...',
-        //         'Please Pay your previous loan in order to request new loan',
-        //         'error'
-        //     )
-        // }else{
-        //
-        //     this.setState({
-        //         buttonText: 'Request In Order'
-        //     })
-        //
-        //
-        //     this.props.setLoanRequest({
-        //         loanDescription:this.state.loanDescription,
-        //         amount: this.state.amount,
-        //         createdAt: Date.now()
-        //     }).then(()=>{
-        //         this.setState({
-        //             buttonText: 'Request has been noted'
-        //         })
-        //
-        //         setTimeout(()=>{
-        //             this.setState({
-        //                 loanDescription:'',
-        //                 amount:0,
-        //                 buttonText: 'Request Loan'
-        //             })
-        //         },2000)
-        //     })
-        // }
-
         this.requestFromPool(this.state.amount)
 
     }
@@ -163,11 +129,12 @@ class FarmerBank extends Component{
             confirmButtonText: 'Submit',
             showLoaderOnConfirm: true,
             preConfirm: (number) => {
-                let amount = number+"00000000000000"
-                return new Promise((resolve) => {
+                let amount = number+"0000000000000000"
+                return new Promise((resolve, reject) => {
                     this.state.instance.addFundsorPayLoan.sendTransaction({from: this.props.web3.eth.accounts[0], value: amount}, function(error, result){
                         if(error){
                             console.log('Error: ', error);
+                            reject(error)
                         }else{
                             console.log(result);
                             resolve(result)
@@ -226,7 +193,7 @@ class FarmerBank extends Component{
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes',
             preConfirm: () => {
-                let amountRequestedToWie = amountRequested+"00000000000000"
+                let amountRequestedToWie = amountRequested+"0000000000000000"
                 return new Promise((resolve) => {
                     this.state.instance.requestLoan.sendTransaction(amountRequestedToWie,{from: this.props.web3.eth.accounts[0]}, function(error, result){
                         if(error){
@@ -285,19 +252,243 @@ class FarmerBank extends Component{
         })
     }
 
+    addMember = (event)=>{
+        event.preventDefault();
+        swal({
+            title: 'Are you want add member?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            preConfirm: () => {
+                return new Promise((resolve) => {
+                    this.state.instance.addMembers.sendTransaction(this.state.addMember,{from: this.props.web3.eth.accounts[0]}, function(error, result){
+                        if(error){
+                            console.log('Error: ', error);
+                            swal(
+                                'Oops...',
+                                error.toString(),
+                                'error'
+                            )
+                        }else{
+                            console.log(result);
+                            resolve(result)
+                        }
+                    });
+
+
+                })
+            },
+        }).then((result) => {
+            if (result.value) {
+                this.getReceipts(result.value).then((result)=>{
+                    console.log(result)
+                    swal({
+                        title: 'Member added Successfully',
+                        type: 'success',
+                        html: '<b>Success!</b><br /><b>Transaction Hash</b> ' + result.transactionHash + '<br /><b>Blockhash</b><br/>' + result.blockHash + '<br/><b>Gas Used</b><br/> ' + result.gasUsed
+                    })
+                })
+                this.setState({
+                    loanDescription:'',
+                    amount:0
+                })
+            }
+        }).catch(error=>{
+            swal(
+                'Oops...',
+                error.toString(),
+                'error'
+            )
+        })
+
+    }
+    removeMember = (event)=>{
+        event.preventDefault();
+        swal({
+            title: 'Are you want remove member?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            preConfirm: () => {
+                return new Promise((resolve) => {
+                    this.state.instance.removeMembers.sendTransaction(this.state.removeMember,{from: this.props.web3.eth.accounts[0]}, function(error, result){
+                        if(error){
+                            console.log('Error: ', error);
+                            swal(
+                                'Oops...',
+                                error.toString(),
+                                'error'
+                            )
+                        }else{
+                            console.log(result);
+                            resolve(result)
+                            // console.log(getReceipts(result));
+                            // getReceipts(result).then(function(receipt){
+                            //     console.log(receipt);
+                            //     swal({
+                            //         title: 'Details',
+                            //         type: 'success',
+                            //         html: '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed
+                            //     })
+                            // }).catch(function(error){
+                            //     console.log(error);
+                            //     swal(
+                            //         'Oops...',
+                            //         error.toString(),
+                            //         'error'
+                            //     )
+                            // });
+                        }
+                    });
+
+
+                })
+            },
+        }).then((result) => {
+            if (result.value) {
+                this.getReceipts(result.value).then((result)=>{
+                    console.log(result)
+                    swal({
+                        title: 'Member removed Successfully',
+                        type: 'success',
+                        html: '<b>Success!</b><br /><b>Transaction Hash</b> ' + result.transactionHash + '<br /><b>Blockhash</b><br/>' + result.blockHash + '<br/><b>Gas Used</b><br/> ' + result.gasUsed
+                    })
+                })
+                this.setState({
+                    loanDescription:'',
+                    amount:0
+                })
+            }
+        }).catch(error=>{
+            swal(
+                'Oops...',
+                error.toString(),
+                'error'
+            )
+        })
+
+    }
+    addMod = (event)=>{
+        event.preventDefault();
+        swal({
+            title: 'Are you want make this person a moderator?',
+            text: "You won't be able to revert this!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            preConfirm: () => {
+                return new Promise((resolve) => {
+                    this.state.instance.addMods.sendTransaction(this.state.addMod,"",{from: this.props.web3.eth.accounts[0]}, function(error, result){
+                        if(error){
+                            console.log('Error: ', error);
+                            swal(
+                                'Oops...',
+                                error.toString(),
+                                'error'
+                            )
+                        }else{
+                            console.log(result);
+                            resolve(result)
+                            // console.log(getReceipts(result));
+                            // getReceipts(result).then(function(receipt){
+                            //     console.log(receipt);
+                            //     swal({
+                            //         title: 'Details',
+                            //         type: 'success',
+                            //         html: '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed
+                            //     })
+                            // }).catch(function(error){
+                            //     console.log(error);
+                            //     swal(
+                            //         'Oops...',
+                            //         error.toString(),
+                            //         'error'
+                            //     )
+                            // });
+                        }
+                    });
+
+
+                })
+            },
+        }).then((result) => {
+            if (result.value) {
+                this.getReceipts(result.value).then((result)=>{
+                    console.log(result)
+                    swal({
+                        title: 'Moderator added Successfully',
+                        type: 'success',
+                        html: '<b>Success!</b><br /><b>Transaction Hash</b> ' + result.transactionHash + '<br /><b>Blockhash</b><br/>' + result.blockHash + '<br/><b>Gas Used</b><br/> ' + result.gasUsed
+                    })
+                })
+                this.setState({
+                    loanDescription:'',
+                    amount:0
+                })
+            }
+        }).catch(error=>{
+            swal(
+                'Oops...',
+                error.toString(),
+                'error'
+            )
+        })
+
+    }
+
+    transactionHistory = ()=>{
+        // for(var i=2;i<= this.props.web3.eth.blockNumber;i++){
+        //     var details = web3.eth.getBlock(i)
+        //     var d= i===web3.eth.blockNumber? "none":"inherit"
+        //     $("ul.history").prepend('<li key={'+i+'}><div className="info transactionhistory"><div class="arrowHash" style="display:'+d+'"><i class="fa fa-arrow-up" aria-hidden="true"></i></div><div className="name">Block number: '+details.number+'<br/> Hash:'+details.hash+'<br/>Transaction Hash: '+ details.transactions[0]|| n +'</div></div></li>');
+        //
+        // }
+        this.setState({
+            transactionHistory:[]
+        })
+        this.props.web3.eth.getBlockNumber((error, resultLen)=>{
+
+            if(!error){
+                const blockChainLen = resultLen;
+                this.setState({
+                    blockChainLen
+                })
+                for(let i=0;i<= blockChainLen;i++){
+                    this.props.web3.eth.getBlock(i,(error,result) =>{
+                        console.log(result)
+                        const newDetail =  {
+                            transactionHash: result.transactions[0],
+                            blockNumber: result.number,
+                            blockHash: result.hash,
+                            parentHash: result.parentHash,
+                            gasUsed: result.gasUsed
+                        }
+                        this.setState({transactionHistory:[...this.state.transactionHistory, newDetail]});
+                    })
+                }
+            }
+            else
+                console.error(error);
+        })
+    }
+
     render(){
         if(this.state.fund!== null){
             return(
                 <div>
                     <div className="tab">
 
-                        <ul className="tabs">
-                            <li><a>Services</a></li>
-                            <li><a>Transaction History</a></li>
+                        <ul className="tabs active">
+                            <li className="current"><a>Services</a></li>
                         </ul>
 
                         <div className="tab_content">
-
                             <div className="tabs_item farmerBank-request">
 
                                 <div className="fund">
@@ -325,10 +516,10 @@ class FarmerBank extends Component{
                                 <label className="service-label" htmlFor="panel_2">Add Members</label>
                                 <input type="checkbox" name="panel" id="panel_2" />
                                 <div className="collapsible">
-                                    <form onSubmit={this.handleSubmit} action="">
+                                    <form onSubmit={this.addMember} action="">
                                         <div>
                                             <label htmlFor="load-desc">Select from registered Member</label>
-                                            <select id="type" value={this.state.quantity} onChange={event=> this.setState({quantity:event.target.value})}>
+                                            <select id="type" value={this.state.addMember} onChange={event=> this.setState({addMember:event.target.value})}>
                                                 <option value="0x627306090abab3a6e1400e9345bc60c78a8bef57">0x627306090abab3a6e1400e9345bc60c78a8bef57</option>
                                                 <option value="0xf17f52151ebef6c7334fad080c5704d77216b732">0xf17f52151ebef6c7334fad080c5704d77216b732</option>
                                                 <option value="0xc5fdf4076b8f3a5357c5e395ab970b5b54098fef">0xc5fdf4076b8f3a5357c5e395ab970b5b54098fef</option>
@@ -347,10 +538,10 @@ class FarmerBank extends Component{
                                 <label className="service-label" htmlFor="panel_3">Remove Members</label>
                                 <input type="checkbox" name="panel" id="panel_3" />
                                 <div className="collapsible">
-                                    <form onSubmit={this.handleSubmit} action="">
+                                    <form onSubmit={this.removeMember} action="">
                                         <div>
                                             <label htmlFor="load-desc">Select from registered Member</label>
-                                            <select id="type" value={this.state.quantity} onChange={event=> this.setState({quantity:event.target.value})}>
+                                            <select id="type" value={this.state.removeMember} onChange={event=> this.setState({removeMember:event.target.value})}>
                                                 <option value="0x627306090abab3a6e1400e9345bc60c78a8bef57">0x627306090abab3a6e1400e9345bc60c78a8bef57</option>
                                                 <option value="0xf17f52151ebef6c7334fad080c5704d77216b732">0xf17f52151ebef6c7334fad080c5704d77216b732</option>
                                                 <option value="0xc5fdf4076b8f3a5357c5e395ab970b5b54098fef">0xc5fdf4076b8f3a5357c5e395ab970b5b54098fef</option>
@@ -366,41 +557,15 @@ class FarmerBank extends Component{
                                         <button className="btn btn-effect" type="submit" >Remove</button>
                                     </form>
                                 </div>
-                                <label className="service-label" htmlFor="panel_4">Add Funds or Pay Loans</label>
-                                <input type="checkbox" name="panel" id="panel_4" />
-                                <div className="collapsible loan-pay">
-                                    <div>
-                                        <div className="details" style={{textAlign:'center'}}>
-                                            General Public Funds
-                                        </div>
-                                        <button className="btn-pool btn-effect payloan" type="submit" onClick={this.payToPool}>Pay</button>
-                                    </div>
-                                    <h3>Your Loan Status</h3>
-                                    <ul>
-                                        {this.props.loans!==null?this.props.loans.map((loan)=> {
-                                            if(loan.uid === this.props.user.uid){
-                                                return <li key={loan.id}>
-                                                    <div className="info">
-                                                        <div className="name">{loan.loanDescription}
-                                                            <div className="type">
-                                                                ₹{loan.amount}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <button className="btn-pool btn-effect" onClick={()=> (loan.status==="waiting" ||loan.status==="paid" || loan.status==="rejected")?this.props.deleteLoanRequest(loan):this.payLoanBack(loan)} style={{backgroundColor: colorStatus(loan.status,"red","green","orange")}}>{colorStatus(loan.status,"Rejected (Cancel Request)","Granted (Pay Loan Now)","Waiting (Cancel Request)","Paid (Remove loan)")}</button>
-                                                </li>
-                                            }
-                                            return '';
-                                        }):''}
-                                    </ul>
-                                </div>
+                                <label className="service-label" htmlFor="panel_4" >Add Funds or Pay Loans</label>
+                                <input type="checkbox" name="panel" id="panel_4" onClick={this.payToPool}/>
                                 <label className="service-label" htmlFor="panel_5">Add Moderators</label>
                                 <input type="checkbox" name="panel" id="panel_5" />
                                 <div className="collapsible">
-                                    <form onSubmit={this.handleSubmit} action="">
+                                    <form onSubmit={this.addMod} action="">
                                         <div>
                                             <label htmlFor="load-desc">Select from registered Member</label>
-                                            <select id="type" value={this.state.quantity} onChange={event=> this.setState({quantity:event.target.value})}>
+                                            <select id="type" value={this.state.addMod} onChange={event=> this.setState({addMod:event.target.value})}>
                                                 <option value="0x627306090abab3a6e1400e9345bc60c78a8bef57">0x627306090abab3a6e1400e9345bc60c78a8bef57</option>
                                                 <option value="0xf17f52151ebef6c7334fad080c5704d77216b732">0xf17f52151ebef6c7334fad080c5704d77216b732</option>
                                                 <option value="0xc5fdf4076b8f3a5357c5e395ab970b5b54098fef">0xc5fdf4076b8f3a5357c5e395ab970b5b54098fef</option>
@@ -416,20 +581,21 @@ class FarmerBank extends Component{
                                         <button className="btn btn-effect" type="submit" >Add</button>
                                     </form>
                                 </div>
-                            </div>
-                            <div className="tabs_item pool-list">
                                 <div className="products-list">
-                                    <h2>List of All transaction</h2>
-                                    <ul>
-                                        {this.showPastTransactions().sort((a,b)=>{
-                                            return new Date(b.createdAt) - new Date(a.createdAt)
-                                        }).map(transaction => {
-                                            return <PastTransactions transaction={transaction} key={transaction.id}/>
-                                        })}
+                                    <h2>List of All Blocks and Transactions</h2>
+                                    <div id="info" className="details" style={{fontSize: '80px',fontWeight: 'bold',textAlign: 'center',marginBottom: '12px'}}><span id="totalBlock">{this.state.blockChainLen}</span></div>
+                                    <div className="details" style={{textAlign: 'center', marginBottom: '12px'}}>Total Blocks mined</div>
+                                    <button className="btn btn-effect" style={{width: '256px'}} onClick={()=>this.transactionHistory()} type="button">Update Blocks history</button>
+                                    <ul className="history" style={{marginTop:"10px"}}>
+                                        {this.state.transactionHistory.length!==0? this.state.transactionHistory[0].blockNumber !== undefined ?this.state.transactionHistory.slice(0).reverse().map(historyDetails=>{
+                                           return <Blockchain historyDetails={historyDetails} key={historyDetails.transactionHash} blocklen={this.state.blockChainLen}/>
+                                        }):"":"Fetching details ... "}
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             )

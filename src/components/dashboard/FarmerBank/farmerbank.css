@@ -119,7 +119,7 @@ input[name='panel']:checked + .collapsible.loan {
 
 input[name='panel']:checked + .collapsible.loan-pay {
     overflow: auto;
-    height: 332px;
+    height: 91px;
     padding: 10px 15px;
 }
 
@@ -153,4 +153,23 @@ iframe{
     height: 585px;
     margin-top: -43px;
     overflow-x: hidden;
+}
+
+ul.history{
+    height:370px;
+}
+
+ul.history li{
+    padding: 10px;
+    background-color: #f3f3f3;
+    margin: 20px 0px;
+    position: relative;
+}
+
+.arrowHash{
+    margin-top: -11px;
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    font-size: 18px;
 }

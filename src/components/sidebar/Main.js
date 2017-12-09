@@ -15,6 +15,7 @@ const jQuery = $;
 class Main extends Component{
     state = {
         money: 0,
+        blockChainLen:0
     }
     componentDidMount(){
         // this.props.web3.eth.getBalance(this.props.ethaccount).then(money => {
@@ -23,6 +24,7 @@ class Main extends Component{
         //     })
         // })
         this.getMoneyFromAccount()
+        this.getToatalTransaction()
         console.log("sidebar", this.props.web3)
         $(document).ready(function() {
 
@@ -60,6 +62,21 @@ class Main extends Component{
             else
                 console.error(error);
         });
+    }
+
+    getToatalTransaction = ()=>{
+        this.props.web3.eth.getBlockNumber((error, resultLen)=>{
+
+            if(!error){
+                const blockChainLen = resultLen;
+                this.setState({
+                    blockChainLen
+                })
+
+            }
+            else
+                console.error(error);
+        })
     }
 
     render(){
@@ -110,20 +127,10 @@ class Main extends Component{
                         <li className="menu-list">
                             <div className="menu-list-item">
                                 <h6>
-                                    Transaction Received
+                                    Total Transaction Done
                                 </h6>
                                 <h1>
-                                    {transactionReceived(this.props.transactions,this.props.user.uid)}
-                                </h1>
-                            </div>
-                        </li>
-                        <li className="menu-list">
-                            <div className="menu-list-item">
-                                <h6>
-                                    Transaction Done
-                                </h6>
-                                <h1>
-                                    {transactionDone(this.props.transactions,this.props.user.uid)}
+                                    {this.state.blockChainLen}
                                 </h1>
                             </div>
                         </li>

@@ -12,7 +12,7 @@ class PastOrders extends Component {
                     Order bought by: {this.props.transaction.to.displayName}<br/>
                     product: {this.props.transaction.info.productName}({this.props.transaction.info.quantity}kg)<br/>
                     price: {this.props.transaction.info.price}<br/>
-                    transaction ID: {`0x${this.props.transaction.id}`}<br/>
+                    transaction ID: {`${this.props.transaction.id}`}<br/>
                 </div>
             </li>
         )

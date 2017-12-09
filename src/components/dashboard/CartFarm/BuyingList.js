@@ -10,6 +10,8 @@ class BuyingList extends Component {
     deleteAcceptedReq = () => {
         this.props.rejectProductRequest(this.props.product.id,this.props.userProductKey)
     }
+
+
     buy = () =>{
         if(!this.props.alreadyBought){
             swal({
@@ -34,7 +36,9 @@ class BuyingList extends Component {
                             swal({
                                 type: 'success',
                             })
-                            this.props.boughtProduct(this.props.product.id, this.props.userProductKey ,extractUserDetails(this.props.user), value)
+
+                            this.props.boughtProduct(this.props.product.id,this.props.ethaccount, this.props.userProductKey ,extractUserDetails(this.props.user), value)
+
                         }else{
                             swal(
                                 'Oops...',
@@ -89,7 +93,8 @@ class BuyingList extends Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.user.user
+        user: state.user.user,
+        ethaccount: state.user.account,
     };
 }
 
