@@ -20,7 +20,7 @@ class Dashboard extends Component{
                     <Route path="/" exact changeHeader={this.props.changeHeader} component={PageShell(Services, this.props.web3)} />
                     <Route path="/poolfarm" changeHeader={this.props.changeHeader} component={PageShell(PoolFarm, this.props.web3)} />
                     <Route path="/cartfarm" changeHeader={this.props.changeHeader} component={PageShell(CartFarm, this.props.web3)} />
-                    <Route path="/farmerBank" changeHeader={this.props.changeHeader} component={PageShell(FarmerBank, this.props.web3)} />
+                    <Route path="/farmerBank" changeHeader={this.props.changeHeader} component={PageShell(FarmerBank, this.props.web3,this.props.contractInstance)} />
                     <Route path="*" component={PageShell(NotFound)} />
                 </Switch>
             </div>

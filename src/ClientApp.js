@@ -67,16 +67,6 @@ class ClientApp extends Component{
         // })
 
         this.loadWeb3(getWeb3)
-            .then(v=>{
-                this.loadContractInstance(this.state.web3).then(()=>{
-                this.state.instance.getBalance(function(error, result){
-                        if(!error)
-                            console.log(result.toNumber())
-                        else
-                            console.error(error);
-                    });
-                })
-            });
         this.props.getUser();
         this.props.getUpdateProductList();
         this.props.getUpdatePoolList();
@@ -94,17 +84,17 @@ class ClientApp extends Component{
     }
 
     render(){
-        if(this.state.web3 ===null){
+        if(this.state.web3 ===null && this.state.instance ===null){
             return(
                 <div></div>
             )
         }else
         return(
             < div className="app-layout">
-                    <Sidebar sidebarShow={this.state.sidebar} showSidebar={this.showSidebar} web3={this.state.web3} contactInstance={this.state.instance}/>
+                    <Sidebar sidebarShow={this.state.sidebar} showSidebar={this.showSidebar} web3={this.state.web3} />
                     {!this.props.user.loading?<div className='main-layout'  web3={this.state.web3}>
                         <Header showSidebar={this.showSidebar}/>
-                        <Dashboard  web3={this.state.web3}/>
+                        <Dashboard  web3={this.state.web3} contractInstance={this.state.instance}/>
                         {!this.props.user.loading?<Bottombar  web3={this.state.web3}/>:''}
                     </div>:''}
 

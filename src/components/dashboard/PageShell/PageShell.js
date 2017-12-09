@@ -2,7 +2,7 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './pageshell.css';
 
-const PageShell = (Service, web3) => {
+const PageShell = (Service, web3,...args) => {
     return props =>
         <div>
             <ReactCSSTransitionGroup
@@ -12,7 +12,8 @@ const PageShell = (Service, web3) => {
                 transitionLeaveTimeout={500}
                 transitionName="SlideIn"
             >
-                <Service {...props} web3={web3} />
+                {args.length===0?<Service {...props} web3={web3} />:<Service {...props} web3={web3} contractInstance={args[0]}/>}
+
             </ReactCSSTransitionGroup>
 
         </div>;

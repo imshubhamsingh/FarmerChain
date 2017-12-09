@@ -22,6 +22,7 @@ class Main extends Component{
         //         money: parseFloat(money / 1e16).toFixed(2)
         //     })
         // })
+        this.getMoneyFromAccount()
         console.log("sidebar", this.props.web3)
         $(document).ready(function() {
 
@@ -49,6 +50,16 @@ class Main extends Component{
     logOutFn = () => {
         this.props.showSidebar()
         this.props.logout()
+    }
+    getMoneyFromAccount = ()=>{
+        this.props.web3.eth.getBalance(this.props.ethaccount,(error, result)=>{
+            if(!error)
+            this.setState({
+                money: parseFloat(result.toNumber()/ 1e16).toFixed(2)
+            })
+            else
+                console.error(error);
+        });
     }
 
     render(){
