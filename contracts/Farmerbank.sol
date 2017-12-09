@@ -1,13 +1,13 @@
 pragma solidity ^0.4.0;
 
-contract Bank{
+contract Farmerbank{
 
     address owner;
     uint256 previousBalance;
 
     event addedFunds(address whoAdded, uint256 howMuch);
 
-    function Bank() {
+    function Farmerbank() {
         owner = msg.sender;
         mods[owner] = mod("FarmerBank", true);
         members[owner] = member(true, true, 0, 0);
