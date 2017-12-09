@@ -23,7 +23,7 @@ class Main extends Component{
         //     })
         // })
         this.getMoneyFromAccount()
-        this.getToatalTransaction()
+        this.getTotalTransaction()
         console.log("sidebar", this.props.web3)
         $(document).ready(function() {
 
@@ -63,7 +63,7 @@ class Main extends Component{
         });
     }
 
-    getToatalTransaction = ()=>{
+    getTotalTransaction = ()=>{
         this.props.web3.eth.getBlockNumber((error, resultLen)=>{
 
             if(!error){
@@ -114,7 +114,7 @@ class Main extends Component{
                         </li>
 
                         <li className="menu-list">
-                            <div className="menu-list-item" onClick={()=>this.getToatalTransaction()}>
+                            <div className="menu-list-item">
                                 <h6>
                                     Ordered Products
                                 </h6>
@@ -125,7 +125,7 @@ class Main extends Component{
                         </li>
 
                         <li className="menu-list">
-                            <div className="menu-list-item">
+                            <div className="menu-list-item" onClick={()=>this.getTotalTransaction()}>
                                 <h6>
                                     Total Transaction Done
                                 </h6>
