@@ -23,7 +23,7 @@ class AcceptProduct extends Component {
 								console.log('Error: ', error);
 								swal('Oops...', error.toString(), 'error');
 							} else {
-								console.log(result);
+								//console.log(result);
 								resolve(result);
 							}
 						}
@@ -34,7 +34,7 @@ class AcceptProduct extends Component {
 			.then((result) => {
 				if (result.value) {
 					this.getReceipts(result.value).then((result) => {
-						console.log(result);
+						//console.log(result);
 						swal({
 							title: 'Member added Successfully',
 							type: 'success',
@@ -81,7 +81,6 @@ class AcceptProduct extends Component {
 					price: this.props.boughtbyDetails.price,
 					id: this.props.product.id
 				};
-				console.log(this.props.web3.eth);
 				let flag = false;
 				this.props.web3.eth.sendTransaction(
 					{
@@ -104,7 +103,7 @@ class AcceptProduct extends Component {
 								title: 'Transaction was complete'
 							});
 						} else {
-							console.log('No');
+							//console.log('No');
 							swal({
 								type: 'error',
 								title: 'Transaction failed'
@@ -123,7 +122,6 @@ class AcceptProduct extends Component {
 	};
 
 	render() {
-		console.log(this.props.boughtbyDetails);
 		return (
 			<li>
 				<div className="info">

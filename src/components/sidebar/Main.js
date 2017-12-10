@@ -94,7 +94,6 @@ class Main extends Component {
 				<h6 id="accountNo" style={{ marginLeft: '-8px', fontSize: '10px' }}>
 					{this.props.account || this.props.ethaccount}
 				</h6>
-				{console.log(this.props.user)}
 
 				<div className="menu">
 					<ul>
