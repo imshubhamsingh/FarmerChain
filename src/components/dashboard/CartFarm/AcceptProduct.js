@@ -81,7 +81,6 @@ class AcceptProduct extends Component {
 					price: this.props.boughtbyDetails.price,
 					id: this.props.product.id
 				};
-				let flag = false;
 				this.props.web3.eth.sendTransaction(
 					{
 						from: this.props.web3.eth.accounts[0],
@@ -111,12 +110,6 @@ class AcceptProduct extends Component {
 						}
 					}
 				);
-				if (!flag) {
-					swal({
-						type: 'error',
-						title: 'Enable MetaMask to Pay and run truffle develop'
-					});
-				}
 			}
 		});
 	};
