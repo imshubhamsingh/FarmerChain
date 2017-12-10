@@ -90,7 +90,6 @@ class AcceptProduct extends Component {
 					(error, result) => {
 						if (!error) {
 							console.log(result);
-							flag = true;
 							this.props.payForProduct(
 								info,
 								{ displayName, email, uid },
