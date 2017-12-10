@@ -736,12 +736,9 @@ class FarmerBank extends Component {
 			);
 		} else {
 			return (
-				<div>
-					{swal(
-						'Oops...',
-						'Enable Metamask Chrome Plugin and run truffle server for testing purpose',
-						'error'
-					)}
+				<div style={{ color: '#313041', marginTop: '37%' }}>
+					<h1>You will not be able to use this service</h1>
+					<h3>Enable Metamask Chrome Plugin and run truffle server for testing purpose</h3>
 				</div>
 			);
 		}
