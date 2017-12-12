@@ -22,13 +22,6 @@ class Main extends Component {
 		blockChainLen: 0
 	};
 	componentDidMount() {
-		// this.props.web3.eth.getBalance(this.props.ethaccount).then(money => {
-		//     this.setState({
-		//         money: parseFloat(money / 1e16).toFixed(2)
-		//     })
-		// })
-		this.getMoneyFromAccount();
-		this.getTotalTransaction();
 		$(document).ready(function() {
 			(function($) {
 				let img = $('.wrapper').children(),
@@ -55,26 +48,6 @@ class Main extends Component {
 		this.props.showSidebar();
 		this.props.logout();
 	};
-	getMoneyFromAccount = () => {
-		this.props.web3.eth.getBalance(this.props.ethaccount, (error, result) => {
-			if (!error)
-				this.setState({
-					money: parseFloat(result.toNumber() / 1e16).toFixed(2)
-				});
-			else console.error(error);
-		});
-	};
-
-	getTotalTransaction = () => {
-		this.props.web3.eth.getBlockNumber((error, resultLen) => {
-			if (!error) {
-				const blockChainLen = resultLen;
-				this.setState({
-					blockChainLen
-				});
-			} else console.error(error);
-		});
-	};
 
 	render() {
 		return (
@@ -98,9 +71,9 @@ class Main extends Component {
 				<div className="menu">
 					<ul>
 						<li className="menu-list">
-							<div className="menu-list-item" onClick={() => this.getMoneyFromAccount()}>
+							<div className="menu-list-item">
 								<h6>Current Balance</h6>
-								<h1>₹{this.state.money}</h1>
+								<h1>₹{this.props.money}</h1>
 							</div>
 						</li>
 						<li className="menu-list">
@@ -118,9 +91,9 @@ class Main extends Component {
 						</li>
 
 						<li className="menu-list">
-							<div className="menu-list-item" onClick={() => this.getTotalTransaction()}>
+							<div className="menu-list-item">
 								<h6>Total Transaction Done</h6>
-								<h1>{this.state.blockChainLen}</h1>
+								<h1>{this.props.blockNumber}</h1>
 							</div>
 						</li>
 					</ul>
@@ -136,11 +109,12 @@ class Main extends Component {
 function mapStateToProps(state) {
 	return {
 		user: state.user.user,
-		money: state.user.money,
 		pools: state.pools,
 		ethaccount: state.user.account,
 		products: state.products,
-		transactions: state.transactions
+		transactions: state.transactions,
+		money: state.web3.money,
+		blockNumber: state.web3.blockNumber
 	};
 }
 

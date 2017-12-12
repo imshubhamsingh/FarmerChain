@@ -14,31 +14,6 @@ class Bottombar extends Component {
 		money: 0,
 		blockChainLen: 0
 	};
-	componentDidMount() {
-		this.getMoneyFromAccount();
-		this.getTotalTransaction();
-	}
-
-	getMoneyFromAccount = () => {
-		this.props.web3.eth.getBalance(this.props.ethaccount, (error, result) => {
-			if (!error)
-				this.setState({
-					money: parseFloat(result.toNumber() / 1e16).toFixed(2)
-				});
-			else console.error(error);
-		});
-	};
-
-	getTotalTransaction = () => {
-		this.props.web3.eth.getBlockNumber((error, resultLen) => {
-			if (!error) {
-				const blockChainLen = resultLen;
-				this.setState({
-					blockChainLen
-				});
-			} else console.error(error);
-		});
-	};
 
 	render() {
 		return (
@@ -48,7 +23,7 @@ class Bottombar extends Component {
 						<li className="bottom-menu-list">
 							<div className="bottom-menu-list-item" onClick={() => this.getMoneyFromAccount()}>
 								<h6>Current Balance</h6>
-								<h1>₹{this.state.money}</h1>
+								<h1>₹{this.props.money}</h1>
 							</div>
 						</li>
 						<li className="bottom-menu-list">
@@ -66,9 +41,9 @@ class Bottombar extends Component {
 						</li>
 
 						<li className="bottom-menu-list">
-							<div className="bottom-menu-list-item" onClick={() => this.getTotalTransaction()}>
+							<div className="bottom-menu-list-item">
 								<h6>Total Transaction Done</h6>
-								<h1>{this.state.blockChainLen}</h1>
+								<h1>{this.props.blockNumber}</h1>
 							</div>
 						</li>
 					</ul>
@@ -85,7 +60,9 @@ function mapStateToProps(state) {
 		pools: state.pools,
 		products: state.products,
 		transactions: state.transactions,
-		ethaccount: state.user.account
+		ethaccount: state.user.account,
+		money: state.web3.money,
+		blockNumber: state.web3.blockNumber
 	};
 }
 

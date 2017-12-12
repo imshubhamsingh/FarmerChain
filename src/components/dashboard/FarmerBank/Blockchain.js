@@ -10,7 +10,7 @@ class Blockchain extends Component {
 					className="arrowHash"
 					style={{ display: this.props.historyDetails.blockNumber === this.props.blocklen ? 'none' : '' }}
 				>
-					<i class="fa fa-arrow-up" aria-hidden="true" />
+					<i className="fa fa-arrow-up" aria-hidden="true" />
 				</div>
 				<div className="info">
 					<div className="name">

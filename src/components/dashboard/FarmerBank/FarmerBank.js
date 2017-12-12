@@ -20,7 +20,6 @@ class FarmerBank extends Component {
 		amount: 0,
 		amountPay: 0,
 		buttonText: 'Request Loan',
-		currentEtherbase: null,
 		instance: null,
 		fund: null,
 		removeMember: '0x627306090abab3a6e1400e9345bc60c78a8bef57',
@@ -31,13 +30,15 @@ class FarmerBank extends Component {
 	};
 	async loadContractInstance(web3) {
 		const instance = await deployContract(web3);
-		window.instance = instance;
 		this.setState({ instance });
 	}
 
 	componentDidMount() {
 		this.props.updateHeader('Farmers Bank');
 		this.checkFund();
+		this.props.web3.eth.filter('latest', (error, result) => {
+			this.checkFund();
+		});
 		$(document).ready(function() {
 			(function($) {
 				$('.tab ul.tabs').addClass('active').find('> li:eq(0)').addClass('current');
@@ -45,7 +46,6 @@ class FarmerBank extends Component {
 				$('.tab ul.tabs li a').click(function(g) {
 					var tab = $(this).closest('.tab'),
 						index = $(this).closest('li').index();
-					console.log(index);
 
 					tab.find('ul.tabs > li').removeClass('current');
 					$(this).closest('li').addClass('current');
@@ -57,7 +57,6 @@ class FarmerBank extends Component {
 				});
 			})(jQuery);
 		});
-		console.log(this.state.instance);
 	}
 
 	checkFund = () => {
@@ -70,21 +69,6 @@ class FarmerBank extends Component {
 				else console.error(error);
 			});
 		});
-	};
-
-	checkIfLoanPaid = () => {
-		let flag = false;
-		this.props.loans !== null
-			? this.props.loans.map((loan) => {
-					if (loan.uid === this.props.user.uid) {
-						if (loan.status === 'granted') {
-							flag = true;
-						}
-					}
-					return null;
-				})
-			: '';
-		return flag;
 	};
 
 	handleSubmit = (event) => {
@@ -104,7 +88,6 @@ class FarmerBank extends Component {
 		return new Promise((resolve, reject) => {
 			this.props.web3.eth.getTransactionReceipt(hash, function(error, result) {
 				if (!error) {
-					console.log(result);
 					resolve(result);
 				} else {
 					reject('Oops');
@@ -123,31 +106,15 @@ class FarmerBank extends Component {
 			preConfirm: (number) => {
 				let amount = number + '0000000000000000';
 				return new Promise((resolve, reject) => {
+					console.log(this.props.ethaccount);
 					this.state.instance.addFundsorPayLoan.sendTransaction(
-						{ from: this.props.web3.eth.accounts[0], value: amount },
+						{ from: this.props.ethaccount, value: amount },
 						function(error, result) {
 							if (error) {
 								console.log('Error: ', error);
 								reject(error);
 							} else {
-								console.log(result);
 								resolve(result);
-								// console.log(getReceipts(result));
-								// getReceipts(result).then(function(receipt){
-								//     console.log(receipt);
-								//     swal({
-								//         title: 'Details',
-								//         type: 'success',
-								//         html: '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed
-								//     })
-								// }).catch(function(error){
-								//     console.log(error);
-								//     swal(
-								//         'Oops...',
-								//         error.toString(),
-								//         'error'
-								//     )
-								// });
 							}
 						}
 					);
@@ -157,9 +124,7 @@ class FarmerBank extends Component {
 		})
 			.then((result) => {
 				if (result.value) {
-					console.log(result);
 					this.getReceipts(result.value).then((result) => {
-						console.log(result);
 						swal({
 							title: 'Details',
 							type: 'success',
@@ -193,30 +158,13 @@ class FarmerBank extends Component {
 				return new Promise((resolve) => {
 					this.state.instance.requestLoan.sendTransaction(
 						amountRequestedToWie,
-						{ from: this.props.web3.eth.accounts[0] },
+						{ from: this.props.ethaccount },
 						function(error, result) {
 							if (error) {
 								console.log('Error: ', error);
 								swal('Oops...', error.toString(), 'error');
 							} else {
-								console.log(result);
 								resolve(result);
-								// console.log(getReceipts(result));
-								// getReceipts(result).then(function(receipt){
-								//     console.log(receipt);
-								//     swal({
-								//         title: 'Details',
-								//         type: 'success',
-								//         html: '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed
-								//     })
-								// }).catch(function(error){
-								//     console.log(error);
-								//     swal(
-								//         'Oops...',
-								//         error.toString(),
-								//         'error'
-								//     )
-								// });
 							}
 						}
 					);
@@ -226,7 +174,6 @@ class FarmerBank extends Component {
 			.then((result) => {
 				if (result.value) {
 					this.getReceipts(result.value).then((result) => {
-						console.log(result);
 						swal({
 							title: 'Details',
 							type: 'success',
@@ -263,7 +210,7 @@ class FarmerBank extends Component {
 				return new Promise((resolve) => {
 					this.state.instance.addMembers.sendTransaction(
 						this.state.addMember,
-						{ from: this.props.web3.eth.accounts[0] },
+						{ from: this.props.ethaccount },
 						function(error, result) {
 							if (error) {
 								console.log('Error: ', error);
@@ -316,31 +263,14 @@ class FarmerBank extends Component {
 				return new Promise((resolve) => {
 					this.state.instance.removeMembers.sendTransaction(
 						this.state.removeMember,
-						{ from: this.props.web3.eth.accounts[0] },
+						{ from: this.props.ethaccount },
 						function(error, result) {
 							console.log(result, error);
 							if (error) {
 								console.log('Error: ', error);
 								swal('Oops...', error.toString(), 'error');
 							} else {
-								console.log(result);
 								resolve(result);
-								// console.log(getReceipts(result));
-								// getReceipts(result).then(function(receipt){
-								//     console.log(receipt);
-								//     swal({
-								//         title: 'Details',
-								//         type: 'success',
-								//         html: '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed
-								//     })
-								// }).catch(function(error){
-								//     console.log(error);
-								//     swal(
-								//         'Oops...',
-								//         error.toString(),
-								//         'error'
-								//     )
-								// });
 							}
 						}
 					);
@@ -350,7 +280,6 @@ class FarmerBank extends Component {
 			.then((result) => {
 				if (result.value) {
 					this.getReceipts(result.value).then((result) => {
-						console.log(result);
 						swal({
 							title: 'Member removed Successfully',
 							type: 'success',
@@ -394,24 +323,7 @@ class FarmerBank extends Component {
 								console.log('Error: ', error);
 								swal('Oops...', error.toString(), 'error');
 							} else {
-								console.log(result);
 								resolve(result);
-								// console.log(getReceipts(result));
-								// getReceipts(result).then(function(receipt){
-								//     console.log(receipt);
-								//     swal({
-								//         title: 'Details',
-								//         type: 'success',
-								//         html: '<b>Success!</b><br /><b>Transaction Hash</b>: ' + receipt.transactionHash + '<br /><b>Blockhash</b>:' + receipt.blockHash + '<br/><b>Gas Used<b>: ' + receipt.gasUsed
-								//     })
-								// }).catch(function(error){
-								//     console.log(error);
-								//     swal(
-								//         'Oops...',
-								//         error.toString(),
-								//         'error'
-								//     )
-								// });
 							}
 						}
 					);
@@ -421,7 +333,6 @@ class FarmerBank extends Component {
 			.then((result) => {
 				if (result.value) {
 					this.getReceipts(result.value).then((result) => {
-						console.log(result);
 						swal({
 							title: 'Moderator added Successfully',
 							type: 'success',
@@ -443,39 +354,6 @@ class FarmerBank extends Component {
 			.catch((error) => {
 				swal('Oops...', error.toString(), 'error');
 			});
-	};
-
-	transactionHistory = () => {
-		// for(var i=2;i<= this.props.web3.eth.blockNumber;i++){
-		//     var details = web3.eth.getBlock(i)
-		//     var d= i===web3.eth.blockNumber? "none":"inherit"
-		//     $("ul.history").prepend('<li key={'+i+'}><div className="info transactionhistory"><div class="arrowHash" style="display:'+d+'"><i class="fa fa-arrow-up" aria-hidden="true"></i></div><div className="name">Block number: '+details.number+'<br/> Hash:'+details.hash+'<br/>Transaction Hash: '+ details.transactions[0]|| n +'</div></div></li>');
-		//
-		// }
-		this.setState({
-			transactionHistory: []
-		});
-		this.props.web3.eth.getBlockNumber((error, resultLen) => {
-			if (!error) {
-				const blockChainLen = resultLen;
-				this.setState({
-					blockChainLen
-				});
-				for (let i = 0; i <= blockChainLen; i++) {
-					this.props.web3.eth.getBlock(i, (error, result) => {
-						console.log(result);
-						const newDetail = {
-							transactionHash: result.transactions[0],
-							blockNumber: result.number,
-							blockHash: result.hash,
-							parentHash: result.parentHash,
-							gasUsed: result.gasUsed
-						};
-						this.setState({ transactionHistory: [ ...this.state.transactionHistory, newDetail ] });
-					});
-				}
-			} else console.error(error);
-		});
 	};
 
 	render() {
@@ -697,33 +575,27 @@ class FarmerBank extends Component {
 											marginBottom: '12px'
 										}}
 									>
-										<span id="totalBlock">{this.state.blockChainLen}</span>
+										<span id="totalBlock">{this.props.blockNumber}</span>
 									</div>
 									<div className="details" style={{ textAlign: 'center', marginBottom: '12px' }}>
 										Total Blocks mined
 									</div>
-									<button
-										className="btn btn-effect"
-										style={{ width: '256px' }}
-										onClick={() => this.transactionHistory()}
-										type="button"
-									>
-										Update Blocks history
-									</button>
 									<ul className="history" style={{ marginTop: '10px' }}>
-										{this.state.transactionHistory.length !== 0 ? this.state.transactionHistory[0]
+										{this.props.transactionHistory.length !== 0 ? this.props.transactionHistory[0]
 											.blockNumber !== undefined ? (
-											this.state.transactionHistory.slice(0).reverse().map((historyDetails) => {
-												return (
-													<Blockchain
-														historyDetails={historyDetails}
-														key={historyDetails.transactionHash}
-														blocklen={this.state.blockChainLen}
-													/>
-												);
-											})
+											this.props.transactionHistory
+												.map((historyDetails) => {
+													return (
+														<Blockchain
+															historyDetails={historyDetails}
+															key={historyDetails.transactionHash}
+															blocklen={this.props.blockNumber}
+														/>
+													);
+												})
+												.reverse()
 										) : (
-											''
+											'No Blocks'
 										) : (
 											'Fetching details ... '
 										)}
@@ -738,7 +610,7 @@ class FarmerBank extends Component {
 			return (
 				<div style={{ color: '#313041', marginTop: '37%' }}>
 					<h1>You will not be able to use this service</h1>
-					<h3>Enable Metamask Chrome Plugin and run truffle server for testing purpose</h3>
+					<h3>Run truffle server for testing purpose</h3>
 				</div>
 			);
 		}
@@ -752,7 +624,10 @@ function mapStateToProps(state) {
 		money: state.user.money,
 		transactions: state.transactions,
 		loans: state.loans,
-		admin: state.admin
+		admin: state.admin,
+		transactionHistory: state.web3.blockdetails,
+		blockNumber: state.web3.blockNumber,
+		ethaccount: state.user.account
 	};
 }
 

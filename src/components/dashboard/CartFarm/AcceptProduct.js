@@ -81,9 +81,13 @@ class AcceptProduct extends Component {
 					price: this.props.boughtbyDetails.price,
 					id: this.props.product.id
 				};
+				console.log({
+					from: this.props.ethaccount,
+					to: this.props.boughtbyDetails.boughtAccount
+				});
 				this.props.web3.eth.sendTransaction(
 					{
-						from: this.props.web3.eth.accounts[0],
+						from: this.props.ethaccount,
 						to: this.props.boughtbyDetails.boughtAccount,
 						value: this.props.boughtbyDetails.price + '0000000000000000'
 					},
@@ -132,7 +136,8 @@ class AcceptProduct extends Component {
 function mapStateToProps(state) {
 	return {
 		user: state.user.user,
-		money: state.user.money
+		money: state.user.money,
+		ethaccount: state.user.account
 	};
 }
 
