@@ -25,7 +25,7 @@ class FarmerBank extends Component {
 		removeMember: '0x627306090abab3a6e1400e9345bc60c78a8bef57',
 		addMember: '0x627306090abab3a6e1400e9345bc60c78a8bef57',
 		addMod: '0x627306090abab3a6e1400e9345bc60c78a8bef57',
-		transactionHistory: [ {} ],
+		transactionHistory: [],
 		blockChainLen: 0
 	};
 	async loadContractInstance(web3) {
@@ -36,8 +36,10 @@ class FarmerBank extends Component {
 	componentDidMount() {
 		this.props.updateHeader('Farmers Bank');
 		this.checkFund();
+		this.getTransactionDetails();
 		this.props.web3.eth.filter('latest', (error, result) => {
 			this.checkFund();
+			this.getTransactionDetails();
 		});
 		$(document).ready(function() {
 			(function($) {
@@ -58,6 +60,29 @@ class FarmerBank extends Component {
 			})(jQuery);
 		});
 	}
+
+	getTransactionDetails = () => {
+		this.setState({
+			transactionHistory: []
+		});
+		this.props.web3.eth.getBlockNumber((error, resultLen) => {
+			if (!error) {
+				const blockChainLen = resultLen;
+				for (let i = 0; i <= blockChainLen; i++) {
+					this.props.web3.eth.getBlock(i, (error, result) => {
+						const newDetail = {
+							transactionHash: result.transactions[0],
+							blockNumber: result.number,
+							blockHash: result.hash,
+							parentHash: result.parentHash,
+							gasUsed: result.gasUsed
+						};
+						this.setState({ transactionHistory: [ ...this.state.transactionHistory, newDetail ] });
+					});
+				}
+			} else console.error(error);
+		});
+	};
 
 	checkFund = () => {
 		return this.loadContractInstance(this.props.web3).then(() => {
@@ -581,9 +606,10 @@ class FarmerBank extends Component {
 										Total Blocks mined
 									</div>
 									<ul className="history" style={{ marginTop: '10px' }}>
-										{this.props.transactionHistory.length !== 0 ? this.props.transactionHistory[0]
+										{this.state.transactionHistory !== undefined &&
+										this.state.transactionHistory.length !== 0 ? this.state.transactionHistory[0]
 											.blockNumber !== undefined ? (
-											this.props.transactionHistory
+											this.state.transactionHistory
 												.map((historyDetails) => {
 													return (
 														<Blockchain
@@ -625,7 +651,6 @@ function mapStateToProps(state) {
 		transactions: state.transactions,
 		loans: state.loans,
 		admin: state.admin,
-		transactionHistory: state.web3.blockdetails,
 		blockNumber: state.web3.blockNumber,
 		ethaccount: state.user.account
 	};

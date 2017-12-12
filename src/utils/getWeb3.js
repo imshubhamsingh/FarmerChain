@@ -15,6 +15,7 @@ let getWeb3 = new Promise(function(resolve, reject) {
 		console.log('Using Local web3.');
 		console.log('Connected!');
 		resolve(results);
+		//}
 	});
 });
 
