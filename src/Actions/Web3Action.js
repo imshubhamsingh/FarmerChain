@@ -34,39 +34,3 @@ export function updateTotalTransaction(web3) {
 		});
 	};
 }
-
-export async function updateTotalTransactionDetails(web3) {
-	return (dispatch) => {
-		web3.eth.getBlockNumber((error, resultlen) => {
-			if (!error) {
-				{
-					const blockchainLen = resultlen;
-					let transactionHistory = [];
-					for (let i = 0; i <= blockchainLen; i++) {
-						let details = getBLockDetails(web3, i);
-						transactionHistory.push(details);
-					}
-					dispatch({
-						type: UPDATE_BLOCK_CHAIN_DETAILS,
-						payload: {
-							blockdetails: transactionHistory
-						}
-					});
-				}
-			} else console.error(error);
-		});
-	};
-}
-
-async function getBLockDetails(web3, i) {
-	return await web3.eth.getBlock(i, (error, result) => {
-		const newDetail = {
-			transactionHash: result.transactions[0],
-			blockNumber: result.number,
-			blockHash: result.hash,
-			parentHash: result.parentHash,
-			gasUsed: result.gasUsed
-		};
-		return newDetail;
-	});
-}

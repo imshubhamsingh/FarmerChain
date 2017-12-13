@@ -71,7 +71,7 @@ class FarmerBank extends Component {
 				for (let i = 0; i <= blockChainLen; i++) {
 					this.props.web3.eth.getBlock(i, (error, result) => {
 						const newDetail = {
-							transactionHash: result.transactions[0],
+							transactionHash: result.transactions,
 							blockNumber: result.number,
 							blockHash: result.hash,
 							parentHash: result.parentHash,
@@ -610,6 +610,9 @@ class FarmerBank extends Component {
 										this.state.transactionHistory.length !== 0 ? this.state.transactionHistory[0]
 											.blockNumber !== undefined ? (
 											this.state.transactionHistory
+												.sort((a, b) => {
+													return b.blockNumber - a.blockNumber;
+												})
 												.map((historyDetails) => {
 													return (
 														<Blockchain
@@ -619,7 +622,6 @@ class FarmerBank extends Component {
 														/>
 													);
 												})
-												.reverse()
 										) : (
 											'No Blocks'
 										) : (
