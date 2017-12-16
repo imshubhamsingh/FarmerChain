@@ -9,6 +9,7 @@ import { updateHeader } from '../../../Actions/HeaderTextAction';
 import swal from 'sweetalert2';
 import './farmerbank.css';
 import { deployContract } from '../../../utils/deployContract';
+import { getBlockDetails } from '../../../utils/getBlockDetails';
 import Blockchain from './Blockchain';
 
 import $ from 'jquery';
@@ -41,6 +42,9 @@ class FarmerBank extends Component {
 		this.checkFund();
 		this.getTransactionDetails();
 		this.props.web3.eth.filter('latest', (error, result) => {
+			this.setState({
+				transactionHistory: []
+			});
 			this.checkFund();
 			this.getTransactionDetails();
 		});
@@ -71,21 +75,20 @@ class FarmerBank extends Component {
 		this.props.web3.eth.getBlockNumber((error, resultLen) => {
 			if (!error) {
 				const blockChainLen = resultLen;
+				let details = [];
 				for (let i = 0; i <= blockChainLen; i++) {
-					this.props.web3.eth.getBlock(i, (error, result) => {
-						const newDetail = {
-							transactionHash: result.transactions,
-							blockNumber: result.number,
-							blockHash: result.hash,
-							parentHash: result.parentHash,
-							gasUsed: result.gasUsed
-						};
-						this.setState({ transactionHistory: [ ...this.state.transactionHistory, newDetail ] });
+					this.getBlock(this.props.web3, i).then((block) => {
+						this.setState({ transactionHistory: [ ...this.state.transactionHistory, block ] });
 					});
 				}
 			} else console.error(error);
 		});
 	};
+
+	async getBlock(web3, i) {
+		const result = await getBlockDetails(web3, i);
+		return result;
+	}
 
 	checkFund = () => {
 		return this.loadContractInstance(this.props.web3).then(() => {
