@@ -34,6 +34,9 @@ class FarmerBank extends Component {
 	}
 
 	componentDidMount() {
+		this.setState({
+			transactionHistory: []
+		});
 		this.props.updateHeader('Farmers Bank');
 		this.checkFund();
 		this.getTransactionDetails();

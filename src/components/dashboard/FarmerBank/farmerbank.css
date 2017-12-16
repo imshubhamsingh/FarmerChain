@@ -147,14 +147,6 @@ input[name='panel']:checked + .collapsible.loan-pay {
 	}
 }
 
-iframe {
-	border: none;
-	width: 100%;
-	height: 585px;
-	margin-top: -43px;
-	overflow-x: hidden;
-}
-
 ul.history {
 	height: 370px;
 }
@@ -164,6 +156,7 @@ ul.history li {
 	background-color: #f3f3f3;
 	margin: 20px 0px;
 	position: relative;
+	overflow: hidden;
 }
 
 .arrowHash {
@@ -172,4 +165,28 @@ ul.history li {
 	top: -12px;
 	left: 50%;
 	font-size: 18px;
+}
+
+.info .block-details {
+	overflow-y: scroll;
+	width: 100%;
+	text-align: center;
+}
+
+.info .block-details::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgb(244, 243, 243) !important;
+	border-radius: 1px;
+	display: none;
+}
+
+.info .block-details::-webkit-scrollbar {
+	width: 0.1px;
+	height: 1px;
+	background-color: transparent;
+}
+
+.info .block-details::-webkit-scrollbar-thumb {
+	border-radius: 1px;
+	-webkit-box-shadow: inset 0 0 6px rgb(244, 243, 243) !important;
+	background-color: rgb(244, 243, 243);
 }
