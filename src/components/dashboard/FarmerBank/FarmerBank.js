@@ -42,9 +42,6 @@ class FarmerBank extends Component {
 		this.checkFund();
 		this.getTransactionDetails();
 		this.props.web3.eth.filter('latest', (error, result) => {
-			this.setState({
-				transactionHistory: []
-			});
 			this.checkFund();
 			this.getTransactionDetails();
 		});
@@ -75,19 +72,29 @@ class FarmerBank extends Component {
 		this.props.web3.eth.getBlockNumber((error, resultLen) => {
 			if (!error) {
 				const blockChainLen = resultLen;
-				let details = [];
-				for (let i = 0; i <= blockChainLen; i++) {
-					this.getBlock(this.props.web3, i).then((block) => {
-						this.setState({ transactionHistory: [ ...this.state.transactionHistory, block ] });
+				this.getBlock(this.props.web3, blockChainLen).then((details) => {
+					this.setState({
+						transactionHistory: details
 					});
-				}
+				});
 			} else console.error(error);
 		});
 	};
 
-	async getBlock(web3, i) {
-		const result = await getBlockDetails(web3, i);
+	async getlatestBlock(web3, blockChainLen) {
+		const result = await getBlockDetails(web3, blockChainLen);
 		return result;
+	}
+
+	async getBlock(web3, blockChainLen) {
+		let details = [];
+		for (let i = 0; i <= blockChainLen; i++) {
+			const result = await getBlockDetails(web3, i);
+			details.push(result);
+		}
+		return details.sort((a, b) => {
+			return b.blockNumber - a.blockNumber;
+		});
 	}
 
 	checkFund = () => {
@@ -613,21 +620,18 @@ class FarmerBank extends Component {
 									</div>
 									<ul className="history" style={{ marginTop: '10px' }}>
 										{this.state.transactionHistory !== undefined &&
-										this.state.transactionHistory.length !== 0 ? this.state.transactionHistory[0]
-											.blockNumber !== undefined ? (
-											this.state.transactionHistory
-												.sort((a, b) => {
-													return b.blockNumber - a.blockNumber;
-												})
-												.map((historyDetails) => {
-													return (
-														<Blockchain
-															historyDetails={historyDetails}
-															key={historyDetails.transactionHash}
-															blocklen={this.props.blockNumber}
-														/>
-													);
-												})
+										this.state.transactionHistory.length !== 0 ? this.state
+											.transactionHistory[0] === undefined ||
+										this.state.transactionHistory[0].blockNumber !== undefined ? (
+											this.state.transactionHistory.map((historyDetails) => {
+												return (
+													<Blockchain
+														historyDetails={historyDetails}
+														key={historyDetails.transactionHash}
+														blocklen={this.props.blockNumber}
+													/>
+												);
+											})
 										) : (
 											'No Blocks'
 										) : (

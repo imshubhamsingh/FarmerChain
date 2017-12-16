@@ -156,7 +156,7 @@ ul.history li {
 	background-color: #f3f3f3;
 	margin: 20px 0px;
 	position: relative;
-	overflow: hidden;
+	overflow-y: hidden;
 }
 
 .arrowHash {
