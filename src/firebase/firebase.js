@@ -1,12 +1,12 @@
 import * as firebase from 'firebase';
 
 const config = {
-	apiKey: 'AIzaSyCNlEBXTBdIG5N31D2bl5FlFSzjT1DiBio',
-	authDomain: 'digitalocean-1a580.firebaseapp.com',
-	databaseURL: 'https://digitalocean-1a580.firebaseio.com',
-	projectId: 'digitalocean-1a580',
-	storageBucket: 'digitalocean-1a580.appspot.com',
-	messagingSenderId: '104470064238'
+	apiKey: process.env.REACT_APP_FIREBASE_KEY,
+	authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+	databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+	projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+	storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID
 };
 
 export const firebaseApp = firebase.initializeApp(config);
