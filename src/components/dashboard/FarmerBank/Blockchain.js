@@ -19,7 +19,7 @@ class Blockchain extends Component {
 					<div className="info" style={{ textAlign: 'left' }}>
 						<b>Transaction Hash</b>
 						<br />{' '}
-						<div class="block-details">
+						<div className="block-details">
 							{this.props.historyDetails.transactionHash !== undefined ? (
 								this.props.historyDetails.transactionHash
 							) : (
@@ -30,9 +30,9 @@ class Blockchain extends Component {
 						{this.props.historyDetails.gasUsed}
 						<br />
 						<b>Block Hash</b> <br />
-						<div class="block-details">{this.props.historyDetails.blockHash}</div>
+						<div className="block-details">{this.props.historyDetails.blockHash}</div>
 						<b>Parent Hash</b> <br />
-						<div class="block-details">{this.props.historyDetails.parentHash}</div>
+						<div className="block-details">{this.props.historyDetails.parentHash}</div>
 					</div>
 				</div>
 			</li>

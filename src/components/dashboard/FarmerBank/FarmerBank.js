@@ -144,7 +144,6 @@ class FarmerBank extends Component {
 			preConfirm: (number) => {
 				let amount = number + '0000000000000000';
 				return new Promise((resolve, reject) => {
-					console.log(this.props.ethaccount);
 					this.state.instance.addFundsorPayLoan.sendTransaction(
 						{ from: this.props.ethaccount, value: amount },
 						function(error, result) {
@@ -254,7 +253,6 @@ class FarmerBank extends Component {
 								console.log('Error: ', error);
 								swal('Oops...', error.toString(), 'error');
 							} else {
-								console.log(result);
 								resolve(result);
 							}
 						}
@@ -265,7 +263,6 @@ class FarmerBank extends Component {
 			.then((result) => {
 				if (result.value) {
 					this.getReceipts(result.value).then((result) => {
-						console.log(result);
 						swal({
 							title: 'Member added Successfully',
 							type: 'success',

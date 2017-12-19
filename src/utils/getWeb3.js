@@ -21,7 +21,8 @@ let getWeb3 = new Promise(function(resolve, reject) {
 		//     resolve(results)
 		// } else {
 		// Fallback to localhost if no web3 injection.
-		var provider = new Web3.providers.HttpProvider('http://localhost:9545');
+		console.log(process.env.REACT_APP_TRUFFLE_HOST);
+		var provider = new Web3.providers.HttpProvider(process.env.REACT_APP_TRUFFLE_HOST);
 
 		web3 = new Web3(provider);
 
