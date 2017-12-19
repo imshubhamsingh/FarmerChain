@@ -20,10 +20,11 @@ class Blockchain extends Component {
 						<b>Transaction Hash</b>
 						<br />{' '}
 						<div className="block-details">
-							{this.props.historyDetails.transactionHash !== undefined ? (
-								this.props.historyDetails.transactionHash
-							) : (
+							{this.props.historyDetails.transactionHash.length === 0 ||
+							this.props.historyDetails.transactionHash === undefined ? (
 								'Genesis Block'
+							) : (
+								this.props.historyDetails.transactionHash
 							)}
 						</div>
 						<b>Gas Used</b> <br />
