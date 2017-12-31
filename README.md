@@ -87,3 +87,7 @@ You can even pay for the purchase directly on the platform also powered by block
 2. [Webpack](https://webpack.js.org/)
 3. [NodeJS](https://nodejs.org/en/)
 5. [Ethereum Solidity](https://github.com/ethereum/solidity)
+
+## License [![License](https://img.shields.io/github/license/hyperium/hyper.svg)](LICENSE.txt)
+
+Copyright (c) 2017 Naman Gupta & Shubham Singh, This software is licensed under the [MIT License](LICENSE.txt).
