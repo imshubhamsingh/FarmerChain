@@ -9,8 +9,7 @@
 
 <p>FarmerChain was built for the DigitalOcean Campus Champ in an attempt to provide a solution to the stinging problem of lack of organised banking in the rural sector.</p>
 
-<p>The application is hosted on DigitalOcean and a wor
-king prototype can found <a href="http://104.131.83.52/">here</a>.</p>
+<p>The application is hosted on DigitalOcean and a working prototype can found <a href="http://104.131.83.52/">here</a>.</p>
 
 <p align=center>
 <img src="./public/screenshots/m1.png" width="280px">
