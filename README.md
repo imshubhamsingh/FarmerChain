@@ -23,10 +23,6 @@ The application itself is divided into three parts.
 
 &nbsp;
 
-
-## Cart Farm
-
-
 ## Farmer Bank
 
 Banking in the rural sector has always been haphazard. Farmers in India historically have depended on the indigenous banking system consisting of shroffs, money lenders and traders, charging absurdly high amounts of interest, for meeting their short term and long term credit requirements. One of the main reasons organised banking hasn’t penetrated rural India is mainly due to absence of collateral security. The higher operating costs and lower margins kept these banks outside making it a monopoly of the money lenders who are sucking the ordinary farmer dry reducing them to pitiful conditions.
