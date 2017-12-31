@@ -9,9 +9,14 @@
 
 <p>FarmerChain was built for the DigitalOcean Campus Champ in an attempt to provide a solution to the stinging problem of lack of organised banking in the rural sector.</p>
 
-<p>The application is hosted on DigitalOcean and a working prototype can found <a href="http://104.131.83.52/">here</a>.</p>
+<p>The application is hosted on DigitalOcean and a wor
+king prototype can found <a href="http://104.131.83.52/">here</a>.</p>
 
-<img src="./public/screenshots/1.png" />
+<p align=center>
+<img src="./public/screenshots/m1.png" width="280px">
+</p>
+<img src="./public/screenshots/1.png" /></p>
+
 
 The application itself is divided into three parts.
 
@@ -35,6 +40,10 @@ Farmer Bank aims to solve the problem with a smart contract built for managing a
 
 This is done to prevent the pool from getting drained and promote sustenance. As with most blockchain based solutions, Farmer Bank derives its powers from a large set of users.
 
+<p align=center>
+<img src="./public/screenshots/m2.png" width="280px">
+</p>
+
 ![FarmerBank](./public/screenshots/2.png) ![request loans](./public/screenshots/3.png)
 
 Members can add money to the pool
@@ -42,6 +51,11 @@ Members can add money to the pool
 ![Adding money to the pool](./public/screenshots/4.png)
 
 Adding a member requires moderator or owner privileges(analogous to a *Sarpanch* or *Panch* in rural settings).
+
+
+<p align=center>
+<img src="./public/screenshots/m3.png" width="280px">
+</p>
 
 ![Member Added Confirmation](./public/screenshots/3.1.png)
 
@@ -56,7 +70,17 @@ Pool Farming is a platform based on shared economy facilitating exchange of thre
 **Machine** : Meant for exchanging tools and machinery
 **Storage** : Meant for exchanging the use of storage facilities.
 
+
+<p align=center>
+<img src="./public/screenshots/m4.png" width="280px">
+</p>
+
 ![Pooling offers](./public/screenshots/6.png)
+
+
+<p align=center>
+<img src="./public/screenshots/m5.1.png" width="280px">
+</p>
 
 ![Pooling offers](./public/screenshots/7.1.png)
 
@@ -64,7 +88,15 @@ Pool Farming is a platform based on shared economy facilitating exchange of thre
 
 Cart Farm is a platform for requesting and outsourcing the need for bringing and delivering supplies. Going to town? You can collect requests from others and bring them their required goods in exchange for a small commission.
 
+<p align=center>
+<img src="./public/screenshots/m6.png" width="280px">
+</p>
+
 ![Cart Farm UI](./public/screenshots/8.png)
+
+<p align=center>
+<img src="./public/screenshots/m7.png" width="280px">
+</p>
 
 You can even pay for the purchase directly on the platform also powered by blockchain technology!
 
