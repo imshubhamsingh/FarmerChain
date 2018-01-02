@@ -11,6 +11,18 @@
 
 <p>The application is hosted on DigitalOcean and a working prototype can found <a href="http://104.131.83.52/">here</a>.</p>
 
+
+#### Dummy Accounts
+
+Our prototype uses [truffle](http://truffleframework.com/) framework for its blockchain implementation. Since truffle is limited to 10 accounts, no more accounts can be created on our platform. Some dummy accounts have thus been provided for you to test the project.
+
+|           Username          |    Password   |
+|:---------------------------:|:-------------:|
+| imshubhamsingh007@gmail.com | welcome@54321 |
+| test1@test.com              | welcome@54321 |
+| namangupta111@gmail.com     | welcome@54321 |
+
+
 <p align=center>
 <img src="./public/screenshots/m1.png" width="280px">
 </p>
