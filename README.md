@@ -101,6 +101,18 @@ You can even pay for the purchase directly on the platform also powered by block
 
 ***
 
+# Running a local instance
+
+- Clone the repo `git clone https://github.com/imshubhamsingh/FarmerChain.git`
+- `cd FarmerChain`
+-  Edit `.env` file with firebase configuration
+- Start truffle blockchain using `truffle develop`
+- In the truffle console, `compile` then `migrate`
+- Open a new terminal and cd into the folder, then run `npm build`
+- Navigate to `localhost:5020`
+
+
+***
 # Tech Stack
 
 ## Front End
