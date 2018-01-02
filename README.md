@@ -65,8 +65,8 @@ Pool Farming is a platform based on shared economy facilitating exchange of thre
 ![UI for adding pool requests](./public/screenshots/5.png)
 
 
-**Hand** : Meant for exchanging manpower
-**Machine** : Meant for exchanging tools and machinery
+**Hand** : Meant for exchanging manpower  
+**Machine** : Meant for exchanging tools and machinery  
 **Storage** : Meant for exchanging the use of storage facilities.
 
 
