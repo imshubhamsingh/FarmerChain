@@ -31,30 +31,6 @@ contract Farmerbank{
     mapping(address => mod) mods;
     mapping(address => uint256) loanGranted;
 
-    // modifier onlyowner(){
-    //     if(msg.sender == owner){
-    //         _;
-    //     }else{
-    //         revert();
-    //     }
-    // }
-
-    // modifier onlymods(){
-    //     if(mods[msg.sender].status == true){
-    //         _;
-    //     }else{
-    //         revert();
-    //     }
-    // }
-
-    // modifier onlymember(){
-    //     if(members[msg.sender].isMember == true){
-    //         _;
-    //     }else{
-    //         revert();
-    //     }
-    // }
-
     modifier onlyowner(){
         require(msg.sender == owner);
 
@@ -84,27 +60,35 @@ contract Farmerbank{
     }
 
     function addFundsorPayLoan() payable onlymember{
-        uint256 changeInBalance = this.balance - previousBalance;
-        members[msg.sender].amountAddedToThePool += changeInBalance;
-        if(members[msg.sender].loanGranted > 0 && members[msg.sender].loanGranted <= members[msg.sender].amountAddedToThePool){
-            members[msg.sender].amountAddedToThePool -= members[msg.sender].loanGranted;
-            members[msg.sender].loanGranted = 0;
-            members[msg.sender].isPermitted = true;
+        // uint256 changeInBalance = this.balance - previousBalance;
+        members[msg.sender].amountAddedToThePool += msg.value;
+        if(members[msg.sender].loanGranted > 0 && members[msg.sender].loanGranted >= msg.value){
+            members[msg.sender].loanGranted -= msg.value;
         }
-        addedFunds(msg.sender, changeInBalance);
-        previousBalance = this.balance;
+        else if(members[msg.sender].loanGranted < msg.value){
+            members[msg.sender].isPermitted = true;
+            members[msg.sender].loanGranted = 0;
+        }
+        addedFunds(msg.sender, msg.value);
+        // previousBalance = this.balance;
     }
 
     function requestLoan(uint256 loanAmount) onlymember returns(bool status){
         if(members[msg.sender].isPermitted && loanAmount <= 2*members[msg.sender].amountAddedToThePool && loanAmount <= this.balance/2){
-            members[msg.sender].isPermitted == false;
+            members[msg.sender].isPermitted = false;
             members[msg.sender].loanGranted = loanAmount;
+            members[msg.sender].amountAddedToThePool -= loanAmount;
             msg.sender.transfer(loanAmount);
+            // previousBalance = this.balance;
             return true;
         }
         else{
             revert();
         }
+    }
+    
+    function getLoanGranted() constant returns(uint256){
+        return members[msg.sender].loanGranted;
     }
 
     function getBalance() constant returns(uint256){
