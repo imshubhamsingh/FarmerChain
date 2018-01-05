@@ -19,7 +19,7 @@ contract Farmerbank{
         bool isPermitted;
         //uint maxAmount;
         uint256 loanGranted;
-        uint256 amountAddedToThePool;
+        int256 amountAddedToThePool;
     }
 
     struct mod{
@@ -61,11 +61,11 @@ contract Farmerbank{
 
     function addFundsorPayLoan() payable onlymember{
         // uint256 changeInBalance = this.balance - previousBalance;
-        members[msg.sender].amountAddedToThePool += msg.value;
-        if(members[msg.sender].loanGranted > 0 && members[msg.sender].loanGranted >= msg.value){
+        members[msg.sender].amountAddedToThePool += int(msg.value);
+        if(members[msg.sender].loanGranted > 0 && members[msg.sender].loanGranted > msg.value){
             members[msg.sender].loanGranted -= msg.value;
         }
-        else if(members[msg.sender].loanGranted < msg.value){
+        else if(members[msg.sender].loanGranted <= msg.value){
             members[msg.sender].isPermitted = true;
             members[msg.sender].loanGranted = 0;
         }
@@ -74,10 +74,10 @@ contract Farmerbank{
     }
 
     function requestLoan(uint256 loanAmount) onlymember returns(bool status){
-        if(members[msg.sender].isPermitted && loanAmount <= 2*members[msg.sender].amountAddedToThePool && loanAmount <= this.balance/2){
+        if(members[msg.sender].isPermitted && int(loanAmount) <= 2*members[msg.sender].amountAddedToThePool && loanAmount <= this.balance/2){
             members[msg.sender].isPermitted = false;
             members[msg.sender].loanGranted = loanAmount;
-            members[msg.sender].amountAddedToThePool -= loanAmount;
+            members[msg.sender].amountAddedToThePool -= int(loanAmount);
             msg.sender.transfer(loanAmount);
             // previousBalance = this.balance;
             return true;
@@ -95,7 +95,7 @@ contract Farmerbank{
         return this.balance;
     }
 
-    function getAmoundAdded() constant returns(uint256){
+    function getAmoundAdded() constant returns(int256){
         return members[msg.sender].amountAddedToThePool;
     }
 }
